@@ -79,10 +79,10 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-// URL publicada en la web de tu Google Docs
-const URL_DOCS_PUB = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub';
+// URL del Google Docs publicado
+const URL_DOCS_PUB = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub?embedded=true';
 
-// Lista base de productos
+// Lista base inicial
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
     {n:"Jamón cocido Paladini", p:11500, img:""},
@@ -338,30 +338,29 @@ function R() {
   }).join('');
 }
 
-const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
 
-function procesarDocumentoHTML(htmlText) {
+function procesarHTMLDocs(htmlText) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlText, 'text/html');
   const preciosDocs = {};
 
-  // Escanear todas las filas del documento publicadas por Google
-  const filas = doc.querySelectorAll('tr');
-  filas.forEach(f => {
-    const celdas = Array.from(f.querySelectorAll('td')).map(c => c.textContent.trim());
-    if (celdas.length >= 2) {
-      for (let i = 0; i < celdas.length; i += 2) {
-        const prod = norm(celdas[i] || '');
-        const precTxt = celdas[i + 1] || '';
-        if (prod && precTxt.includes('$')) {
-          const num = parseInt(precTxt.replace(/\D/g, ''));
-          if (!isNaN(num)) {
-            preciosDocs[prod] = num;
-          }
-        }
+  const elementos = doc.querySelectorAll('td, p, span');
+  let ultimoTexto = '';
+
+  elementos.forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt.includes('$')) {
+      const num = parseInt(txt.replace(/\D/g, ''));
+      if (!isNaN(num) && ultimoTexto) {
+        preciosDocs[norm(ultimoTexto)] = num;
       }
+    } else if (txt.length > 2 && !txt.startsWith('http')) {
+      ultimoTexto = txt;
     }
   });
+
+  console.log("Precios detectados en Google Docs:", preciosDocs);
 
   let huboCambios = false;
   S.forEach(cat => {
@@ -374,7 +373,11 @@ function procesarDocumentoHTML(htmlText) {
     });
   });
 
-  if (huboCambios) R();
+  // Re-renderizado cuando llegan los precios de Google Docs
+  if (huboCambios) {
+    console.log("Actualizando precios en pantalla...");
+    R();
+  }
 }
 
 $('catsSelect').onchange = e => {
@@ -385,16 +388,16 @@ $('catsSelect').onchange = e => {
 $('q').oninput = R;
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
-// Render inicial inmediato
+// Primer renderizado inmediato con datos locales
 R();
 
-// Consulta mediante el proxy público usando el endpoint /pub (Probado y funcionando OK en tu consola)
+// Consulta asíncrona para actualizar precios desde Google Docs
 const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(URL_DOCS_PUB) + '&cb=' + Date.now();
 
 fetch(proxyUrl)
   .then(r => r.text())
-  .then(html => procesarDocumentoHTML(html))
-  .catch(err => console.error("Error al sincronizar con Google Docs:", err));
+  .then(html => procesarHTMLDocs(html))
+  .catch(err => console.error("Error al sincronizar:", err));
 </script>
 </body>
 </html>
