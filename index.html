@@ -17,11 +17,26 @@ input[type=search]{flex:1;min-width:0;padding:10px 12px;border:1px solid #ddd;bo
 button{padding:10px 14px;border:0;border-radius:10px;background:var(--r);color:#fff;font-size:15px;cursor:pointer}
 button.on{background:#2e7d32}
 
-/* Ocultar la barra de scroll horriblemente visible */
-.cats{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;-ms-overflow-style:none;scrollbar-width:none;}
-.cats::-webkit-scrollbar{display:none;}
+/* Estilos para el desplegable de categorías con flecha */
+.cats-wrap{position:relative;margin-bottom:8px}
+select#catsSelect{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--b);
+  background:var(--b);
+  color:var(--t);
+  font-size:15px;
+  font-weight:600;
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23d32622" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>');
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  cursor:pointer;
+  outline:none;
+}
 
-.chip{white-space:nowrap;background:var(--b);color:var(--t);padding:7px 12px;border-radius:16px;font-size:13px}
 h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px 14px;border-radius:10px}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px 8px}
 .card{position:relative;text-align:center}
@@ -37,33 +52,41 @@ h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px
 footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--bg);border-top:1px solid var(--b);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px));font-size:13px}
 footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6px 12px;font-size:13px}
 
-/* Estilo para el botón / enlace de WhatsApp */
-.wa-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: #25d366;
-  color: #fff;
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 13px;
+/* Enlace directo a WhatsApp con número corregido */
+.wa-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background-color:#25d366;
+  color:#fff;
+  text-decoration:none;
+  padding:7px 14px;
+  border-radius:20px;
+  font-weight:bold;
+  font-size:13px;
 }
 </style>
 </head>
 <body>
 <div class="top"><h1 id="h"></h1></div>
 <div class="w">
-<div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="e" hidden>Editar</button></div>
-<div id="cats" class="cats"></div><p class="hint" id="hi"></p><div id="l"></div>
+  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="e" hidden>Editar</button></div>
+  <div class="cats-wrap">
+    <select id="catsSelect">
+      <option value="" disabled selected>Ir a una categoría...</option>
+    </select>
+  </div>
+  <p class="hint" id="hi"></p>
+  <div id="l"></div>
 </div>
+
 <footer>
   <button id="up">Inicio ↑</button>
-  <a id="wa" class="wa-link" href="https://wa.me/5491153445331" target="_blank" rel="noopener noreferrer">
+  <a id="wa" class="wa-link" href="https://wa.me/5491153442331" target="_blank" rel="noopener noreferrer">
     💬 Consultar por WhatsApp
   </a>
 </footer>
+
 <input type="file" id="f" accept="image/*" hidden>
 
 <script>
@@ -84,7 +107,7 @@ const D=[
 ["🧀","Quesos en barra",["Barra punta del agua|11500","Barra Los troncos|11000","Barra Barraza|11000","Barra Sancor|14000","Barra Lucrecia|9800","Barra Biolac|9800","Barra La Paulina|12500","Fiambrin Spalem|","Fiambrin La Quesera|16000","Fiambrin la serenisima|15000","Cheddar serenisima|15000","Cheddar Cayelac|14000","Pategras Sancor|15900","Pategras La Paulina|18500","Fontina Paulina|19500"]],
 ["🧀","Quesos postre",["Holanda Cayelac|15900","Pategras Paulina|18900","Mar del plata doble A|14900","Mar del plata Maria Luisa|14000","Mar del plata Lactear|20000","Fontina la paulina|19500","Fontina Cayelac|18500","Queso azul Bavaria|23000","Queso azul Quesera|14500","Queso azul Lucrecia|12900","Queso azul Emperador|13900","Provoleta Doble A|14900","Provoleta Santa Rosa|35900","Provoleta Cayelac|17000"]],
 ["🧀","Quesos duros",["Sardo fresco Santa Lucía|10500","Sardo semi Santa Lucía|12000","Sardo duro Santa Lucía|17500","Sardo Lucrecia|16500","Sardo Santa Rosa|34500","Provolin Santa lucía|17500","Provolone Cayelac|16500","Romanito Santa Lucía|14500","Reggianito Santa Lucía|17500","Reggianito Melincué|18000","Provolone Santa Rosa|38500","Reggianito Trelau|17500","Parmesano Melincué|18500","Talita Los Troncos|"]],
-["ZB","Varios lácteos y panificación",["Ricota La niña|4500","Ricota Trelau|5000","Manteca x 100 tonadita|1600","Manteca x 200 tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2650","Grasa porcina Esani x 500 gr|2750","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura levex 10 x 50 gr|6000","Levadura levex seca|17900","Levadura Calsa x 20x50gr|13000","Tapa rotisera Sabroricas|2750"]]
+["🧈","Varios lácteos y panificación",["Ricota La niña|4500","Ricota Trelau|5000","Manteca x 100 tonadita|1600","Manteca x 200 tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2650","Grasa porcina Esani x 500 gr|2750","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura levex 10 x 50 gr|6000","Levadura levex seca|17900","Levadura Calsa x 20x50gr|13000","Tapa rotisera Sabroricas|2750"]]
 ];
 
 let S,ed=0,T='LISTA DE PRECIOS',tg;
@@ -93,24 +116,92 @@ try{S=JSON.parse(localStorage.getItem('lp1'));T=localStorage.getItem('lpt')||T}c
 if(!S)S=D.map(([e,t,a])=>({e,t,a:a.map(s=>{const[n,p]=s.split('|');return{n,p:p?+p:null}})}));
 const sv=()=>{try{localStorage.setItem('lp1',JSON.stringify(S));localStorage.setItem('lpt',T)}catch(e){alert('No hay más espacio para fotos en este dispositivo.')}};
 const fm=p=>p==null?'Consultar':'$'+p.toLocaleString('es-AR');
-function R(){const q=$('q').value.toLowerCase(),c=ed?' contenteditable="true"':'';
-$('cats').innerHTML=S.map((s,i)=>`<button class="chip" data-c="${i}">${s.e} ${s.t} ↓</button>`).join('');$('h').innerHTML='<span id="t"'+c+'>'+T+'</span>';$('e').textContent=ed?'Listo':'Editar';$('e').className=ed?'on':'';$('hi').textContent=ed?'Modo edición: tocá un nombre o precio para cambiarlo, la foto para subir una, y ✕ para borrar. Se guarda solo.':'';
-$('l').className=ed?'ed':'';$('l').innerHTML=S.map((s,si)=>{const it=s.a.map((x,i)=>x.n.toLowerCase().includes(q)?`<div class="card" data-s="${si}" data-i="${i}"><div class="ph">${x.img?`<img src="${x.img}">`:s.e}</div><div class="n" data-f="n"${c}>${x.n}</div><div class="p" data-f="p"${c}>${fm(x.p)}</div>${ed?'<button class="x">✕</button>':''}</div>`:'').join('');
-return it||(ed&&!q)?`<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>${ed?`<button class="add" data-s="${si}">+ Agregar producto</button>`:''}`:''}).join('')}
-$('q').oninput=R;$('e').onclick=()=>{ed=!ed;R()};
-document.addEventListener('click',e=>{const k=e.target.closest('.card'),a=e.target.closest('.add');
-const ch=e.target.closest('.chip');if(ch){$('c'+ch.dataset.c)&&$('c'+ch.dataset.c).scrollIntoView({behavior:'smooth'});return}if(e.target.id=='up'){scrollTo({top:0,behavior:'smooth'});return}
-if(a){S[a.dataset.s].a.push({n:'Nuevo producto',p:null});sv();R();return}
-if(!ed||!k)return;tg=[k.dataset.s,k.dataset.i];
-if(e.target.className=='x'){S[tg[0]].a.splice(tg[1],1);sv();R()}else if(e.target.closest('.ph'))$('f').click()});
-document.addEventListener('focusin',e=>{const d=e.target;if(d.dataset.f=='p'){const k=d.closest('.card'),p=S[k.dataset.s].a[k.dataset.i].p;d.textContent=p==null?'':p}});
-document.addEventListener('focusout',e=>{const d=e.target;if(d.id=='t'){T=d.textContent.trim()||T;sv();return}
-if(!d.dataset.f)return;const k=d.closest('.card'),x=S[k.dataset.s].a[k.dataset.i];
-if(d.dataset.f=='n')x.n=d.textContent.trim()||x.n;else{const v=d.textContent.replace(/\D/g,'');x.p=v?+v:null;d.textContent=fm(x.p)}sv()});
-$('f').onchange=e=>{const fl=e.target.files[0];if(!fl)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),w=320,h=240,s=Math.max(w/im.width,h/im.height);c.width=w;c.height=h;const g=c.getContext('2d');g.drawImage(im,(w-im.width*s)/2,(h-im.height*s)/2,im.width*s,im.height*s);S[tg[0]].a[tg[1]].img=c.toDataURL('image/jpeg',.6);sv();R()};im.src=r.result};r.readAsDataURL(fl);e.target.value=''};
+
+function R(){
+  const q=$('q').value.toLowerCase(),c=ed?' contenteditable="true"':'';
+  
+  // Cargar opciones en el select
+  $('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
+    S.map((s,i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
+
+  $('h').innerHTML='<span id="t"'+c+'>'+T+'</span>';
+  $('e').textContent=ed?'Listo':'Editar';
+  $('e').className=ed?'on':'';$('hi').textContent=ed?'Modo edición: tocá un nombre o precio para cambiarlo, la foto para subir una, y ✕ para borrar. Se guarda solo.':'';
+  $('l').className=ed?'ed':'';$('l').innerHTML=S.map((s,si)=>{
+    const it=s.a.map((x,i)=>x.n.toLowerCase().includes(q)?`<div class="card" data-s="${si}" data-i="${i}"><div class="ph">${x.img?`<img src="${x.img}">`:s.e}</div><div class="n" data-f="n"${c}>${x.n}</div><div class="p" data-f="p"${c}>${fm(x.p)}</div>${ed?'<button class="x">✕</button>':''}</div>`:'').join('');
+    return it||(ed&&!q)?`<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>${ed?`<button class="add" data-s="${si}">+ Agregar producto</button>`:''}`:''
+  }).join('');
+}
+
+// Navegar al seleccionar una categoría del menú
+$('catsSelect').onchange = e => {
+  const el = $('c' + e.target.value);
+  if(el) el.scrollIntoView({ behavior: 'smooth' });
+};
+
+$('q').oninput=R;
+$('e').onclick=()=>{ed=!ed;R()};
+
+document.addEventListener('click',e=>{
+  const k=e.target.closest('.card'),a=e.target.closest('.add');
+  if(e.target.id=='up'){scrollTo({top:0,behavior:'smooth'});return}
+  if(a){S[a.dataset.s].a.push({n:'Nuevo producto',p:null});sv();R();return}
+  if(!ed||!k)return;
+  tg=[k.dataset.s,k.dataset.i];
+  if(e.target.className=='x'){S[tg[0]].a.splice(tg[1],1);sv();R()}
+  else if(e.target.closest('.ph'))$('f').click();
+});
+
+document.addEventListener('focusin',e=>{
+  const d=e.target;
+  if(d.dataset.f=='p'){
+    const k=d.closest('.card'),p=S[k.dataset.s].a[k.dataset.i].p;
+    d.textContent=p==null?'':p;
+  }
+});
+
+document.addEventListener('focusout',e=>{
+  const d=e.target;
+  if(d.id=='t'){T=d.textContent.trim()||T;sv();return}
+  if(!d.dataset.f)return;
+  const k=d.closest('.card'),x=S[k.dataset.s].a[k.dataset.i];
+  if(d.dataset.f=='n')x.n=d.textContent.trim()||x.n;
+  else{
+    const v=d.textContent.replace(/\D/g,'');
+    x.p=v?+v:null;
+    d.textContent=fm(x.p);
+  }
+  sv();
+});
+
+$('f').onchange=e=>{
+  const fl=e.target.files[0];
+  if(!fl)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    const im=new Image();
+    im.onload=()=>{
+      const c=document.createElement('canvas'),w=320,h=240,s=Math.max(w/im.width,h/im.height);
+      c.width=w;c.height=h;
+      const g=c.getContext('2d');
+      g.drawImage(im,(w-im.width*s)/2,(h-im.height*s)/2,im.width*s,im.height*s);
+      S[tg[0]].a[tg[1]].img=c.toDataURL('image/jpeg',.6);
+      sv();R();
+    };
+    im.src=r.result;
+  };
+  r.readAsDataURL(fl);
+  e.target.value='';
+};
+
 const CLAVE='#editar';
-function adm(){const ok=location.hash==CLAVE;$('e').hidden=!ok;if(!ok&&ed){ed=0;R()}}
-addEventListener('hashchange',adm);adm();
+function adm(){
+  const ok=location.hash==CLAVE;
+  $('e').hidden=!ok;
+  if(!ok&&ed){ed=0;R()}
+}
+addEventListener('hashchange',adm);
+adm();
 R();
 </script>
 </body>
