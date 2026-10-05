@@ -79,8 +79,8 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-// ID del documento de Google Docs extraído de tu enlace
-const DOC_ID = '1OBgIMcnEuS3Dh0rexTw45_9UI8_WXLMfX_PvNM2PG6Y';
+// URL publicada en la web de tu Google Docs
+const URL_DOCS_PUB = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub';
 
 // Lista base de productos
 const BASE_PRODUCTOS = [
@@ -338,22 +338,26 @@ function R() {
   }).join('');
 }
 
-// Función para normalizar texto (sacar tildes, espacios extra, etc.)
 const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 
-function procesarTextoPlano(texto) {
-  const lineas = texto.split('\n');
+function procesarDocumentoHTML(htmlText) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlText, 'text/html');
   const preciosDocs = {};
 
-  lineas.forEach(linea => {
-    // Buscar patrones donde esté el nombre del producto y el precio con "$"
-    if (linea.includes('$')) {
-      const partes = linea.split('$');
-      if (partes.length >= 2) {
-        const prod = norm(partes[0].replace(/[\t|\t]+/g, ' '));
-        const prec = parseInt(partes[1].replace(/\D/g, ''));
-        if (prod && !isNaN(prec)) {
-          preciosDocs[prod] = prec;
+  // Escanear todas las filas del documento publicadas por Google
+  const filas = doc.querySelectorAll('tr');
+  filas.forEach(f => {
+    const celdas = Array.from(f.querySelectorAll('td')).map(c => c.textContent.trim());
+    if (celdas.length >= 2) {
+      for (let i = 0; i < celdas.length; i += 2) {
+        const prod = norm(celdas[i] || '');
+        const precTxt = celdas[i + 1] || '';
+        if (prod && precTxt.includes('$')) {
+          const num = parseInt(precTxt.replace(/\D/g, ''));
+          if (!isNaN(num)) {
+            preciosDocs[prod] = num;
+          }
         }
       }
     }
@@ -363,16 +367,10 @@ function procesarTextoPlano(texto) {
   S.forEach(cat => {
     cat.a.forEach(prod => {
       const pBuscado = norm(prod.n);
-      
-      // Búsqueda flexible (coincidencia exacta o parcial)
-      Object.keys(preciosDocs).forEach(key => {
-        if (key.includes(pBuscado) || pBuscado.includes(key)) {
-          if (prod.p !== preciosDocs[key]) {
-            prod.p = preciosDocs[key];
-            huboCambios = true;
-          }
-        }
-      });
+      if (preciosDocs[pBuscado] !== undefined && preciosDocs[pBuscado] !== prod.p) {
+        prod.p = preciosDocs[pBuscado];
+        huboCambios = true;
+      }
     });
   });
 
@@ -390,19 +388,13 @@ $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 // Render inicial inmediato
 R();
 
-// Consulta directa al documento exportado como TXT (Texto Plano sin HTML)
-const txtUrl = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
-const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(txtUrl) + '&nocache=' + Date.now();
+// Consulta mediante el proxy público usando el endpoint /pub (Probado y funcionando OK en tu consola)
+const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(URL_DOCS_PUB) + '&cb=' + Date.now();
 
 fetch(proxyUrl)
   .then(r => r.text())
-  .then(txt => procesarTextoPlano(txt))
-  .catch(() => {
-    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(txtUrl))
-      .then(r => r.text())
-      .then(txt => procesarTextoPlano(txt))
-      .catch(() => {});
-  });
+  .then(html => procesarDocumentoHTML(html))
+  .catch(err => console.error("Error al sincronizar con Google Docs:", err));
 </script>
 </body>
 </html>
