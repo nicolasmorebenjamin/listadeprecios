@@ -37,8 +37,8 @@ select#catsSelect{
 h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px 14px;border-radius:10px}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px 8px}
 .card{position:relative;text-align:center}
-.ph{aspect-ratio:1;background:var(--b);display:flex;align-items:center;justify-content:center;font-size:40px;border-radius:8px;overflow:hidden}
-.ph img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:8px;padding:4px;box-sizing:border-box}
+.ph{aspect-ratio:1;background:#ffffff;display:flex;align-items:center;justify-content:center;font-size:40px;border-radius:10px;overflow:hidden;padding:6px;box-sizing:border-box}
+.ph img{width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important}
 .n{padding:6px 2px 0;font-size:12.5px;font-weight:700;line-height:1.25;min-height:32px}
 .p{margin:6px auto 14px;width:fit-content;background:var(--r);color:#fff;border-radius:20px;padding:5px 14px;font-weight:700;font-size:15px}
 
@@ -57,7 +57,6 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
   font-weight:bold;
   font-size:13px;
 }
-.loading{text-align:center;padding:20px;font-weight:bold;color:var(--m)}
 </style>
 </head>
 <body>
@@ -69,7 +68,7 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
       <option value="" disabled selected>Ir a una categoría...</option>
     </select>
   </div>
-  <div id="l"><p class="loading">Cargando precios actualizados...</p></div>
+  <div id="l"></div>
 </div>
 
 <footer>
@@ -80,252 +79,264 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-// URL del documento de Google Docs publicado
-const URL_DOCS = 'https://docs.google.com/document/d/e/2PACX-1vS55Y-e_4OBgIMcnEuS3Dh0rexTw45_9UI8_WXLMfX_PvNM2PG6Y/pub';
-const URL_DOCS_ALT = 'https://docs.google.com/document/d/1OBgIMcnEuS3Dh0rexTw45_9UI8_WXLMfX_PvNM2PG6Y/pub';
+// URL del documento publicado en Google Docs
+const URL_DOCS_ALT = 'https://docs.google.com/document/d/e/2PACX-1vS55Y-e_4OBgIMcnEuS3Dh0rexTw45_9UI8_WXLMfX_PvNM2PG6Y/pub';
 
 // Lista base de productos
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
-    {n:"Jamón cocido Paladini",p:11500},
-    {n:"Jamón cocido Calchaquí",p:12500},
-    {n:"Jamón cocido Sadia",p:12300},
-    {n:"Jamón cocido 214",p:11500},
-    {n:"J. cocido barril Luvianka",p:8000},
-    {n:"J. cocido barril Cabaña",p:8300},
-    {n:"J. cocido Arivan",p:6900},
-    {n:"Jamón cocido 266",p:9700},
-    {n:"Jamón cocido Cosenza",p:6200},
-    {n:"Jamón natural graseto",p:13900},
-    {n:"Jamón cocido Antonino",p:7500},
-    {n:"Jamón Cocido Sorrento",p:7100},
-    {n:"Jamón natural Bocatti",p:19500},
-    {n:"Jamón natural Luvianka",p:14900},
-    {n:"Jamón natural 266",p:14900},
-    {n:"Jamón natural Don José",p:8700},
-    {n:"Jamón natural jonelli",p:8000}
+    {n:"Jamón cocido Paladini", p:11500, img:""},
+    {n:"Jamón cocido Calchaquí", p:12500, img:""},
+    {n:"Jamón cocido Sadia", p:12300, img:""},
+    {n:"Jamón cocido 214", p:11500, img:""},
+    {n:"J. cocido barril Luvianka", p:8000, img:""},
+    {n:"J. cocido barril Cabaña", p:8300, img:""},
+    {n:"J. cocido Arivan", p:6900, img:""},
+    {n:"Jamón cocido 266", p:9700, img:""},
+    {n:"Jamón cocido Cosenza", p:6200, img:""},
+    {n:"Jamón natural graseto", p:13900, img:""},
+    {n:"Jamón cocido Antonino", p:7500, img:""},
+    {n:"Jamón Cocido Sorrento", p:7100, img:""},
+    {n:"Jamón natural Bocatti", p:19500, img:""},
+    {n:"Jamón natural Luvianka", p:14900, img:""},
+    {n:"Jamón natural 266", p:14900, img:""},
+    {n:"Jamón natural Don José", p:8700, img:""},
+    {n:"Jamón natural jonelli", p:8000, img:""}
   ]],
   ["🥓","Salames y salamines",[
-    {n:"Salame milán calchaquí",p:16200},
-    {n:"Salame milán 214",p:17700},
-    {n:"Salame milán El Nahuel",p:13500},
-    {n:"Salame milán Miguez",p:12900},
-    {n:"Salame milán Champion",p:15500},
-    {n:"Salame milán Imperiale",p:11500},
-    {n:"Salame cantimpalo Miguez",p:13500},
-    {n:"Salamines Miguez",p:15300},
-    {n:"Salamines 214",p:20600},
-    {n:"Longaniza bastón Miguez",p:15900},
-    {n:"Longaniza bastón 214",p:21700},
-    {n:"Chorizo colorado 214",p:22500},
-    {n:"Salame alerce campo austral",p:20500},
-    {n:"Salame de cerdo C. Austral",p:17500},
-    {n:"Salame fuet bocatti",p:4000},
-    {n:"Salame spianatta el nahuel",p:24000},
-    {n:"Salame Fuet cagnoli",p:4500}
+    {n:"Salame milán calchaquí", p:16200},
+    {n:"Salame milán 214", p:17700},
+    {n:"Salame milán El Nahuel", p:13500},
+    {n:"Salame milán Miguez", p:12900},
+    {n:"Salame milán Champion", p:15500},
+    {n:"Salame milán Imperiale", p:11500},
+    {n:"Salame cantimpalo Miguez", p:13500},
+    {n:"Salamines Miguez", p:15300},
+    {n:"Salamines 214", p:20600},
+    {n:"Longaniza bastón Miguez", p:15900},
+    {n:"Longaniza bastón 214", p:21700},
+    {n:"Chorizo colorado 214", p:22500},
+    {n:"Salame alerce campo austral", p:20500},
+    {n:"Salame de cerdo C. Austral", p:17500},
+    {n:"Salame fuet bocatti", p:4000},
+    {n:"Salame spianatta el nahuel", p:24000},
+    {n:"Salame Fuet cagnoli", p:4500}
   ]],
   ["🍖","Paletas",[
-    {n:"Paleta cocida Calchaquí",p:10500},
-    {n:"Paleta cocida 214",p:10000},
-    {n:"Paleta cocida Luvianka",p:7000},
-    {n:"Paleta cocida Barolo",p:6300},
-    {n:"Paleta vaina calchaqui",p:10900},
-    {n:"Paleta centurión",p:5500},
-    {n:"Paleta cocida Cagnoli",p:7200}
+    {n:"Paleta cocida Calchaquí", p:10500},
+    {n:"Paleta cocida 214", p:10000},
+    {n:"Paleta cocida Luvianka", p:7000},
+    {n:"Paleta cocida Barolo", p:6300},
+    {n:"Paleta vaina calchaqui", p:10900},
+    {n:"Paleta centurión", p:5500},
+    {n:"Paleta cocida Cagnoli", p:7200}
   ]],
   ["🌭","Mortadelas",[
-    {n:"Mortadela bocha Calchaquí",p:9200},
-    {n:"Mortadela bocha 214",p:10000},
-    {n:"Mortadela bocha Luvianka",p:7000},
-    {n:"Mortadela bocha Miguez",p:8900},
-    {n:"Mortadela bocha Champion",p:8500},
-    {n:"Mortadela c/pistacho Bocatti",p:13500},
-    {n:"Mortadela Cabaña Antonativa",p:6000}
+    {n:"Mortadela bocha Calchaquí", p:9200},
+    {n:"Mortadela bocha 214", p:10000},
+    {n:"Mortadela bocha Luvianka", p:7000},
+    {n:"Mortadela bocha Miguez", p:8900},
+    {n:"Mortadela bocha Champion", p:8500},
+    {n:"Mortadela c/pistacho Bocatti", p:13500},
+    {n:"Mortadela Cabaña Antonativa", p:6000}
   ]],
   ["🥩","Jamón crudo",[
-    {n:"J crudo parma La Octava",p:38000},
-    {n:"J crudo parma La Reina",p:30000},
-    {n:"J crudo La Reina",p:28000},
-    {n:"Jamón crudo JM",p:26000},
-    {n:"J. crudo Sol de Avellaneda",p:null},
-    {n:"Jamón crudo el rey",p:21000},
-    {n:"Jamón crudo serrano El Rey",p:22000},
-    {n:"J crudo listo Don José",p:24800},
-    {n:"J crudo c/cuero 4718",p:22000},
-    {n:"J Crudo Jonelli",p:null}
+    {n:"J crudo parma La Octava", p:38000},
+    {n:"J crudo parma La Reina", p:30000},
+    {n:"J crudo La Reina", p:28000},
+    {n:"Jamón crudo JM", p:26000},
+    {n:"J. crudo Sol de Avellaneda", p:null},
+    {n:"Jamón crudo el rey", p:21000},
+    {n:"Jamón crudo serrano El Rey", p:22000},
+    {n:"J crudo listo Don José", p:24800},
+    {n:"J crudo c/cuero 4718", p:22000},
+    {n:"J Crudo Jonelli", p:null}
   ]],
   ["🥩","Bondiolas y lomos",[
-    {n:"Bondiola ahumada",p:null},
-    {n:"Bondiola Paladini",p:26900},
-    {n:"Bondiola Calchaquí",p:null},
-    {n:"Bondiola La Reina",p:23500},
-    {n:"Bondiola Jonelli",p:19900},
-    {n:"Bondiola Luvianka",p:23500},
-    {n:"Lomo bocatti",p:19500},
-    {n:"Lomo Horneado Luvianka",p:14500},
-    {n:"Lomo ahumado Luvianka",p:14500},
-    {n:"Lomo ahumado 266",p:14900},
-    {n:"Pastrón",p:20000}
+    {n:"Bondiola ahumada", p:null},
+    {n:"Bondiola Paladini", p:26900},
+    {n:"Bondiola Calchaquí", p:null},
+    {n:"Bondiola La Reina", p:23500},
+    {n:"Bondiola Jonelli", p:19900},
+    {n:"Bondiola Luvianka", p:23500},
+    {n:"Lomo bocatti", p:19500},
+    {n:"Lomo Horneado Luvianka", p:14500},
+    {n:"Lomo ahumado Luvianka", p:14500},
+    {n:"Lomo ahumado 266", p:14900},
+    {n:"Pastrón", p:20000}
   ]],
   ["🥓","Pancetas",[
-    {n:"Panceta ahumada Calchaquí",p:20000},
-    {n:"Panceta ahumada 214",p:20500},
-    {n:"Panceta ahumada Luvianka",p:15000},
-    {n:"Panceta ahumada La Reina",p:13000},
-    {n:"Panceta salada miguez",p:15000},
-    {n:"Panceta ahumada centurion",p:13000}
+    {n:"Panceta ahumada Calchaquí", p:20000},
+    {n:"Panceta ahumada 214", p:20500},
+    {n:"Panceta ahumada Luvianka", p:15000},
+    {n:"Panceta ahumada La Reina", p:13000},
+    {n:"Panceta salada miguez", p:15000},
+    {n:"Panceta ahumada centurion", p:13000}
   ]],
   ["🍖","Matambres",[
-    {n:"Matambre carne serrano",p:32000},
-    {n:"Matambre Cerdo serrano",p:null},
-    {n:"Matambre carne imperial",p:25000},
-    {n:"Matambre pollo imperial",p:21000},
-    {n:"Fiambre de pollo 214",p:12000}
+    {n:"Matambre carne serrano", p:32000},
+    {n:"Matambre Cerdo serrano", p:null},
+    {n:"Matambre carne imperial", p:25000},
+    {n:"Matambre pollo imperial", p:21000},
+    {n:"Fiambre de pollo 214", p:12000}
   ]],
   ["🍽️","Varios fiambres",[
-    {n:"Salchichón Luvianka",p:6000},
-    {n:"Queso de cerdo 266",p:7000},
-    {n:"Mortadelita Paladini",p:3200},
-    {n:"Leber Paladini",p:2200},
-    {n:"Salchichas champifiesta x 6",p:1100},
-    {n:"Salchichas 66 x 6",p:null},
-    {n:"Tapas rotisera Sabroricas",p:2400}
+    {n:"Salchichón Luvianka", p:6000},
+    {n:"Queso de cerdo 266", p:7000},
+    {n:"Mortadelita Paladini", p:3200},
+    {n:"Leber Paladini", p:2200},
+    {n:"Salchichas champifiesta x 6", p:1100},
+    {n:"Salchichas 66 x 6", p:null},
+    {n:"Tapas rotisera Sabroricas", p:2400}
   ]],
   ["🫒","Encurtidos",[
-    {n:"Ac. verdes 0 x 2 kg",p:15000},
-    {n:"Ac. verdes 00 x 2 kg",p:20000},
-    {n:"Ac. verdes 000 x 2 kg",p:22000},
-    {n:"Ac. verdes s/ carozo x 2 kg",p:18500},
-    {n:"Ac. verdes s/ carozo x 5 kg",p:38000},
-    {n:"Ac. verdes c/ morrón x 1 kg",p:13000},
-    {n:"Ac. verdes rodajas x 2 kg",p:17000},
-    {n:"Ac. verdes rodajas x 4 kg",p:32000},
-    {n:"Ac. Verdes 0 x 5 kg",p:32000},
-    {n:"Ac. Verdes pizzera x 5 kg",p:27000},
-    {n:"Ac. Negra 0 x 2 kg",p:22000},
-    {n:"Ac. Negra 00 x 2 kg",p:28000},
-    {n:"Ac. Negra 000 x 2 kg",p:29000},
-    {n:"Ac. Negra s/carozo x 2 kg",p:23000},
-    {n:"Pickles x 2kg",p:12000},
-    {n:"Ajíes en frasco x 900 gr",p:19000},
-    {n:"Anchoas 60 x 3 unidades",p:33000},
-    {n:"Ac. Negra 0 x 1 kg",p:null},
-    {n:"Berenjenas x 1 kg",p:null},
-    {n:"Pepinillo x 2 kg",p:24000},
-    {n:"Aceitunas griegas x 2 kg",p:null},
-    {n:"Aceitunas rodajas x 2 kg",p:null},
-    {n:"Pickle x 5 kg",p:22000},
-    {n:"Aceitunas verdes 000 x 5 kg",p:null},
-    {n:"Aceitunas negras 0 x 5 kg",p:46000},
-    {n:"Aceitunas negras 000 x 5 kg",p:null},
-    {n:"Aceit negras s/carozo x 5 kg",p:48000},
-    {n:"Lupines x 2 kg",p:13000}
+    {n:"Ac. verdes 0 x 2 kg", p:15000},
+    {n:"Ac. verdes 00 x 2 kg", p:20000},
+    {n:"Ac. verdes 000 x 2 kg", p:22000},
+    {n:"Ac. verdes s/ carozo x 2 kg", p:18500},
+    {n:"Ac. verdes s/ carozo x 5 kg", p:38000},
+    {n:"Ac. verdes c/ morrón x 1 kg", p:13000},
+    {n:"Ac. verdes rodajas x 2 kg", p:17000},
+    {n:"Ac. verdes rodajas x 4 kg", p:32000},
+    {n:"Ac. Verdes 0 x 5 kg", p:32000},
+    {n:"Ac. Verdes pizzera x 5 kg", p:27000},
+    {n:"Ac. Negra 0 x 2 kg", p:22000},
+    {n:"Ac. Negra 00 x 2 kg", p:28000},
+    {n:"Ac. Negra 000 x 2 kg", p:29000},
+    {n:"Ac. Negra s/carozo x 2 kg", p:23000},
+    {n:"Pickles x 2kg", p:12000},
+    {n:"Ajíes en frasco x 900 gr", p:19000},
+    {n:"Anchoas 60 x 3 unidades", p:33000},
+    {n:"Ac. Negra 0 x 1 kg", p:null},
+    {n:"Berenjenas x 1 kg", p:null},
+    {n:"Pepinillo x 2 kg", p:24000},
+    {n:"Aceitunas griegas x 2 kg", p:null},
+    {n:"Aceitunas rodajas x 2 kg", p:null},
+    {n:"Pickle x 5 kg", p:22000},
+    {n:"Aceitunas verdes 000 x 5 kg", p:null},
+    {n:"Aceitunas negras 0 x 5 kg", p:46000},
+    {n:"Aceitunas negras 000 x 5 kg", p:null},
+    {n:"Aceit negras s/carozo x 5 kg", p:48000},
+    {n:"Lupines x 2 kg", p:13000}
   ]],
   ["🍯","Dulces Cayfar",[
-    {n:"Batata cajón x 5 kg",p:10500},
-    {n:"Batata c/cacao cajón x 5 kg",p:10500},
-    {n:"Membrillo cajón x 5 kg",p:13000},
-    {n:"Batata lata x 5 kg",p:13500},
-    {n:"Batata c/cacao lata x 5 kg",p:13500},
-    {n:"Membrillo lata x 5 kg",p:17500}
+    {n:"Batata cajón x 5 kg", p:10500},
+    {n:"Batata c/cacao cajón x 5 kg", p:10500},
+    {n:"Membrillo cajón x 5 kg", p:13000},
+    {n:"Batata lata x 5 kg", p:13500},
+    {n:"Batata c/cacao lata x 5 kg", p:13500},
+    {n:"Membrillo lata x 5 kg", p:17500}
   ]],
   ["🍯","Dulces Esnaola",[
-    {n:"Batata en lata x 5kg",p:16000},
-    {n:"Batata c/cacao lata x 5kg",p:16000},
-    {n:"Membrillo en lata x 5kg",p:19500},
-    {n:"P. bombon Esnaola x 5kg",p:35000},
-    {n:"Zapallo lata x 5 kg",p:null},
-    {n:"Batata c/guinda x 5kg",p:24000}
+    {n:"Batata en lata x 5kg", p:16000},
+    {n:"Batata c/cacao lata x 5kg", p:16000},
+    {n:"Membrillo en lata x 5kg", p:19500},
+    {n:"P. bombon Esnaola x 5kg", p:35000},
+    {n:"Zapallo lata x 5 kg", p:null},
+    {n:"Batata c/guinda x 5kg", p:24000}
   ]],
   ["🧀","Quesos blandos",[
-    {n:"Q. cremoso Barraza",p:9100},
-    {n:"Q. cremoso Punta del agua",p:9100},
-    {n:"Q. cremoso La Paulina",p:9000},
-    {n:"Q. cremoso Lactear",p:8500},
-    {n:"Q. cremoso El faisan",p:8300},
-    {n:"Q. cremoso La Finca",p:8300},
-    {n:"Q. cremoso los troncos",p:9000},
-    {n:"Q. por salut Punta del Agua",p:9900},
-    {n:"Q. por salut Cayelac",p:11500},
-    {n:"Q. por salut Barraza",p:10500},
-    {n:"Q. por salut s/sal Cayelac",p:12000},
-    {n:"Q. por salut s/sal Barraza",p:11500},
-    {n:"Q. por salut light Barraza",p:null},
-    {n:"Muzzarella barraza cilindro",p:12000},
-    {n:"Muzzarella Lucrecia",p:9500},
-    {n:"Muzza El Gauchito plancha",p:9800},
-    {n:"Muzza El Gauchito",p:10000}
+    {n:"Q. cremoso Barraza", p:9100},
+    {n:"Q. cremoso Punta del agua", p:9100},
+    {n:"Q. cremoso La Paulina", p:9000},
+    {n:"Q. cremoso Lactear", p:8500},
+    {n:"Q. cremoso El faisan", p:8300},
+    {n:"Q. cremoso La Finca", p:8300},
+    {n:"Q. cremoso los troncos", p:9000},
+    {n:"Q. por salut Punta del Agua", p:9900},
+    {n:"Q. por salut Cayelac", p:11500},
+    {n:"Q. por salut Barraza", p:10500},
+    {n:"Q. por salut s/sal Cayelac", p:12000},
+    {n:"Q. por salut s/sal Barraza", p:11500},
+    {n:"Q. por salut light Barraza", p:null},
+    {n:"Muzzarella barraza cilindro", p:12000},
+    {n:"Muzzarella Lucrecia", p:9500},
+    {n:"Muzza El Gauchito plancha", p:9800},
+    {n:"Muzza El Gauchito", p:10000}
   ]],
   ["🧀","Quesos en barra",[
-    {n:"Barra punta del agua",p:11500},
-    {n:"Barra Los troncos",p:11000},
-    {n:"Barra Barraza",p:11000},
-    {n:"Barra Sancor",p:14000},
-    {n:"Barra Lucrecia",p:9800},
-    {n:"Barra Biolac",p:9800},
-    {n:"Barra La Paulina",p:12500},
-    {n:"Fiambrin Spalem",p:null},
-    {n:"Fiambrin La Quesera",p:16000},
-    {n:"Fiambrin la serenisima",p:15000},
-    {n:"Cheddar serenisima",p:15000},
-    {n:"Cheddar Cayelac",p:14000},
-    {n:"Pategras Sancor",p:15900},
-    {n:"Pategras La Paulina",p:18500},
-    {n:"Fontina Paulina",p:19500}
+    {n:"Barra punta del agua", p:11500},
+    {n:"Barra Los troncos", p:11000},
+    {n:"Barra Barraza", p:11000},
+    {n:"Barra Sancor", p:14000},
+    {n:"Barra Lucrecia", p:9800},
+    {n:"Barra Biolac", p:9800},
+    {n:"Barra La Paulina", p:12500},
+    {n:"Fiambrin Spalem", p:null},
+    {n:"Fiambrin La Quesera", p:16000},
+    {n:"Fiambrin la serenisima", p:15000},
+    {n:"Cheddar serenisima", p:15000},
+    {n:"Cheddar Cayelac", p:14000},
+    {n:"Pategras Sancor", p:15900},
+    {n:"Pategras La Paulina", p:18500},
+    {n:"Fontina Paulina", p:19500}
   ]],
   ["🧀","Quesos postre",[
-    {n:"Holanda Cayelac",p:15900},
-    {n:"Pategras Paulina",p:18900},
-    {n:"Mar del plata doble A",p:14900},
-    {n:"Mar del plata Maria Luisa",p:14000},
-    {n:"Mar del plata Lactear",p:20000},
-    {n:"Fontina la paulina",p:19500},
-    {n:"Fontina Cayelac",p:18500},
-    {n:"Queso azul Bavaria",p:23000},
-    {n:"Queso azul Quesera",p:14500},
-    {n:"Queso azul Lucrecia",p:12900},
-    {n:"Queso azul Emperador",p:13900},
-    {n:"Provoleta Doble A",p:14900},
-    {n:"Provoleta Santa Rosa",p:35900},
-    {n:"Provoleta Cayelac",p:17000}
+    {n:"Holanda Cayelac", p:15900},
+    {n:"Pategras Paulina", p:18900},
+    {n:"Mar del plata doble A", p:14900},
+    {n:"Mar del plata Maria Luisa", p:14000},
+    {n:"Mar del plata Lactear", p:20000},
+    {n:"Fontina la paulina", p:19500},
+    {n:"Fontina Cayelac", p:18500},
+    {n:"Queso azul Bavaria", p:23000},
+    {n:"Queso azul Quesera", p:14500},
+    {n:"Queso azul Lucrecia", p:12900},
+    {n:"Queso azul Emperador", p:13900},
+    {n:"Provoleta Doble A", p:14900},
+    {n:"Provoleta Santa Rosa", p:35900},
+    {n:"Provoleta Cayelac", p:17000}
   ]],
   ["🧀","Quesos duros",[
-    {n:"Sardo fresco Santa Lucía",p:10500},
-    {n:"Sardo semi Santa Lucía",p:12000},
-    {n:"Sardo duro Santa Lucía",p:17500},
-    {n:"Sardo Lucrecia",p:16500},
-    {n:"Sardo Santa Rosa",p:34500},
-    {n:"Provolin Santa lucía",p:17500},
-    {n:"Provolone Cayelac",p:16500},
-    {n:"Romanito Santa Lucía",p:14500},
-    {n:"Reggianito Santa Lucía",p:17500},
-    {n:"Reggianito Melincué",p:18000},
-    {n:"Provolone Santa Rosa",p:38500},
-    {n:"Reggianito Trelau",p:17500},
-    {n:"Parmesano Melincué",p:18500},
-    {n:"Talita Los Troncos",p:null}
+    {n:"Sardo fresco Santa Lucía", p:10500},
+    {n:"Sardo semi Santa Lucía", p:12000},
+    {n:"Sardo duro Santa Lucía", p:17500},
+    {n:"Sardo Lucrecia", p:16500},
+    {n:"Sardo Santa Rosa", p:34500},
+    {n:"Provolin Santa lucía", p:17500},
+    {n:"Provolone Cayelac", p:16500},
+    {n:"Romanito Santa Lucía", p:14500},
+    {n:"Reggianito Santa Lucía", p:17500},
+    {n:"Reggianito Melincué", p:18000},
+    {n:"Provolone Santa Rosa", p:38500},
+    {n:"Reggianito Trelau", p:17500},
+    {n:"Parmesano Melincué", p:18500},
+    {n:"Talita Los Troncos", p:null}
   ]],
-  ["🧈","Varios lácteos y panificación",[
-    {n:"Ricota La niña",p:4500},
-    {n:"Ricota Trelau",p:5000},
-    {n:"Manteca x 100 tonadita",p:1600},
-    {n:"Manteca x 200 tonadita",p:3000},
-    {n:"Manteca x 100 Ramolac",p:null},
-    {n:"Manteca x 200 Ramolac",p:null},
-    {n:"Grasa vacuna Esani x 500 gr",p:2250},
-    {n:"Grasa porcina Esani x 500 gr",p:2350},
-    {n:"Fainalind display",p:14000},
-    {n:"Queso rallado suelto x kg",p:21000},
-    {n:"Levadura levex 10 x 50 gr",p:6000},
-    {n:"Levadura levex seca",p:17900},
-    {n:"Levadura Calsa x 20x50gr",p:13000},
-    {n:"Tapa rotisera Sabroricas",p:2750}
+  ["GB","Varios lácteos y panificación",[
+    {n:"Ricota La niña", p:4500},
+    {n:"Ricota Trelau", p:5000},
+    {n:"Manteca x 100 tonadita", p:1600},
+    {n:"Manteca x 200 tonadita", p:3000},
+    {n:"Manteca x 100 Ramolac", p:null},
+    {n:"Manteca x 200 Ramolac", p:null},
+    {n:"Grasa vacuna Esani x 500 gr", p:2250},
+    {n:"Grasa porcina Esani x 500 gr", p:2350},
+    {n:"Fainalind display", p:14000},
+    {n:"Queso rallado suelto x kg", p:21000},
+    {n:"Levadura levex 10 x 50 gr", p:6000},
+    {n:"Levadura levex seca", p:17900},
+    {n:"Levadura Calsa x 20x50gr", p:13000},
+    {n:"Tapa rotisera Sabroricas", p:2750}
   ]]
 ];
 
 let S = BASE_PRODUCTOS.map(([e,t,a])=>({e,t,a:a.map(x=>({...x, img: x.img||null}))}));
 const $ = id => document.getElementById(id);
 const fm = p => (p == null || isNaN(p) || p === '') ? 'Consultar' : '$' + Number(p).toLocaleString('es-AR');
+
+function R() {
+  const q = $('q').value.toLowerCase();$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
+    S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
+
+  $('l').innerHTML = S.map((s, si) => {
+    const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
+      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+    ).join('');
+    
+    return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
+  }).join('');
+}
 
 function procesarHTMLDocs(htmlText) {
   const parser = new DOMParser();
@@ -350,27 +361,18 @@ function procesarHTMLDocs(htmlText) {
     }
   });
 
+  let huboCambios = false;
   S.forEach(cat => {
     cat.a.forEach(prod => {
       const pBuscado = prod.n.toLowerCase();
-      if (preciosDocs[pBuscado] !== undefined) {
+      if (preciosDocs[pBuscado] !== undefined && preciosDocs[pBuscado] !== prod.p) {
         prod.p = preciosDocs[pBuscado];
+        huboCambios = true;
       }
     });
   });
-}
 
-function R() {
-  const q = $('q').value.toLowerCase();$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
-    S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
-
-  $('l').innerHTML = S.map((s, si) => {
-    const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
-    ).join('');
-    
-    return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
-  }).join('');
+  if (huboCambios) R();
 }
 
 $('catsSelect').onchange = e => {
@@ -381,16 +383,24 @@ $('catsSelect').onchange = e => {
 $('q').oninput = R;
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
-// Leer precios desde Google Docs mediante un proxy CORS
-const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(URL_DOCS_ALT);
+// Mostrar la vista previa inicial
+R();
+
+// Cargar precios en tiempo real sin guardar en caché
+const urlDocsNoCache = URL_DOCS_ALT + '?nocache=' + Date.now();
+const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(urlDocsNoCache);
+
 fetch(proxyUrl)
   .then(r => r.text())
   .then(html => {
     procesarHTMLDocs(html);
-    R();
   })
   .catch(() => {
-    R(); // Muestra los precios base si falla la consulta externa
+    // Si falla AllOrigins, prueba con el proxy secundario
+    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(urlDocsNoCache))
+      .then(r => r.text())
+      .then(html => procesarHTMLDocs(html))
+      .catch(() => {});
   });
 </script>
 </body>
