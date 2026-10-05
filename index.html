@@ -64,7 +64,7 @@ const D=[
 ["🧈","Varios lácteos y panificación",["Ricota La niña|4500","Ricota Trelau|5000","Manteca x 100 tonadita|1600","Manteca x 200 tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2650","Grasa porcina Esani x 500 gr|2750","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura levex 10 x 50 gr|6000","Levadura levex seca|17900","Levadura Calsa x 20x50gr|13000","Tapa rotisera Sabroricas|2750"]]
 ];
 
-let S,ed=0,T='LISTA DE PRECIOS',W='WhatsApp: +54 9 11 ----',tg;
+let S,ed=0,T='LISTA DE PRECIOS',W='WhatsApp: +54 9 11 5344-2331',tg;
 const $=id=>document.getElementById(id);
 try{S=JSON.parse(localStorage.getItem('lp1'));T=localStorage.getItem('lpt')||T;W=localStorage.getItem('lpw')||W}catch(e){}
 if(!S)S=D.map(([e,t,a])=>({e,t,a:a.map(s=>{const[n,p]=s.split('|');return{n,p:p?+p:null}})}));
