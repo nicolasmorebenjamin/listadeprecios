@@ -1,0 +1,33 @@
+name: Sincronizar precios de Google Docs
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Leer precios del documento publicado
+        run: node scripts/sync-prices.mjs
+      - name: Publicar cambios de precios
+        run: |
+          if git diff --quiet -- precios.json; then
+            echo "Los precios no cambiaron."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add precios.json
+          git commit -m "Actualizar precios publicados"
+          git push

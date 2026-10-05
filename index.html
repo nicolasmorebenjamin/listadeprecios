@@ -83,8 +83,6 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-const URL_DOCS_PUB = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub?embedded=true';
-
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
     {n:"Jamón cocido Paladini", p:null, img:"paladini.JPG"},
@@ -342,42 +340,7 @@ function R() {
 
 const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
 
-function procesarHTMLDocs(htmlText) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlText, 'text/html');
-  const preciosDocs = {};
-
-  const filas = doc.querySelectorAll('tr');
-  filas.forEach(f => {
-    const celdas = Array.from(f.querySelectorAll('td, th')).map(c => c.textContent.trim());
-    for (let i = 0; i < celdas.length - 1; i++) {
-      const prodTxt = celdas[i];
-      const precTxt = celdas[i + 1];
-      if (prodTxt && precTxt.includes('$')) {
-        const num = parseInt(precTxt.replace(/\D/g, ''));
-        if (!isNaN(num)) {
-          preciosDocs[norm(prodTxt)] = num;
-        }
-      }
-    }
-  });
-
-  if (Object.keys(preciosDocs).length === 0) {
-    const elementos = doc.querySelectorAll('p, span');
-    let ultimoTexto = '';
-    elementos.forEach(el => {
-      const txt = el.textContent.trim();
-      if (txt.includes('$')) {
-        const num = parseInt(txt.replace(/\D/g, ''));
-        if (!isNaN(num) && ultimoTexto) {
-          preciosDocs[norm(ultimoTexto)] = num;
-        }
-      } else if (txt.length > 2 && !txt.startsWith('http')) {
-        ultimoTexto = txt;
-      }
-    });
-  }
-
+function aplicarPrecios(preciosDocs) {
   S.forEach(cat => {
     cat.a.forEach(prod => {
       const pBuscado = norm(prod.n);
@@ -400,15 +363,12 @@ $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
 async function actualizarPrecios() {
   const status = $('syncStatus');
-  const urlDocsSinCache = URL_DOCS_PUB + '&_cb=' + Date.now();
-  const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(urlDocsSinCache) + '&_cb=' + Date.now();
-
   try {
-    const respuesta = await fetch(proxyUrl, { cache: 'no-store' });
-    if (!respuesta.ok) throw new Error('No se pudo consultar el documento publicado');
-    const html = await respuesta.text();
-    if (!html || !html.includes('<html')) throw new Error('El documento publicado no devolvió contenido válido');
-    procesarHTMLDocs(html);
+    const respuesta = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' });
+    if (!respuesta.ok) throw new Error('No se pudo consultar la lista de precios');
+    const preciosDocs = await respuesta.json();
+    if (!preciosDocs || !Object.keys(preciosDocs).length) throw new Error('La lista de precios está vacía');
+    aplicarPrecios(preciosDocs);
     status.textContent = 'Precios sincronizados · ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
   } catch (error) {
     // Conserva los precios visibles si la fuente falla temporalmente.
