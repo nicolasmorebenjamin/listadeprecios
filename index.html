@@ -43,6 +43,7 @@ h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px
 .p{margin:6px auto 14px;width:fit-content;background:var(--r);color:#fff;border-radius:20px;padding:5px 14px;font-weight:700;font-size:15px}
 
 .loading{text-align:center;padding:40px 10px;font-weight:bold;color:var(--m);font-size:16px}
+.sync-status{text-align:center;color:var(--m);font-size:12px;padding:4px 0 10px}
 
 footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--bg);border-top:1px solid var(--b);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px));font-size:13px;z-index:100}
 footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6px 12px;font-size:13px;border-radius:10px;cursor:pointer}
@@ -71,6 +72,7 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
     </select>
   </div>
   <div id="l"><div class="loading">Cargando precios actualizados...</div></div>
+  <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
 </div>
 
 <footer>
@@ -396,14 +398,30 @@ $('catsSelect').onchange = e => {
 $('q').oninput = R;
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
-const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(URL_DOCS_PUB) + '&_cb=' + Date.now();
+async function actualizarPrecios() {
+  const status = $('syncStatus');
+  const urlDocsSinCache = URL_DOCS_PUB + '&_cb=' + Date.now();
+  const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(urlDocsSinCache) + '&_cb=' + Date.now();
 
-fetch(proxyUrl)
-  .then(r => r.text())
-  .then(html => procesarHTMLDocs(html))
-  .catch(() => {
+  try {
+    const respuesta = await fetch(proxyUrl, { cache: 'no-store' });
+    if (!respuesta.ok) throw new Error('No se pudo consultar el documento publicado');
+    const html = await respuesta.text();
+    if (!html || !html.includes('<html')) throw new Error('El documento publicado no devolvió contenido válido');
+    procesarHTMLDocs(html);
+    status.textContent = 'Precios sincronizados · ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+  } catch (error) {
+    // Conserva los precios visibles si la fuente falla temporalmente.
     R();
-  });
+    status.textContent = 'No se pudieron actualizar los precios. Se volverá a intentar automáticamente.';
+  }
+}
+
+actualizarPrecios();
+// Si la página queda abierta, consulta nuevamente el documento cada minuto.
+setInterval(() => {
+  if (document.visibilityState === 'visible') actualizarPrecios();
+}, 60 * 1000);
 </script>
 </body>
 </html>
