@@ -17,7 +17,6 @@ input[type=search]{flex:1;min-width:0;padding:10px 12px;border:1px solid #ddd;bo
 button{padding:10px 14px;border:0;border-radius:10px;background:var(--r);color:#fff;font-size:15px;cursor:pointer}
 button.on{background:#2e7d32}
 
-
 .cats-wrap{position:relative;margin-bottom:8px}
 select#catsSelect{
   width:100%;
@@ -40,18 +39,17 @@ select#catsSelect{
 h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px 14px;border-radius:10px}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px 8px}
 .card{position:relative;text-align:center}
-.ph{aspect-ratio:1;background:var(--b);display:flex;align-items:center;justify-content:center;font-size:40px;border-radius:8px;overflow:hidden}
-.ph img{width:100%;height:100%;object-fit:contain;background:#fff}
+.ph{aspect-ratio:1;background:var(--b);display:flex;align-items:center;justify-content:center;font-size:40px;border-radius:8px;overflow:hidden;padding:6px;box-sizing:border-box}
+.ph img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .n{padding:6px 2px 0;font-size:12.5px;font-weight:700;line-height:1.25;min-height:32px}
 .p{margin:6px auto 14px;width:fit-content;background:var(--r);color:#fff;border-radius:20px;padding:5px 14px;font-weight:700;font-size:15px}
 .ed .ph{cursor:pointer;outline:2px dashed var(--m);outline-offset:-4px}
 [contenteditable]{outline:1px dashed var(--m);border-radius:6px}
-.x{position:absolute;top:4px;right:4px;padding:4px 9px;border-radius:50%;background:#000a}
-.add{margin-top:10px;background:var(--m)}
+.x{position:absolute;top:4px;right:4px;padding:4px 9px;border-radius:50%;background:#000a;color:#fff}
+.add{margin-top:10px;background:var(--m);color:#fff}
 .hint{color:var(--m);font-size:13px;margin:0 0 6px}
 footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--bg);border-top:1px solid var(--b);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px));font-size:13px}
 footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6px 12px;font-size:13px}
-
 
 .wa-link{
   display:inline-flex;
@@ -103,11 +101,11 @@ const D=[
 ["🫒","Encurtidos",["Ac. verdes 0 x 2 kg|15000","Ac. verdes 00 x 2 kg|20000","Ac. verdes 000 x 2 kg|22000","Ac. verdes s/ carozo x 2 kg|18500","Ac. verdes s/ carozo x 5 kg|38000","Ac. verdes c/ morrón x 1 kg|13000","Ac. verdes rodajas x 2 kg|17000","Ac. verdes rodajas x 4 kg|32000","Ac. Verdes 0 x 5 kg|32000","Ac. Verdes pizzera x 5 kg|27000","Ac. Negra 0 x 2 kg|22000","Ac. Negra 00 x 2 kg|28000","Ac. Negra 000 x 2 kg|29000","Ac. Negra s/carozo x 2 kg|23000","Pickles x 2kg|12000","Ajíes en frasco x 900 gr|19000","Anchoas 60 x 3 unidades|33000","Ac. Negra 0 x 1 kg|","Berenjenas x 1 kg|","Pepinillo x 2 kg|24000","Aceitunas griegas x 2 kg|","Aceitunas rodajas x 2 kg|","Pickle x 5 kg|22000","Aceitunas verdes 000 x 5 kg|","Aceitunas negras 0 x 5 kg|46000","Aceitunas negras 000 x 5 kg|","Aceit negras s/carozo x 5 kg|48000","Lupines x 2 kg|13000"]],
 ["🍯","Dulces Cayfar",["Batata cajón x 5 kg|10500","Batata c/cacao cajón x 5 kg|10500","Membrillo cajón x 5 kg|13000","Batata lata x 5 kg|13500","Batata c/cacao lata x 5 kg|13500","Membrillo lata x 5 kg|17500"]],
 ["🍯","Dulces Esnaola",["Batata en lata x 5kg|16000","Batata c/cacao lata x 5kg|16000","Membrillo en lata x 5kg|19500","P. bombon Esnaola x 5kg|35000","Zapallo lata x 5 kg|","Batata c/guinda x 5kg|24000"]],
-["🧀","Quesos blandos",["Q. cremoso Barraza|9100","Q. cremoso Punta del agua|9100","Q. cremoso La Paulina|9000","Q. cremoso Lactear|8500","Q. cremoso El faisan|8300","Q. cremoso La Finca|8300","Q. cremoso los troncos|9000","Q. por salut Punta del Agua|9900","Q. por salut Cayelac|11000","Q. por salut Barraza|11000","Q. por salut s/sal Cayelac|11500","Q. por salut s/sal Barraza|11000","Q. por salut light Barraza|","Muzzarella barraza cilindro|12000","Muzzarella Lucrecia|9500","Muzza El Gauchito plancha|9800","Muzza El Gauchito|10000"]],
+["🧀","Quesos blandos",["Q. cremoso Barraza|9100","Q. cremoso Punta del agua|9100","Q. cremoso La Paulina|9000","Q. cremoso Lactear|8500","Q. cremoso El faisan|8300","Q. cremoso La Finca|8300","Q. cremoso los troncos|9000","Q. por salut Punta del Agua|9900","Q. por salut Cayelac|11500","Q. por salut Barraza|10500","Q. por salut s/sal Cayelac|12000","Q. por salut s/sal Barraza|11500","Q. por salut light Barraza|","Muzzarella barraza cilindro|12000","Muzzarella Lucrecia|9500","Muzza El Gauchito plancha|9800","Muzza El Gauchito|10000"]],
 ["🧀","Quesos en barra",["Barra punta del agua|11500","Barra Los troncos|11000","Barra Barraza|11000","Barra Sancor|14000","Barra Lucrecia|9800","Barra Biolac|9800","Barra La Paulina|12500","Fiambrin Spalem|","Fiambrin La Quesera|16000","Fiambrin la serenisima|15000","Cheddar serenisima|15000","Cheddar Cayelac|14000","Pategras Sancor|15900","Pategras La Paulina|18500","Fontina Paulina|19500"]],
 ["🧀","Quesos postre",["Holanda Cayelac|15900","Pategras Paulina|18900","Mar del plata doble A|14900","Mar del plata Maria Luisa|14000","Mar del plata Lactear|20000","Fontina la paulina|19500","Fontina Cayelac|18500","Queso azul Bavaria|23000","Queso azul Quesera|14500","Queso azul Lucrecia|12900","Queso azul Emperador|13900","Provoleta Doble A|14900","Provoleta Santa Rosa|35900","Provoleta Cayelac|17000"]],
 ["🧀","Quesos duros",["Sardo fresco Santa Lucía|10500","Sardo semi Santa Lucía|12000","Sardo duro Santa Lucía|17500","Sardo Lucrecia|16500","Sardo Santa Rosa|34500","Provolin Santa lucía|17500","Provolone Cayelac|16500","Romanito Santa Lucía|14500","Reggianito Santa Lucía|17500","Reggianito Melincué|18000","Provolone Santa Rosa|38500","Reggianito Trelau|17500","Parmesano Melincué|18500","Talita Los Troncos|"]],
-["🧈","Varios lácteos y panificación",["Ricota La niña|4500","Ricota Trelau|5000","Manteca x 100 tonadita|1600","Manteca x 200 tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2650","Grasa porcina Esani x 500 gr|2750","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura levex 10 x 50 gr|6000","Levadura levex seca|17900","Levadura Calsa x 20x50gr|13000","Tapa rotisera Sabroricas|2750"]]
+["🧈","Varios lácteos y panificación",["Ricota La niña|4500","Ricota Trelau|5000","Manteca x 100 tonadita|1600","Manteca x 200 tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2250","Grasa porcina Esani x 500 gr|2350","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura levex 10 x 50 gr|6000","Levadura levex seca|17900","Levadura Calsa x 20x50gr|13000","Tapa rotisera Sabroricas|2750"]]
 ];
 
 let S,ed=0,T='LISTA DE PRECIOS',tg;
@@ -120,7 +118,6 @@ const fm=p=>p==null?'Consultar':'$'+p.toLocaleString('es-AR');
 function R(){
   const q=$('q').value.toLowerCase(),c=ed?' contenteditable="true"':'';
   
-  // Cargar opciones en el select
   $('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
     S.map((s,i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
 
@@ -133,7 +130,6 @@ function R(){
   }).join('');
 }
 
-// Navegar al seleccionar una categoría del menú
 $('catsSelect').onchange = e => {
   const el = $('c' + e.target.value);
   if(el) el.scrollIntoView({ behavior: 'smooth' });
