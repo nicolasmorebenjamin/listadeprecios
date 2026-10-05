@@ -79,9 +79,6 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-// URL del documento publicado en Google Docs
-const URL_DOCS_ALT = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub';
-
 // Lista base de productos
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
@@ -165,7 +162,7 @@ const BASE_PRODUCTOS = [
     {n:"Lomo ahumado 266", p:14900, img:""},
     {n:"Pastrón", p:20000, img:""}
   ]],
-  ["BAC","Pancetas",[
+  ["🥓","Pancetas",[
     {n:"Panceta ahumada Calchaquí", p:20000, img:""},
     {n:"Panceta ahumada 214", p:20500, img:""},
     {n:"Panceta ahumada Luvianka", p:15000, img:""},
@@ -331,7 +328,7 @@ function R() {
 
   $('l').innerHTML = S.map((s, si) => {
     const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}" onerror="this.parentNode.innerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
     ).join('');
     
     return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
@@ -341,21 +338,23 @@ function R() {
 function procesarHTMLDocs(htmlText) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlText, 'text/html');
-  const textoLimpio = doc.body ? doc.body.textContent : htmlText;
-
   const preciosDocs = {};
-  
-  // Expresión regular universal para capturar "Nombre del producto" seguido de "$Monto"
-  const regex = /([A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s\.\/kg-]+?)\s*\$\s*([0-9\.]+)/g;
-  let match;
 
-  while ((match = regex.exec(textoLimpio)) !== null) {
-    const prod = match[1].trim().toLowerCase();
-    const prec = parseInt(match[2].replace(/\./g, ''));
-    if (prod && !isNaN(prec)) {
-      preciosDocs[prod] = prec;
+  // Extraer celdas de tabla o párrafos
+  const elementos = doc.querySelectorAll('td, p, div, tr');
+  let ultimoTexto = '';
+
+  elementos.forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt.includes('$')) {
+      const num = parseInt(txt.replace(/\D/g, ''));
+      if (!isNaN(num) && ultimoTexto) {
+        preciosDocs[ultimoTexto.toLowerCase()] = num;
+      }
+    } else if (txt.length > 2 && !txt.startsWith('http')) {
+      ultimoTexto = txt;
     }
-  }
+  });
 
   let huboCambios = false;
   S.forEach(cat => {
@@ -382,14 +381,16 @@ $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 // Render inicial inmediato
 R();
 
-// Consulta dinámica a Google Docs sin caché
-const urlDocsNoCache = URL_DOCS_ALT + '?t=' + Date.now();
+// Consulta mediante el servicio de proxy con respaldo
+const targetUrl = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub';
 
-fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(urlDocsNoCache))
-  .then(r => r.text())
-  .then(html => procesarHTMLDocs(html))
+fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl))
+  .then(r => r.json())
+  .then(data => {
+    if (data.contents) procesarHTMLDocs(data.contents);
+  })
   .catch(() => {
-    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(urlDocsNoCache))
+    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl))
       .then(r => r.text())
       .then(html => procesarHTMLDocs(html))
       .catch(() => {});
