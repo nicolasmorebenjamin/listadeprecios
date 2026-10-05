@@ -91,26 +91,26 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
     {n:"Jamón cocido Paladini", p:null, img:"paladini.JPG"},
-    {n:"Jamón cocido Calchaquí", p:null, img:""},
-    {n:"Jamón cocido Sadia", p:null, img:""},
-    {n:"Jamón cocido 214", p:null, img:""},
-    {n:"J. cocido barril Luvianka", p:null, img:""},
+    {n:"Jamón cocido Calchaquí", p:null, img:"images/jamon-calchaqui.jpg"},
+    {n:"Jamón cocido Sadia", p:null, img:"images/jamon-sadia.webp"},
+    {n:"Jamón cocido 214", p:null, img:"images/jamon-214.jpg"},
+    {n:"J. cocido barril Luvianka", p:null, img:"images/jamon-luvianka.jpg"},
     {n:"J. cocido barril Cabaña", p:null, img:""},
     {n:"J. cocido Arivan", p:null, img:""},
     {n:"Jamón cocido 266", p:null, img:""},
-    {n:"Jamón cocido Cosenza", p:null, img:""},
+    {n:"Jamón cocido Cosenza", p:null, img:"images/jamon-cosenza.webp"},
     {n:"Jamón natural graseto", p:null, img:""},
     {n:"Jamón cocido Antonino", p:null, img:""},
     {n:"Jamón Cocido Sorrento", p:null, img:""},
-    {n:"Jamón natural Bocatti", p:null, img:""},
+    {n:"Jamón natural Bocatti", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/686761-800-600?aspect=true&height=600&v=637793481799800000&width=800"},
     {n:"Jamón natural Luvianka", p:null, img:""},
     {n:"Jamón natural 266", p:null, img:""},
     {n:"Jamón natural Don José", p:null, img:""},
     {n:"Jamón natural jonelli", p:null, img:""}
   ]],
   ["🥓","Salames y salamines",[
-    {n:"Salame milán calchaquí", p:null, img:""},
-    {n:"Salame milán 214", p:null, img:""},
+    {n:"Salame milán calchaquí", p:null, img:"images/salame-calchaqui.jpg"},
+    {n:"Salame milán 214", p:null, img:"images/salame-214.jpg"},
     {n:"Salame milán El Nahuel", p:null, img:""},
     {n:"Salame milán Miguez", p:null, img:""},
     {n:"Salame milán Champion", p:null, img:""},
@@ -128,7 +128,7 @@ const BASE_PRODUCTOS = [
     {n:"Salame Fuet cagnoli", p:null, img:""}
   ]],
   ["🍖","Paletas",[
-    {n:"Paleta cocida Calchaquí", p:null, img:""},
+    {n:"Paleta cocida Calchaquí", p:null, img:"images/paleta-calchaqui.jpg"},
     {n:"Paleta cocida 214", p:null, img:""},
     {n:"Paleta cocida Luvianka", p:null, img:""},
     {n:"Paleta cocida Barolo", p:null, img:""},
@@ -138,8 +138,8 @@ const BASE_PRODUCTOS = [
   ]],
   ["🌭","Mortadelas",[
     {n:"Mortadela bocha Calchaquí", p:null, img:""},
-    {n:"Mortadela bocha 214", p:null, img:""},
-    {n:"Mortadela bocha Luvianka", p:null, img:""},
+    {n:"Mortadela bocha 214", p:null, img:"images/mortadela-214.jpg"},
+    {n:"Mortadela bocha Luvianka", p:null, img:"images/mortadela-luvianka.webp"},
     {n:"Mortadela bocha Miguez", p:null, img:""},
     {n:"Mortadela bocha Champion", p:null, img:""},
     {n:"Mortadela c/pistacho Bocatti", p:null, img:""},
@@ -339,7 +339,7 @@ function R() {
 
   $('l').innerHTML = S.map((s, si) => {
     const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}" alt="${x.n}" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
     ).join('');
     
     return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
