@@ -42,6 +42,8 @@ h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px
 .n{padding:6px 2px 0;font-size:12.5px;font-weight:700;line-height:1.25;min-height:32px}
 .p{margin:6px auto 14px;width:fit-content;background:var(--r);color:#fff;border-radius:20px;padding:5px 14px;font-weight:700;font-size:15px}
 
+.loading{text-align:center;padding:40px 10px;font-weight:bold;color:var(--m);font-size:16px}
+
 footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--bg);border-top:1px solid var(--b);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px));font-size:13px;z-index:100}
 footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6px 12px;font-size:13px;border-radius:10px;cursor:pointer}
 
@@ -68,7 +70,7 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
       <option value="" disabled selected>Ir a una categoría...</option>
     </select>
   </div>
-  <div id="l"></div>
+  <div id="l"><div class="loading">Cargando precios actualizados...</div></div>
 </div>
 
 <footer>
@@ -83,239 +85,239 @@ const URL_DOCS_PUB = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TK
 
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
-    {n:"Jamón cocido Paladini", p:11500, img:"paladini.JPG"},
-    {n:"Jamón cocido Calchaquí", p:12500, img:""},
-    {n:"Jamón cocido Sadia", p:12300, img:""},
-    {n:"Jamón cocido 214", p:11500, img:""},
-    {n:"J. cocido barril Luvianka", p:8000, img:""},
-    {n:"J. cocido barril Cabaña", p:8300, img:""},
-    {n:"J. cocido Arivan", p:6900, img:""},
-    {n:"Jamón cocido 266", p:9700, img:""},
-    {n:"Jamón cocido Cosenza", p:6200, img:""},
-    {n:"Jamón natural graseto", p:13900, img:""},
-    {n:"Jamón cocido Antonino", p:7500, img:""},
-    {n:"Jamón Cocido Sorrento", p:7100, img:""},
-    {n:"Jamón natural Bocatti", p:19500, img:""},
-    {n:"Jamón natural Luvianka", p:14900, img:""},
-    {n:"Jamón natural 266", p:14900, img:""},
-    {n:"Jamón natural Don José", p:8700, img:""},
-    {n:"Jamón natural jonelli", p:8000, img:""}
+    {n:"Jamón cocido Paladini", p:14500, img:"paladini.JPG"},
+    {n:"Jamón cocido Calchaquí", p:14200, img:""},
+    {n:"Jamón cocido Sadia", p:13800, img:""},
+    {n:"Jamón cocido 214", p:12800, img:""},
+    {n:"J. cocido barril Luvianka", p:8800, img:""},
+    {n:"J. cocido barril Cabaña", p:8900, img:""},
+    {n:"J. cocido Arivan", p:7500, img:""},
+    {n:"Jamón cocido 266", p:10500, img:""},
+    {n:"Jamón cocido Cosenza", p:6800, img:""},
+    {n:"Jamón natural graseto", p:15500, img:""},
+    {n:"Jamón cocido Antonino", p:8200, img:""},
+    {n:"Jamón Cocido Sorrento", p:7800, img:""},
+    {n:"Jamón natural Bocatti", p:21000, img:""},
+    {n:"Jamón natural Luvianka", p:16500, img:""},
+    {n:"Jamón natural 266", p:16500, img:""},
+    {n:"Jamón natural Don José", p:9500, img:""},
+    {n:"Jamón natural jonelli", p:8800, img:""}
   ]],
   ["🥓","Salames y salamines",[
-    {n:"Salame milán calchaquí", p:16200, img:""},
-    {n:"Salame milán 214", p:17700, img:""},
-    {n:"Salame milán El Nahuel", p:13500, img:""},
-    {n:"Salame milán Miguez", p:12900, img:""},
-    {n:"Salame milán Champion", p:15500, img:""},
-    {n:"Salame milán Imperiale", p:11500, img:""},
-    {n:"Salame cantimpalo Miguez", p:13500, img:""},
-    {n:"Salamines Miguez", p:15300, img:""},
-    {n:"Salamines 214", p:20600, img:""},
-    {n:"Longaniza bastón Miguez", p:15900, img:""},
-    {n:"Longaniza bastón 214", p:21700, img:""},
-    {n:"Chorizo colorado 214", p:22500, img:""},
-    {n:"Salame alerce campo austral", p:20500, img:""},
-    {n:"Salame de cerdo C. Austral", p:17500, img:""},
-    {n:"Salame fuet bocatti", p:4000, img:""},
-    {n:"Salame spianatta el nahuel", p:24000, img:""},
-    {n:"Salame Fuet cagnoli", p:4500, img:""}
+    {n:"Salame milán calchaquí", p:17800, img:""},
+    {n:"Salame milán 214", p:19200, img:""},
+    {n:"Salame milán El Nahuel", p:14800, img:""},
+    {n:"Salame milán Miguez", p:14200, img:""},
+    {n:"Salame milán Champion", p:16900, img:""},
+    {n:"Salame milán Imperiale", p:12800, img:""},
+    {n:"Salame cantimpalo Miguez", p:14800, img:""},
+    {n:"Salamines Miguez", p:16800, img:""},
+    {n:"Salamines 214", p:22500, img:""},
+    {n:"Longaniza bastón Miguez", p:17500, img:""},
+    {n:"Longaniza bastón 214", p:23800, img:""},
+    {n:"Chorizo colorado 214", p:24500, img:""},
+    {n:"Salame alerce campo austral", p:22000, img:""},
+    {n:"Salame de cerdo C. Austral", p:19000, img:""},
+    {n:"Salame fuet bocatti", p:4500, img:""},
+    {n:"Salame spianatta el nahuel", p:26000, img:""},
+    {n:"Salame Fuet cagnoli", p:5000, img:""}
   ]],
   ["🍖","Paletas",[
-    {n:"Paleta cocida Calchaquí", p:10500, img:""},
-    {n:"Paleta cocida 214", p:10000, img:""},
-    {n:"Paleta cocida Luvianka", p:7000, img:""},
-    {n:"Paleta cocida Barolo", p:6300, img:""},
-    {n:"Paleta vaina calchaqui", p:10900, img:""},
-    {n:"Paleta centurión", p:5500, img:""},
-    {n:"Paleta cocida Cagnoli", p:7200, img:""}
+    {n:"Paleta cocida Calchaquí", p:11800, img:""},
+    {n:"Paleta cocida 214", p:11200, img:""},
+    {n:"Paleta cocida Luvianka", p:7800, img:""},
+    {n:"Paleta cocida Barolo", p:7000, img:""},
+    {n:"Paleta vaina calchaqui", p:12000, img:""},
+    {n:"Paleta centurión", p:6200, img:""},
+    {n:"Paleta cocida Cagnoli", p:8000, img:""}
   ]],
   ["🌭","Mortadelas",[
-    {n:"Mortadela bocha Calchaquí", p:9200, img:""},
-    {n:"Mortadela bocha 214", p:10000, img:""},
-    {n:"Mortadela bocha Luvianka", p:7000, img:""},
-    {n:"Mortadela bocha Miguez", p:8900, img:""},
-    {n:"Mortadela bocha Champion", p:8500, img:""},
-    {n:"Mortadela c/pistacho Bocatti", p:13500, img:""},
-    {n:"Mortadela Cabaña Antonativa", p:6000, img:""}
+    {n:"Mortadela bocha Calchaquí", p:10200, img:""},
+    {n:"Mortadela bocha 214", p:11200, img:""},
+    {n:"Mortadela bocha Luvianka", p:7800, img:""},
+    {n:"Mortadela bocha Miguez", p:9800, img:""},
+    {n:"Mortadela bocha Champion", p:9200, img:""},
+    {n:"Mortadela c/pistacho Bocatti", p:14800, img:""},
+    {n:"Mortadela Cabaña Antonativa", p:6800, img:""}
   ]],
   ["🥩","Jamón crudo",[
-    {n:"J crudo parma La Octava", p:38000, img:""},
-    {n:"J crudo parma La Reina", p:30000, img:""},
-    {n:"J crudo La Reina", p:28000, img:""},
-    {n:"Jamón crudo JM", p:26000, img:""},
+    {n:"J crudo parma La Octava", p:41000, img:""},
+    {n:"J crudo parma La Reina", p:33000, img:""},
+    {n:"J crudo La Reina", p:31000, img:""},
+    {n:"Jamón crudo JM", p:28500, img:""},
     {n:"J. crudo Sol de Avellaneda", p:null, img:""},
-    {n:"Jamón crudo el rey", p:21000, img:""},
-    {n:"Jamón crudo serrano El Rey", p:22000, img:""},
-    {n:"J crudo listo Don José", p:24800, img:""},
-    {n:"J crudo c/cuero 4718", p:22000, img:""},
+    {n:"Jamón crudo el rey", p:23000, img:""},
+    {n:"Jamón crudo serrano El Rey", p:24200, img:""},
+    {n:"J crudo listo Don José", p:27000, img:""},
+    {n:"J crudo c/cuero 4718", p:24000, img:""},
     {n:"J Crudo Jonelli", p:null, img:""}
   ]],
   ["🥩","Bondiolas y lomos",[
     {n:"Bondiola ahumada", p:null, img:""},
-    {n:"Bondiola Paladini", p:26900, img:""},
+    {n:"Bondiola Paladini", p:29500, img:""},
     {n:"Bondiola Calchaquí", p:null, img:""},
-    {n:"Bondiola La Reina", p:23500, img:""},
-    {n:"Bondiola Jonelli", p:19900, img:""},
-    {n:"Bondiola Luvianka", p:23500, img:""},
-    {n:"Lomo bocatti", p:19500, img:""},
-    {n:"Lomo Horneado Luvianka", p:14500, img:""},
-    {n:"Lomo ahumado Luvianka", p:14500, img:""},
-    {n:"Lomo ahumado 266", p:14900, img:""},
-    {n:"Pastrón", p:20000, img:""}
+    {n:"Bondiola La Reina", p:25800, img:""},
+    {n:"Bondiola Jonelli", p:21800, img:""},
+    {n:"Bondiola Luvianka", p:25800, img:""},
+    {n:"Lomo bocatti", p:21500, img:""},
+    {n:"Lomo Horneado Luvianka", p:16000, img:""},
+    {n:"Lomo ahumado Luvianka", p:16000, img:""},
+    {n:"Lomo ahumado 266", p:16500, img:""},
+    {n:"Pastrón", p:22000, img:""}
   ]],
   ["🥓","Pancetas",[
-    {n:"Panceta ahumada Calchaquí", p:20000, img:""},
-    {n:"Panceta ahumada 214", p:20500, img:""},
-    {n:"Panceta ahumada Luvianka", p:15000, img:""},
-    {n:"Panceta ahumada La Reina", p:13000, img:""},
-    {n:"Panceta salada miguez", p:15000, img:""},
-    {n:"Panceta ahumada centurion", p:13000, img:""}
+    {n:"Panceta ahumada Calchaquí", p:22000, img:""},
+    {n:"Panceta ahumada 214", p:22500, img:""},
+    {n:"Panceta ahumada Luvianka", p:16800, img:""},
+    {n:"Panceta ahumada La Reina", p:14500, img:""},
+    {n:"Panceta salada miguez", p:16800, img:""},
+    {n:"Panceta ahumada centurion", p:14500, img:""}
   ]],
   ["🍖","Matambres",[
-    {n:"Matambre carne serrano", p:32000, img:""},
+    {n:"Matambre carne serrano", p:35000, img:""},
     {n:"Matambre Cerdo serrano", p:null, img:""},
-    {n:"Matambre carne imperial", p:25000, img:""},
-    {n:"Matambre pollo imperial", p:21000, img:""},
-    {n:"Fiambre de pollo 214", p:12000, img:""}
+    {n:"Matambre carne imperial", p:27500, img:""},
+    {n:"Matambre pollo imperial", p:23000, img:""},
+    {n:"Fiambre de pollo 214", p:13200, img:""}
   ]],
   ["🍽️","Varios fiambres",[
-    {n:"Salchichón Luvianka", p:6000, img:""},
-    {n:"Queso de cerdo 266", p:7000, img:""},
-    {n:"Mortadelita Paladini", p:3200, img:""},
-    {n:"Leber Paladini", p:2200, img:""},
-    {n:"Salchichas champifiesta x 6", p:1100, img:""},
+    {n:"Salchichón Luvianka", p:6800, img:""},
+    {n:"Queso de cerdo 266", p:7800, img:""},
+    {n:"Mortadelita Paladini", p:3600, img:""},
+    {n:"Leber Paladini", p:2500, img:""},
+    {n:"Salchichas champifiesta x 6", p:1300, img:""},
     {n:"Salchichas 66 x 6", p:null, img:""},
-    {n:"Tapas rotisera Sabroricas", p:2400, img:""}
+    {n:"Tapas rotisera Sabroricas", p:2700, img:""}
   ]],
   ["🫒","Encurtidos",[
-    {n:"Ac. verdes 0 x 2 kg", p:15000, img:""},
-    {n:"Ac. verdes 00 x 2 kg", p:20000, img:""},
-    {n:"Ac. verdes 000 x 2 kg", p:22000, img:""},
-    {n:"Ac. verdes s/ carozo x 2 kg", p:18500, img:""},
-    {n:"Ac. verdes s/ carozo x 5 kg", p:38000, img:""},
-    {n:"Ac. verdes c/ morrón x 1 kg", p:13000, img:""},
-    {n:"Ac. verdes rodajas x 2 kg", p:17000, img:""},
-    {n:"Ac. verdes rodajas x 4 kg", p:32000, img:""},
-    {n:"Ac. Verdes 0 x 5 kg", p:32000, img:""},
-    {n:"Ac. Verdes pizzera x 5 kg", p:27000, img:""},
-    {n:"Ac. Negra 0 x 2 kg", p:22000, img:""},
-    {n:"Ac. Negra 00 x 2 kg", p:28000, img:""},
-    {n:"Ac. Negra 000 x 2 kg", p:29000, img:""},
-    {n:"Ac. Negra s/carozo x 2 kg", p:23000, img:""},
-    {n:"Pickles x 2kg", p:12000, img:""},
-    {n:"Ajíes en frasco x 900 gr", p:19000, img:""},
-    {n:"Anchoas 60 x 3 unidades", p:33000, img:""},
+    {n:"Ac. verdes 0 x 2 kg", p:16500, img:""},
+    {n:"Ac. verdes 00 x 2 kg", p:22000, img:""},
+    {n:"Ac. verdes 000 x 2 kg", p:24000, img:""},
+    {n:"Ac. verdes s/ carozo x 2 kg", p:20000, img:""},
+    {n:"Ac. verdes s/ carozo x 5 kg", p:41000, img:""},
+    {n:"Ac. verdes c/ morrón x 1 kg", p:14500, img:""},
+    {n:"Ac. verdes rodajas x 2 kg", p:18800, img:""},
+    {n:"Ac. verdes rodajas x 4 kg", p:35000, img:""},
+    {n:"Ac. Verdes 0 x 5 kg", p:35000, img:""},
+    {n:"Ac. Verdes pizzera x 5 kg", p:29500, img:""},
+    {n:"Ac. Negra 0 x 2 kg", p:24000, img:""},
+    {n:"Ac. Negra 00 x 2 kg", p:30500, img:""},
+    {n:"Ac. Negra 000 x 2 kg", p:31800, img:""},
+    {n:"Ac. Negra s/carozo x 2 kg", p:25200, img:""},
+    {n:"Pickles x 2kg", p:13200, img:""},
+    {n:"Ajíes en frasco x 900 gr", p:21000, img:""},
+    {n:"Anchoas 60 x 3 unidades", p:36000, img:""},
     {n:"Ac. Negra 0 x 1 kg", p:null, img:""},
     {n:"Berenjenas x 1 kg", p:null, img:""},
-    {n:"Pepinillo x 2 kg", p:24000, img:""},
+    {n:"Pepinillo x 2 kg", p:26500, img:""},
     {n:"Aceitunas griegas x 2 kg", p:null, img:""},
     {n:"Aceitunas rodajas x 2 kg", p:null, img:""},
-    {n:"Pickle x 5 kg", p:22000, img:""},
+    {n:"Pickle x 5 kg", p:24200, img:""},
     {n:"Aceitunas verdes 000 x 5 kg", p:null, img:""},
-    {n:"Aceitunas negras 0 x 5 kg", p:46000, img:""},
+    {n:"Aceitunas negras 0 x 5 kg", p:50000, img:""},
     {n:"Aceitunas negras 000 x 5 kg", p:null, img:""},
-    {n:"Aceit negras s/carozo x 5 kg", p:48000, img:""},
-    {n:"Lupines x 2 kg", p:13000, img:""}
+    {n:"Aceit negras s/carozo x 5 kg", p:52000, img:""},
+    {n:"Lupines x 2 kg", p:14500, img:""}
   ]],
   ["🍯","Dulces Cayfar",[
-    {n:"Batata cajón x 5 kg", p:10500, img:""},
-    {n:"Batata c/cacao cajón x 5 kg", p:10500, img:""},
-    {n:"Membrillo cajón x 5 kg", p:13000, img:""},
-    {n:"Batata lata x 5 kg", p:13500, img:""},
-    {n:"Batata c/cacao lata x 5 kg", p:13500, img:""},
-    {n:"Membrillo lata x 5 kg", p:17500, img:""}
+    {n:"Batata cajón x 5 kg", p:11500, img:""},
+    {n:"Batata c/cacao cajón x 5 kg", p:11500, img:""},
+    {n:"Membrillo cajón x 5 kg", p:14200, img:""},
+    {n:"Batata lata x 5 kg", p:14800, img:""},
+    {n:"Batata c/cacao lata x 5 kg", p:14800, img:""},
+    {n:"Membrillo lata x 5 kg", p:19200, img:""}
   ]],
   ["🍯","Dulces Esnaola",[
-    {n:"Batata en lata x 5kg", p:16000, img:""},
-    {n:"Batata c/cacao lata x 5kg", p:16000, img:""},
-    {n:"Membrillo en lata x 5kg", p:19500, img:""},
-    {n:"P. bombon Esnaola x 5kg", p:35000, img:""},
+    {n:"Batata en lata x 5kg", p:17500, img:""},
+    {n:"Batata c/cacao lata x 5kg", p:17500, img:""},
+    {n:"Membrillo en lata x 5kg", p:21000, img:""},
+    {n:"P. bombon Esnaola x 5kg", p:38500, img:""},
     {n:"Zapallo lata x 5 kg", p:null, img:""},
-    {n:"Batata c/guinda x 5kg", p:24000, img:""}
+    {n:"Batata c/guinda x 5kg", p:26200, img:""}
   ]],
   ["🧀","Quesos blandos",[
-    {n:"Q. cremoso Barraza", p:9100, img:""},
-    {n:"Q. cremoso Punta del agua", p:9100, img:""},
-    {n:"Q. cremoso La Paulina", p:9000, img:""},
-    {n:"Q. cremoso Lactear", p:8500, img:""},
-    {n:"Q. cremoso El faisan", p:8300, img:""},
-    {n:"Q. cremoso La Finca", p:8300, img:""},
-    {n:"Q. cremoso los troncos", p:9000, img:""},
-    {n:"Q. por salut Punta del Agua", p:9900, img:""},
-    {n:"Q. por salut Cayelac", p:11500, img:""},
-    {n:"Q. por salut Barraza", p:10500, img:""},
-    {n:"Q. por salut s/sal Cayelac", p:12000, img:""},
-    {n:"Q. por salut s/sal Barraza", p:11500, img:""},
+    {n:"Q. cremoso Barraza", p:10000, img:""},
+    {n:"Q. cremoso Punta del agua", p:10000, img:""},
+    {n:"Q. cremoso La Paulina", p:9900, img:""},
+    {n:"Q. cremoso Lactear", p:9300, img:""},
+    {n:"Q. cremoso El faisan", p:9100, img:""},
+    {n:"Q. cremoso La Finca", p:9100, img:""},
+    {n:"Q. cremoso los troncos", p:9900, img:""},
+    {n:"Q. por salut Punta del Agua", p:10800, img:""},
+    {n:"Q. por salut Cayelac", p:12600, img:""},
+    {n:"Q. por salut Barraza", p:11500, img:""},
+    {n:"Q. por salut s/sal Cayelac", p:13200, img:""},
+    {n:"Q. por salut s/sal Barraza", p:12600, img:""},
     {n:"Q. por salut light Barraza", p:null, img:""},
-    {n:"Muzzarella barraza cilindro", p:12000, img:""},
-    {n:"Muzzarella Lucrecia", p:9500, img:""},
-    {n:"Muzza El Gauchito plancha", p:9800, img:""},
-    {n:"Muzza El Gauchito", p:10000, img:""}
+    {n:"Muzzarella barraza cilindro", p:13200, img:""},
+    {n:"Muzzarella Lucrecia", p:10500, img:""},
+    {n:"Muzza El Gauchito plancha", p:10800, img:""},
+    {n:"Muzza El Gauchito", p:11000, img:""}
   ]],
   ["🧀","Quesos en barra",[
-    {n:"Barra punta del agua", p:11500, img:""},
-    {n:"Barra Los troncos", p:11000, img:""},
-    {n:"Barra Barraza", p:11000, img:""},
-    {n:"Barra Sancor", p:14000, img:""},
-    {n:"Barra Lucrecia", p:9800, img:""},
-    {n:"Barra Biolac", p:9800, img:""},
-    {n:"Barra La Paulina", p:12500, img:""},
+    {n:"Barra punta del agua", p:12600, img:""},
+    {n:"Barra Los troncos", p:12100, img:""},
+    {n:"Barra Barraza", p:12100, img:""},
+    {n:"Barra Sancor", p:15400, img:""},
+    {n:"Barra Lucrecia", p:10800, img:""},
+    {n:"Barra Biolac", p:10800, img:""},
+    {n:"Barra La Paulina", p:13700, img:""},
     {n:"Fiambrin Spalem", p:null, img:""},
-    {n:"Fiambrin La Quesera", p:16000, img:""},
-    {n:"Fiambrin la serenisima", p:15000, img:""},
-    {n:"Cheddar serenisima", p:15000, img:""},
-    {n:"Cheddar Cayelac", p:14000, img:""},
-    {n:"Pategras Sancor", p:15900, img:""},
-    {n:"Pategras La Paulina", p:18500, img:""},
-    {n:"Fontina Paulina", p:19500, img:""}
+    {n:"Fiambrin La Quesera", p:17500, img:""},
+    {n:"Fiambrin la serenisima", p:16500, img:""},
+    {n:"Cheddar serenisima", p:16500, img:""},
+    {n:"Cheddar Cayelac", p:15400, img:""},
+    {n:"Pategras Sancor", p:17500, img:""},
+    {n:"Pategras La Paulina", p:20300, img:""},
+    {n:"Fontina Paulina", p:21400, img:""}
   ]],
   ["🧀","Quesos postre",[
-    {n:"Holanda Cayelac", p:15900, img:""},
-    {n:"Pategras Paulina", p:18900, img:""},
-    {n:"Mar del plata doble A", p:14900, img:""},
-    {n:"Mar del plata Maria Luisa", p:14000, img:""},
-    {n:"Mar del plata Lactear", p:20000, img:""},
-    {n:"Fontina la paulina", p:19500, img:""},
-    {n:"Fontina Cayelac", p:18500, img:""},
-    {n:"Queso azul Bavaria", p:23000, img:""},
-    {n:"Queso azul Quesera", p:14500, img:""},
-    {n:"Queso azul Lucrecia", p:12900, img:""},
-    {n:"Queso azul Emperador", p:13900, img:""},
-    {n:"Provoleta Doble A", p:14900, img:""},
-    {n:"Provoleta Santa Rosa", p:35900, img:""},
-    {n:"Provoleta Cayelac", p:17000, img:""}
+    {n:"Holanda Cayelac", p:17500, img:""},
+    {n:"Pategras Paulina", p:20800, img:""},
+    {n:"Mar del plata doble A", p:16400, img:""},
+    {n:"Mar del plata Maria Luisa", p:15400, img:""},
+    {n:"Mar del plata Lactear", p:22000, img:""},
+    {n:"Fontina la paulina", p:21400, img:""},
+    {n:"Fontina Cayelac", p:20300, img:""},
+    {n:"Queso azul Bavaria", p:25300, img:""},
+    {n:"Queso azul Quesera", p:16000, img:""},
+    {n:"Queso azul Lucrecia", p:14200, img:""},
+    {n:"Queso azul Emperador", p:15300, img:""},
+    {n:"Provoleta Doble A", p:16400, img:""},
+    {n:"Provoleta Santa Rosa", p:39500, img:""},
+    {n:"Provoleta Cayelac", p:18700, img:""}
   ]],
   ["🧀","Quesos duros",[
-    {n:"Sardo fresco Santa Lucía", p:10500, img:""},
-    {n:"Sardo semi Santa Lucía", p:12000, img:""},
-    {n:"Sardo duro Santa Lucía", p:17500, img:""},
-    {n:"Sardo Lucrecia", p:16500, img:""},
-    {n:"Sardo Santa Rosa", p:34500, img:""},
-    {n:"Provolin Santa lucía", p:17500, img:""},
-    {n:"Provolone Cayelac", p:16500, img:""},
-    {n:"Romanito Santa Lucía", p:14500, img:""},
-    {n:"Reggianito Santa Lucía", p:17500, img:""},
-    {n:"Reggianito Melincué", p:18000, img:""},
-    {n:"Provolone Santa Rosa", p:38500, img:""},
-    {n:"Reggianito Trelau", p:17500, img:""},
-    {n:"Parmesano Melincué", p:18500, img:""},
+    {n:"Sardo fresco Santa Lucía", p:11500, img:""},
+    {n:"Sardo semi Santa Lucía", p:13200, img:""},
+    {n:"Sardo duro Santa Lucía", p:19200, img:""},
+    {n:"Sardo Lucrecia", p:18100, img:""},
+    {n:"Sardo Santa Rosa", p:38000, img:""},
+    {n:"Provolin Santa lucía", p:19200, img:""},
+    {n:"Provolone Cayelac", p:18100, img:""},
+    {n:"Romanito Santa Lucía", p:16000, img:""},
+    {n:"Reggianito Santa Lucía", p:19200, img:""},
+    {n:"Reggianito Melincué", p:19800, img:""},
+    {n:"Provolone Santa Rosa", p:42300, img:""},
+    {n:"Reggianito Trelau", p:19200, img:""},
+    {n:"Parmesano Melincué", p:20300, img:""},
     {n:"Talita Los Troncos", p:null, img:""}
   ]],
   ["GB","Varios lácteos y panificación",[
-    {n:"Ricota La niña", p:4500, img:""},
-    {n:"Ricota Trelau", p:5000, img:""},
-    {n:"Manteca x 100 tonadita", p:1600, img:""},
-    {n:"Manteca x 200 tonadita", p:3000, img:""},
+    {n:"Ricota La niña", p:4950, img:""},
+    {n:"Ricota Trelau", p:5500, img:""},
+    {n:"Manteca x 100 tonadita", p:1760, img:""},
+    {n:"Manteca x 200 tonadita", p:3300, img:""},
     {n:"Manteca x 100 Ramolac", p:null, img:""},
     {n:"Manteca x 200 Ramolac", p:null, img:""},
-    {n:"Grasa vacuna Esani x 500 gr", p:2250, img:""},
-    {n:"Grasa porcina Esani x 500 gr", p:2350, img:""},
-    {n:"Fainalind display", p:14000, img:""},
-    {n:"Queso rallado suelto x kg", p:21000, img:""},
-    {n:"Levadura levex 10 x 50 gr", p:6000, img:""},
-    {n:"Levadura levex seca", p:17900, img:""},
-    {n:"Levadura Calsa x 20x50gr", p:13000, img:""},
-    {n:"Tapa rotisera Sabroricas", p:2750, img:""}
+    {n:"Grasa vacuna Esani x 500 gr", p:2480, img:""},
+    {n:"Grasa porcina Esani x 500 gr", p:2580, img:""},
+    {n:"Fainalind display", p:15400, img:""},
+    {n:"Queso rallado suelto x kg", p:23100, img:""},
+    {n:"Levadura levex 10 x 50 gr", p:6600, img:""},
+    {n:"Levadura levex seca", p:19600, img:""},
+    {n:"Levadura Calsa x 20x50gr", p:14300, img:""},
+    {n:"Tapa rotisera Sabroricas", p:3000, img:""}
   ]]
 ];
 
@@ -358,18 +360,16 @@ function procesarHTMLDocs(htmlText) {
     }
   });
 
-  let huboCambios = false;
   S.forEach(cat => {
     cat.a.forEach(prod => {
       const pBuscado = norm(prod.n);
-      if (preciosDocs[pBuscado] !== undefined && preciosDocs[pBuscado] !== prod.p) {
+      if (preciosDocs[pBuscado] !== undefined) {
         prod.p = preciosDocs[pBuscado];
-        huboCambios = true;
       }
     });
   });
 
-  if (huboCambios) R();
+  R();
 }
 
 $('catsSelect').onchange = e => {
@@ -380,14 +380,15 @@ $('catsSelect').onchange = e => {
 $('q').oninput = R;
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
-R();
-
-const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(URL_DOCS_PUB) + '&cb=' + Date.now();
+// Sincronización evadiendo caché del servidor proxy
+const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(URL_DOCS_PUB) + '&_nocache=' + Date.now();
 
 fetch(proxyUrl)
   .then(r => r.text())
   .then(html => procesarHTMLDocs(html))
-  .catch(err => console.error("Error al sincronizar:", err));
+  .catch(() => {
+    R();
+  });
 </script>
 </body>
 </html>
