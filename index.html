@@ -79,10 +79,10 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-// URL pública publicada en la web
+// URL del documento publicado en Google Docs
 const URL_DOCS_ALT = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub';
 
-// Lista base de productos con direccionamiento de fotos directo desde el código
+// Lista base de productos
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
     {n:"Jamón cocido Paladini", p:11500, img:"img/paladini.png"},
@@ -165,7 +165,7 @@ const BASE_PRODUCTOS = [
     {n:"Lomo ahumado 266", p:14900, img:""},
     {n:"Pastrón", p:20000, img:""}
   ]],
-  ["🥓","Pancetas",[
+  ["BAC","Pancetas",[
     {n:"Panceta ahumada Calchaquí", p:20000, img:""},
     {n:"Panceta ahumada 214", p:20500, img:""},
     {n:"Panceta ahumada Luvianka", p:15000, img:""},
@@ -331,7 +331,7 @@ function R() {
 
   $('l').innerHTML = S.map((s, si) => {
     const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}" onerror="this.parentNode.innerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
     ).join('');
     
     return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
@@ -341,30 +341,26 @@ function R() {
 function procesarHTMLDocs(htmlText) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlText, 'text/html');
-  const filas = doc.querySelectorAll('tr');
+  const textoLimpio = doc.body ? doc.body.textContent : htmlText;
 
   const preciosDocs = {};
+  
+  // Expresión regular universal para capturar "Nombre del producto" seguido de "$Monto"
+  const regex = /([A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s\.\/kg-]+?)\s*\$\s*([0-9\.]+)/g;
+  let match;
 
-  filas.forEach(f => {
-    const celdas = Array.from(f.querySelectorAll('td')).map(c => c.textContent.trim());
-    if (celdas.length >= 2) {
-      for (let i = 0; i < celdas.length; i += 2) {
-        const prod = celdas[i];
-        const precTxt = celdas[i + 1];
-        if (prod && precTxt && precTxt.includes('$')) {
-          const num = parseInt(precTxt.replace(/\D/g, ''));
-          if (!isNaN(num)) {
-            preciosDocs[prod.toLowerCase()] = num;
-          }
-        }
-      }
+  while ((match = regex.exec(textoLimpio)) !== null) {
+    const prod = match[1].trim().toLowerCase();
+    const prec = parseInt(match[2].replace(/\./g, ''));
+    if (prod && !isNaN(prec)) {
+      preciosDocs[prod] = prec;
     }
-  });
+  }
 
   let huboCambios = false;
   S.forEach(cat => {
     cat.a.forEach(prod => {
-      const pBuscado = prod.n.toLowerCase();
+      const pBuscado = prod.n.toLowerCase().trim();
       if (preciosDocs[pBuscado] !== undefined && preciosDocs[pBuscado] !== prod.p) {
         prod.p = preciosDocs[pBuscado];
         huboCambios = true;
@@ -386,15 +382,14 @@ $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 // Render inicial inmediato
 R();
 
-// Consulta dinámica a Google Docs para actualización automática de precios
-const urlDocsNoCache = URL_DOCS_ALT + '?nocache=' + Date.now();
-const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(urlDocsNoCache);
+// Consulta dinámica a Google Docs sin caché
+const urlDocsNoCache = URL_DOCS_ALT + '?t=' + Date.now();
 
-fetch(proxyUrl)
+fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(urlDocsNoCache))
   .then(r => r.text())
   .then(html => procesarHTMLDocs(html))
   .catch(() => {
-    fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(urlDocsNoCache))
+    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(urlDocsNoCache))
       .then(r => r.text())
       .then(html => procesarHTMLDocs(html))
       .catch(() => {});
