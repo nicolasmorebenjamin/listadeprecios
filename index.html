@@ -79,13 +79,11 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
-// URL del Google Docs publicado
 const URL_DOCS_PUB = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub?embedded=true';
 
-// Lista base inicial
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
-    {n:"Jamón cocido Paladini", p:11500, img:""},
+    {n:"Jamón cocido Paladini", p:11500, img:"paladini.JPG"},
     {n:"Jamón cocido Calchaquí", p:12500, img:""},
     {n:"Jamón cocido Sadia", p:12300, img:""},
     {n:"Jamón cocido 214", p:11500, img:""},
@@ -360,8 +358,6 @@ function procesarHTMLDocs(htmlText) {
     }
   });
 
-  console.log("Precios detectados en Google Docs:", preciosDocs);
-
   let huboCambios = false;
   S.forEach(cat => {
     cat.a.forEach(prod => {
@@ -373,11 +369,7 @@ function procesarHTMLDocs(htmlText) {
     });
   });
 
-  // Re-renderizado cuando llegan los precios de Google Docs
-  if (huboCambios) {
-    console.log("Actualizando precios en pantalla...");
-    R();
-  }
+  if (huboCambios) R();
 }
 
 $('catsSelect').onchange = e => {
@@ -388,10 +380,8 @@ $('catsSelect').onchange = e => {
 $('q').oninput = R;
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
-// Primer renderizado inmediato con datos locales
 R();
 
-// Consulta asíncrona para actualizar precios desde Google Docs
 const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(URL_DOCS_PUB) + '&cb=' + Date.now();
 
 fetch(proxyUrl)
