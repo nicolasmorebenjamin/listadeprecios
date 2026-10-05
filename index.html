@@ -79,10 +79,13 @@ footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6
 </footer>
 
 <script>
+// ID del documento de Google Docs extraído de tu enlace
+const DOC_ID = '1OBgIMcnEuS3Dh0rexTw45_9UI8_WXLMfX_PvNM2PG6Y';
+
 // Lista base de productos
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
-    {n:"Jamón cocido Paladini", p:11500, img:"img/paladini.png"},
+    {n:"Jamón cocido Paladini", p:11500, img:""},
     {n:"Jamón cocido Calchaquí", p:12500, img:""},
     {n:"Jamón cocido Sadia", p:12300, img:""},
     {n:"Jamón cocido 214", p:11500, img:""},
@@ -335,35 +338,41 @@ function R() {
   }).join('');
 }
 
-function procesarHTMLDocs(htmlText) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlText, 'text/html');
+// Función para normalizar texto (sacar tildes, espacios extra, etc.)
+const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+
+function procesarTextoPlano(texto) {
+  const lineas = texto.split('\n');
   const preciosDocs = {};
 
-  // Extraer celdas de tabla o párrafos
-  const elementos = doc.querySelectorAll('td, p, div, tr');
-  let ultimoTexto = '';
-
-  elementos.forEach(el => {
-    const txt = el.textContent.trim();
-    if (txt.includes('$')) {
-      const num = parseInt(txt.replace(/\D/g, ''));
-      if (!isNaN(num) && ultimoTexto) {
-        preciosDocs[ultimoTexto.toLowerCase()] = num;
+  lineas.forEach(linea => {
+    // Buscar patrones donde esté el nombre del producto y el precio con "$"
+    if (linea.includes('$')) {
+      const partes = linea.split('$');
+      if (partes.length >= 2) {
+        const prod = norm(partes[0].replace(/[\t|\t]+/g, ' '));
+        const prec = parseInt(partes[1].replace(/\D/g, ''));
+        if (prod && !isNaN(prec)) {
+          preciosDocs[prod] = prec;
+        }
       }
-    } else if (txt.length > 2 && !txt.startsWith('http')) {
-      ultimoTexto = txt;
     }
   });
 
   let huboCambios = false;
   S.forEach(cat => {
     cat.a.forEach(prod => {
-      const pBuscado = prod.n.toLowerCase().trim();
-      if (preciosDocs[pBuscado] !== undefined && preciosDocs[pBuscado] !== prod.p) {
-        prod.p = preciosDocs[pBuscado];
-        huboCambios = true;
-      }
+      const pBuscado = norm(prod.n);
+      
+      // Búsqueda flexible (coincidencia exacta o parcial)
+      Object.keys(preciosDocs).forEach(key => {
+        if (key.includes(pBuscado) || pBuscado.includes(key)) {
+          if (prod.p !== preciosDocs[key]) {
+            prod.p = preciosDocs[key];
+            huboCambios = true;
+          }
+        }
+      });
     });
   });
 
@@ -381,18 +390,17 @@ $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 // Render inicial inmediato
 R();
 
-// Consulta mediante el servicio de proxy con respaldo
-const targetUrl = 'https://docs.google.com/document/d/e/2PACX-1vRYuEJAWCqb3TKXHiO24XBo3ip9PX4z1EiWissi8ccsM2WUBsueH-KuU3_BX3deaoEk3_XD1dxjX-Wn/pub';
+// Consulta directa al documento exportado como TXT (Texto Plano sin HTML)
+const txtUrl = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
+const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(txtUrl) + '&nocache=' + Date.now();
 
-fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl))
-  .then(r => r.json())
-  .then(data => {
-    if (data.contents) procesarHTMLDocs(data.contents);
-  })
+fetch(proxyUrl)
+  .then(r => r.text())
+  .then(txt => procesarTextoPlano(txt))
   .catch(() => {
-    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl))
+    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(txtUrl))
       .then(r => r.text())
-      .then(html => procesarHTMLDocs(html))
+      .then(txt => procesarTextoPlano(txt))
       .catch(() => {});
   });
 </script>
