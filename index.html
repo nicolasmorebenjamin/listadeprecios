@@ -1,4 +1,10 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Lista de precios</title><style>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lista de precios</title>
+<style>
 :root{--bg:#fff;--c:#fff;--t:#222;--m:#777;--a:#d32622;--r:#d32622;--b:#f1f1f1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1c1713;--t:#f3ebe1;--m:#b3a38f;--b:#2e2620}}
 :root[data-theme=dark]{--bg:#1c1713;--t:#f3ebe1;--m:#b3a38f;--b:#2e2620}
@@ -24,29 +30,40 @@ h2{margin:18px 0 12px;font-size:19px;background:var(--r);color:#fff;padding:10px
 .x{position:absolute;top:4px;right:4px;padding:4px 9px;border-radius:50%;background:#000a}
 .add{margin-top:10px;background:var(--m)}
 .hint{color:var(--m);font-size:13px;margin:0 0 6px}
-footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--bg);border-top:1px solid var(--b);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px));font-size:13px}
+footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-between;align-items:center;gap:8px;background:var(--bg);border-top:1px solid var(--b);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px));font-size:13px}
 footer button{background:none;color:var(--r);border:1px solid var(--r);padding:6px 12px;font-size:13px}
-</style></head><body><div class="top"><h1 id="h"></h1></div><div class="w">
+</style>
+</head>
+<body>
+<div class="top"><h1 id="h"></h1></div>
+<div class="w">
 <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="e" hidden>Editar</button></div>
-<div id="cats" class="cats"></div><p class="hint" id="hi"></p><div id="l"></div></div><footer><button id="up">Categorías ↑</button><span id="wa"></span></footer><input type="file" id="f" accept="image/*" hidden>
+<div id="cats" class="cats"></div><p class="hint" id="hi"></p><div id="l"></div>
+</div>
+<footer><button id="up">Categorías ↑</button><span id="wa"></span></footer>
+<input type="file" id="f" accept="image/*" hidden>
+
 <script>
-const D=[["🍖","Jamones",["Jamón cocido Paladini|11500","Jamón cocido Calchaquí|12500","Jamón cocido Sadia|12300","Jamón cocido 214|11500","J. cocido barril Luvianka|8000","J. cocido barril Cabaña|8300","J. cocido Arivan|6900","Jamón cocido 266|9700","Jamón cocido Cosenza|6200","Jamón natural graseto|13900","Jamón cocido Antonino|7500","Jamón cocido Sorrento|7100","Jamón natural Bocatti|19500","Jamón natural Luvianka|14900","Jamón natural 266|14900","Jamón natural Don José|8700","Jamón natural Jonelli|8000"]],
-["🥓","Salames y salamines",["Salame milán Calchaquí|16200","Salame milán 214|17700","Salame milán El Nahuel|13500","Salame milán Miguez|12900","Salame milán Champion|15500","Salame milán Imperiale|11500","Salame cantimpalo Miguez|13500","Salamines Miguez|15300","Salamines 214|20600","Longaniza bastón Miguez|15900","Longaniza bastón 214|21700","Chorizo colorado 214|22500","Salame Alerce Campo Austral|20500","Salame de cerdo C. Austral|17500","Salame fuet Bocatti|4000","Salame spianatta El Nahuel|24000","Salame fuet Cagnoli|4500"]],
-["🍖","Paletas",["Paleta cocida Calchaquí|10500","Paleta cocida 214|10000","Paleta cocida Luvianka|7000","Paleta cocida Barolo|6300","Paleta vaina Calchaquí|10900","Paleta Centurión|5500","Paleta cocida Cagnoli|7200"]],
+const D=[
+["🍖","Jamones",["Jamón cocido Paladini|11500","Jamón cocido Calchaquí|12500","Jamón cocido Sadia|12300","Jamón cocido 214|11500","J. cocido barril Luvianka|8000","J. cocido barril Cabaña|8300","J. cocido Arivan|6900","Jamón cocido 266|9700","Jamón cocido Cosenza|6200","Jamón natural graseto|13900","Jamón cocido Antonino|7500","Jamón Cocido Sorrento|7100","Jamón natural Bocatti|19500","Jamón natural Luvianka|14900","Jamón natural 266|14900","Jamón natural Don José|8700","Jamón natural jonelli|8000"]],
+["🥓","Salames y salamines",["Salame milán calchaquí|16200","Salame milán 214|17700","Salame milán El Nahuel|13500","Salame milán Miguez|12900","Salame milán Champion|15500","Salame milán Imperiale|11500","Salame cantimpalo Miguez|13500","Salamines Miguez|15300","Salamines 214|20600","Longaniza bastón Miguez|15900","Longaniza bastón 214|21700","Chorizo colorado 214|22500","Salame alerce campo austral|20500","Salame de cerdo C. Austral|17500","Salame fuet bocatti|4000","Salame spianatta el nahuel|24000","Salame Fuet cagnoli|4500"]],
+["🍖","Paletas",["Paleta cocida Calchaquí|10500","Paleta cocida 214|10000","Paleta cocida Luvianka|7000","Paleta cocida Barolo|6300","Paleta vaina calchaqui|10900","Paleta centurión|5500","Paleta cocida Cagnoli|7200"]],
 ["🌭","Mortadelas",["Mortadela bocha Calchaquí|9200","Mortadela bocha 214|10000","Mortadela bocha Luvianka|7000","Mortadela bocha Miguez|8900","Mortadela bocha Champion|8500","Mortadela c/pistacho Bocatti|13500","Mortadela Cabaña Antonativa|6000"]],
-["🥩","Jamón crudo",["J. crudo parma La Octava|38000","J. crudo parma La Reina|30000","J. crudo La Reina|28000","Jamón crudo JM|26000","J. crudo Sol de Avellaneda|","Jamón crudo El Rey|21000","Jamón crudo serrano El Rey|22000","J. crudo listo Don José|24800","J. crudo c/cuero 4718|22000","J. crudo Jonelli|"]],
-["🥩","Bondiolas y lomos",["Bondiola ahumada|","Bondiola Paladini|26900","Bondiola Calchaquí|","Bondiola La Reina|23500","Bondiola Jonelli|19900","Bondiola Luvianka|23500","Lomo Bocatti|19500","Lomo horneado Luvianka|14500","Lomo ahumado Luvianka|14500","Lomo ahumado 266|14900","Pastrón|20000"]],
-["🥓","Pancetas",["Panceta ahumada Calchaquí|20000","Panceta ahumada 214|20500","Panceta ahumada Luvianka|15000","Panceta ahumada La Reina|13000","Panceta salada Miguez|15000","Panceta ahumada Centurión|13000"]],
-["🍖","Matambres",["Matambre carne serrano|32000","Matambre cerdo serrano|","Matambre carne Imperial|25000","Matambre pollo Imperial|21000","Fiambre de pollo 214|12000"]],
-["🍽️","Varios fiambres",["Salchichón Luvianka|6000","Queso de cerdo 266|7000","Mortadelita Paladini|3200","Leber Paladini|2200","Salchichas Champifiesta x 6|1100","Salchichas 66 x 6|","Tapas rotisera Sabroricas|2400"]],
-["🫒","Encurtidos",["Ac. verdes 0 x 2 kg|15000","Ac. verdes 00 x 2 kg|20000","Ac. verdes 000 x 2 kg|22000","Ac. verdes s/carozo x 2 kg|18500","Ac. verdes s/carozo x 5 kg|38000","Ac. verdes c/morrón x 1 kg|13000","Ac. verdes rodajas x 2 kg|17000","Ac. verdes rodajas x 4 kg|32000","Ac. verdes 0 x 5 kg|32000","Ac. verdes pizzera x 5 kg|27000","Ac. negra 0 x 2 kg|22000","Ac. negra 00 x 2 kg|28000","Ac. negra 000 x 2 kg|29000","Ac. negra s/carozo x 2 kg|23000","Pickles x 2 kg|12000","Ajíes en frasco x 900 gr|19000","Anchoas 60 x 3 unidades|33000","Ac. negra 0 x 1 kg|","Berenjenas x 1 kg|","Pepinillo x 2 kg|24000","Aceitunas griegas x 2 kg|","Aceitunas rodajas x 2 kg|","Pickle x 5 kg|22000","Aceitunas verdes 000 x 5 kg|","Aceitunas negras 0 x 5 kg|46000","Aceitunas negras 000 x 5 kg|","Aceit. negras s/carozo x 5 kg|48000","Lupines x 2 kg|13000"]],
+["🥩","Jamón crudo",["J crudo parma La Octava|38000","J crudo parma La Reina|30000","J crudo La Reina|28000","Jamón crudo JM|26000","J. crudo Sol de Avellaneda|","Jamón crudo el rey|21000","Jamón crudo serrano El Rey|22000","J crudo listo Don José|24800","J crudo c/cuero 4718|22000","J Crudo Jonelli|"]],
+["🥩","Bondiolas y lomos",["Bondiola ahumada|","Bondiola Paladini|26900","Bondiola Calchaquí|","Bondiola La Reina|23500","Bondiola Jonelli|19900","Bondiola Luvianka|23500","Lomo bocatti|19500","Lomo Horneado Luvianka|14500","Lomo ahumado Luvianka|14500","Lomo ahumado 266|14900","Pastrón|20000"]],
+["🥓","Pancetas",["Panceta ahumada Calchaquí|20000","Panceta ahumada 214|20500","Panceta ahumada Luvianka|15000","Panceta ahumada La Reina|13000","Panceta salada miguez|15000","Panceta ahumada centurion|13000"]],
+["🍖","Matambres",["Matambre carne serrano|32000","Matambre Cerdo serrano|","Matambre carne imperial|25000","Matambre pollo imperial|21000","Fiambre de pollo 214|12000"]],
+["🍽️","Varios fiambres",["Salchichón Luvianka|6000","Queso de cerdo 266|7000","Mortadelita Paladini|3200","Leber Paladini|2200","Salchichas champifiesta x 6|1100","Salchichas 66 x 6|","Tapas rotisera Sabroricas|2400"]],
+["🫒","Encurtidos",["Ac. verdes 0 x 2 kg|15000","Ac. verdes 00 x 2 kg|20000","Ac. verdes 000 x 2 kg|22000","Ac. verdes s/ carozo x 2 kg|18500","Ac. verdes s/ carozo x 5 kg|38000","Ac. verdes c/ morrón x 1 kg|13000","Ac. verdes rodajas x 2 kg|17000","Ac. verdes rodajas x 4 kg|32000","Ac. Verdes 0 x 5 kg|32000","Ac. Verdes pizzera x 5 kg|27000","Ac. Negra 0 x 2 kg|22000","Ac. Negra 00 x 2 kg|28000","Ac. Negra 000 x 2 kg|29000","Ac. Negra s/carozo x 2 kg|23000","Pickles x 2kg|12000","Ajíes en frasco x 900 gr|19000","Anchoas 60 x 3 unidades|33000","Ac. Negra 0 x 1 kg|","Berenjenas x 1 kg|","Pepinillo x 2 kg|24000","Aceitunas griegas x 2 kg|","Aceitunas rodajas x 2 kg|","Pickle x 5 kg|22000","Aceitunas verdes 000 x 5 kg|","Aceitunas negras 0 x 5 kg|46000","Aceitunas negras 000 x 5 kg|","Aceit negras s/carozo x 5 kg|48000","Lupines x 2 kg|13000"]],
 ["🍯","Dulces Cayfar",["Batata cajón x 5 kg|10500","Batata c/cacao cajón x 5 kg|10500","Membrillo cajón x 5 kg|13000","Batata lata x 5 kg|13500","Batata c/cacao lata x 5 kg|13500","Membrillo lata x 5 kg|17500"]],
-["🍯","Dulces Esnaola",["Batata en lata x 5 kg|16000","Batata c/cacao lata x 5 kg|16000","Membrillo en lata x 5 kg|19500","P. bombón Esnaola x 5 kg|35000","Zapallo lata x 5 kg|","Batata c/guinda x 5 kg|24000"]],
-["🧀","Quesos blandos",["Q. cremoso Barraza|9100","Q. cremoso Punta del Agua|9100","Q. cremoso La Paulina|9000","Q. cremoso Lactear|8500","Q. cremoso El Faisán|8300","Q. cremoso La Finca|8300","Q. cremoso Los Troncos|9000","Q. por salut Punta del Agua|9900","Q. por salut Cayelac|11000","Q. por salut Barraza|11000","Q. por salut s/sal Cayelac|11500","Q. por salut s/sal Barraza|11000","Q. por salut light Barraza|","Muzzarella Barraza cilindro|12000","Muzzarella Lucrecia|9500","Muzza El Gauchito plancha|9800","Muzza El Gauchito|10000"]],
-["🧀","Quesos en barra",["Barra Punta del Agua|11500","Barra Los Troncos|11000","Barra Barraza|11000","Barra Sancor|14000","Barra Lucrecia|9800","Barra Biolac|9800","Barra La Paulina|12500","Fiambrín Spalem|","Fiambrín La Quesera|16000","Fiambrín La Serenísima|15000","Cheddar La Serenísima|15000","Cheddar Cayelac|14000","Pategras Sancor|15900","Pategras La Paulina|18500","Fontina Paulina|19500"]],
-["🧀","Quesos postre",["Holanda Cayelac|15900","Pategras Paulina|18900","Mar del Plata Doble A|14900","Mar del Plata María Luisa|14000","Mar del Plata Lactear|20000","Fontina La Paulina|19500","Fontina Cayelac|18500","Queso azul Bavaria|23000","Queso azul Quesera|14500","Queso azul Lucrecia|12900","Queso azul Emperador|13900","Provoleta Doble A|14900","Provoleta Santa Rosa|35900","Provoleta Cayelac|17000"]],
-["🧀","Quesos duros",["Sardo fresco Santa Lucía|10500","Sardo semi Santa Lucía|12000","Sardo duro Santa Lucía|17500","Sardo Lucrecia|16500","Sardo Santa Rosa|34500","Provolín Santa Lucía|17500","Provolone Cayelac|16500","Romanito Santa Lucía|14500","Reggianito Santa Lucía|17500","Reggianito Melincué|18000","Provolone Santa Rosa|38500","Reggianito Trelau|17500","Parmesano Melincué|18500","Talita Los Troncos|"]],
-["🧈","Varios lácteos y panificación",["Ricota La Niña|4500","Ricota Trelau|5000","Manteca x 100 Tonadita|1600","Manteca x 200 Tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2650","Grasa porcina Esani x 500 gr|2750","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura Levex 10 x 50 gr|6000","Levadura Levex seca|17900","Levadura Calsa 20 x 50 gr|13000","Tapa rotisera Sabroricas|2750"]]];
+["🍯","Dulces Esnaola",["Batata en lata x 5kg|16000","Batata c/cacao lata x 5kg|16000","Membrillo en lata x 5kg|19500","P. bombon Esnaola x 5kg|35000","Zapallo lata x 5 kg|","Batata c/guinda x 5kg|24000"]],
+["🧀","Quesos blandos",["Q. cremoso Barraza|9100","Q. cremoso Punta del agua|9100","Q. cremoso La Paulina|9000","Q. cremoso Lactear|8500","Q. cremoso El faisan|8300","Q. cremoso La Finca|8300","Q. cremoso los troncos|9000","Q. por salut Punta del Agua|9900","Q. por salut Cayelac|11000","Q. por salut Barraza|11000","Q. por salut s/sal Cayelac|11500","Q. por salut s/sal Barraza|11000","Q. por salut light Barraza|","Muzzarella barraza cilindro|12000","Muzzarella Lucrecia|9500","Muzza El Gauchito plancha|9800","Muzza El Gauchito|10000"]],
+["🧀","Quesos en barra",["Barra punta del agua|11500","Barra Los troncos|11000","Barra Barraza|11000","Barra Sancor|14000","Barra Lucrecia|9800","Barra Biolac|9800","Barra La Paulina|12500","Fiambrin Spalem|","Fiambrin La Quesera|16000","Fiambrin la serenisima|15000","Cheddar serenisima|15000","Cheddar Cayelac|14000","Pategras Sancor|15900","Pategras La Paulina|18500","Fontina Paulina|19500"]],
+["🧀","Quesos postre",["Holanda Cayelac|15900","Pategras Paulina|18900","Mar del plata doble A|14900","Mar del plata Maria Luisa|14000","Mar del plata Lactear|20000","Fontina la paulina|19500","Fontina Cayelac|18500","Queso azul Bavaria|23000","Queso azul Quesera|14500","Queso azul Lucrecia|12900","Queso azul Emperador|13900","Provoleta Doble A|14900","Provoleta Santa Rosa|35900","Provoleta Cayelac|17000"]],
+["🧀","Quesos duros",["Sardo fresco Santa Lucía|10500","Sardo semi Santa Lucía|12000","Sardo duro Santa Lucía|17500","Sardo Lucrecia|16500","Sardo Santa Rosa|34500","Provolin Santa lucía|17500","Provolone Cayelac|16500","Romanito Santa Lucía|14500","Reggianito Santa Lucía|17500","Reggianito Melincué|18000","Provolone Santa Rosa|38500","Reggianito Trelau|17500","Parmesano Melincué|18500","Talita Los Troncos|"]],
+["🧈","Varios lácteos y panificación",["Ricota La niña|4500","Ricota Trelau|5000","Manteca x 100 tonadita|1600","Manteca x 200 tonadita|3000","Manteca x 100 Ramolac|","Manteca x 200 Ramolac|","Grasa vacuna Esani x 500 gr|2650","Grasa porcina Esani x 500 gr|2750","Fainalind display|14000","Queso rallado suelto x kg|21000","Levadura levex 10 x 50 gr|6000","Levadura levex seca|17900","Levadura Calsa x 20x50gr|13000","Tapa rotisera Sabroricas|2750"]]
+];
+
 let S,ed=0,T='LISTA DE PRECIOS',W='WhatsApp: +54 9 11 ----',tg;
 const $=id=>document.getElementById(id);
 try{S=JSON.parse(localStorage.getItem('lp1'));T=localStorage.getItem('lpt')||T;W=localStorage.getItem('lpw')||W}catch(e){}
@@ -54,10 +71,8 @@ if(!S)S=D.map(([e,t,a])=>({e,t,a:a.map(s=>{const[n,p]=s.split('|');return{n,p:p?
 const sv=()=>{try{localStorage.setItem('lp1',JSON.stringify(S));localStorage.setItem('lpt',T)}catch(e){alert('No hay más espacio para fotos en este dispositivo.')}};
 const fm=p=>p==null?'Consultar':'$'+p.toLocaleString('es-AR');
 function R(){const q=$('q').value.toLowerCase(),c=ed?' contenteditable="true"':'';
-$('cats').innerHTML=S.map((s,i)=>`<button class="chip" data-c="${i}">${s.t}</button>`).join('');$('wa').textContent=W;$('wa').contentEditable=ed?'true':'false';$('h').innerHTML='<span id="t"'+c+'>'+T+'</span>';$('e').textContent=ed?'Listo':'Editar';$('e').className=ed?'on':'';
-$('hi').textContent=ed?'Modo edición: tocá un nombre o precio para cambiarlo, la foto para subir una, y ✕ para borrar. Se guarda solo.':'';
-$('l').className=ed?'ed':'';
-$('l').innerHTML=S.map((s,si)=>{const it=s.a.map((x,i)=>x.n.toLowerCase().includes(q)?`<div class="card" data-s="${si}" data-i="${i}"><div class="ph">${x.img?`<img src="${x.img}">`:s.e}</div><div class="n" data-f="n"${c}>${x.n}</div><div class="p" data-f="p"${c}>${fm(x.p)}</div>${ed?'<button class="x">✕</button>':''}</div>`:'').join('');
+$('cats').innerHTML=S.map((s,i)=>`<button class="chip" data-c="${i}">${s.t}</button>`).join('');$('wa').textContent=W;$('wa').contentEditable=ed?'true':'false';$('h').innerHTML='<span id="t"'+c+'>'+T+'</span>';$('e').textContent=ed?'Listo':'Editar';$('e').className=ed?'on':'';$('hi').textContent=ed?'Modo edición: tocá un nombre o precio para cambiarlo, la foto para subir una, y ✕ para borrar. Se guarda solo.':'';
+$('l').className=ed?'ed':'';$('l').innerHTML=S.map((s,si)=>{const it=s.a.map((x,i)=>x.n.toLowerCase().includes(q)?`<div class="card" data-s="${si}" data-i="${i}"><div class="ph">${x.img?`<img src="${x.img}">`:s.e}</div><div class="n" data-f="n"${c}>${x.n}</div><div class="p" data-f="p"${c}>${fm(x.p)}</div>${ed?'<button class="x">✕</button>':''}</div>`:'').join('');
 return it||(ed&&!q)?`<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>${ed?`<button class="add" data-s="${si}">+ Agregar producto</button>`:''}`:''}).join('')}
 $('q').oninput=R;$('e').onclick=()=>{ed=!ed;R()};
 document.addEventListener('click',e=>{const k=e.target.closest('.card'),a=e.target.closest('.add');
@@ -74,4 +89,6 @@ const CLAVE='#editar';
 function adm(){const ok=location.hash==CLAVE;$('e').hidden=!ok;if(!ok&&ed){ed=0;R()}}
 addEventListener('hashchange',adm);adm();
 R();
-</script></body></html>
+</script>
+</body>
+</html>
