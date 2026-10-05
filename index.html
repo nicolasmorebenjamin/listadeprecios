@@ -317,6 +317,9 @@ const BASE_PRODUCTOS = [
   ]]
 ];
 
+// Pegar aquí la URL /exec de la Web App de Apps Script para usar la sincronización desde Google.
+const URL_APPS_SCRIPT_PRECIOS = '';
+
 let S = BASE_PRODUCTOS.map(([e,t,a])=>({e,t,a:a.map(x=>({...x, img: x.img||null}))}));
 const $ = id => document.getElementById(id);
 const fm = p => (p == null || isNaN(p) || p === '') ? 'Consultar' : '$' + Number(p).toLocaleString('es-AR');
@@ -332,6 +335,26 @@ function R() {
     
     return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
   }).join('');
+}
+
+function cargarPrecios() {
+  if (!URL_APPS_SCRIPT_PRECIOS) {
+    return fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
+      if (!r.ok) throw new Error('No se pudo consultar la lista de precios');
+      return r.json();
+    });
+  }
+
+  return new Promise((resolve, reject) => {
+    const callback = '__preciosCallback' + Date.now();
+    const script = document.createElement('script');
+    const limpiar = () => { delete window[callback]; script.remove(); };
+    const timeout = setTimeout(() => { limpiar(); reject(new Error('Tiempo de espera agotado')); }, 15000);
+    window[callback] = data => { clearTimeout(timeout); limpiar(); resolve(data); };
+    script.onerror = () => { clearTimeout(timeout); limpiar(); reject(new Error('No se pudo conectar con Google Apps Script')); };
+    script.src = URL_APPS_SCRIPT_PRECIOS + (URL_APPS_SCRIPT_PRECIOS.includes('?') ? '&' : '?') + 'callback=' + callback + '&_cb=' + Date.now();
+    document.head.appendChild(script);
+  });
 }
 
 const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
@@ -360,9 +383,7 @@ $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 async function actualizarPrecios() {
   const status = $('syncStatus');
   try {
-    const respuesta = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' });
-    if (!respuesta.ok) throw new Error('No se pudo consultar la lista de precios');
-    const preciosDocs = await respuesta.json();
+    const preciosDocs = await cargarPrecios();
     if (!preciosDocs || !Object.keys(preciosDocs).length) throw new Error('La lista de precios está vacía');
     aplicarPrecios(preciosDocs);
     status.textContent = 'Precios sincronizados · ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
