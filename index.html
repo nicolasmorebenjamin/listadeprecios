@@ -318,7 +318,7 @@ const BASE_PRODUCTOS = [
 ];
 
 // Pegar aquí la URL /exec de la Web App de Apps Script para usar la sincronización desde Google.
-const URL_APPS_SCRIPT_PRECIOS = '';
+const URL_APPS_SCRIPT_PRECIOS = 'https://script.google.com/macros/s/AKfycbwqwNgWKcClFw-SuhQH0iGvvo0ZaLEG5dhZ35SgC-9V0kv6NMH3LqUjJZcx8Bbd6F5QFQ/exec';
 
 let S = BASE_PRODUCTOS.map(([e,t,a])=>({e,t,a:a.map(x=>({...x, img: x.img||null}))}));
 const $ = id => document.getElementById(id);
