@@ -31,6 +31,7 @@ Las imágenes de `catalogo/` se extrajeron de las fotos de producto del PDF **Ca
 | `paleta-cagnoli.webp` | Paleta cocida Cagnoli | [Luz Azul](https://luzazultiendaonline.mitiendanube.com/productos/paleta-cocida-cagnoli/) |
 | `mortadela-cabana-antonativa.webp` | Mortadela Cabaña Antonativa | [Cabaña Antonativa](https://antonativa.com/productos/) |
 | `panceta-centurion.webp` | Panceta ahumada Centurión | [Cabaña Antonativa](https://antonativa.com/productos/) |
+| `antonativa/jamon-cocido-barril-cabana.png` | Fiambre cocido de pata de cerdo barril (línea Barolo), coincide con barril Cabaña | [Catálogo oficial Cabaña Antonativa](https://antonativa.com/productos/) |
 | `panceta-salada-miguez.webp` | Panceta salada Miguez | [El Granero](https://www.elgranerodigital.com.ar/productos/panceta-salada-en-trozo-x-100-gr-miguez/) |
 | `jamon-crudo-el-rey.webp` | Jamón crudo El Rey | [Distribuidora Maranzana](https://www.distribuidoramaranzana.com/tienda/) |
 | `mortadela-miguez.webp` | Mortadela bocha Miguez | [Lacteosur](https://lacteosur.com/categoria-producto/fiambres/) |
@@ -56,7 +57,6 @@ Se quitaron las imágenes que el cliente marcó como equivocadas; esos productos
 
 | Producto | Estado |
 | --- | --- |
-| J. cocido barril Cabaña | A la espera de una foto exacta del producto |
 | Jamón Cocido Sorrento | A la espera de una foto exacta del producto |
 | Jamón natural 266 | A la espera de una foto exacta del producto |
 | Jamón natural Don José | A la espera de una foto exacta del producto |
