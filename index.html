@@ -49,6 +49,10 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .ph{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:12px;overflow:hidden;padding:8px;box-sizing:border-box}
 .ph img{width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important}
 .ph img.crop-right-panel{width:80%;object-fit:cover;object-position:left center}
+.ph img.crop-lower-product{height:70%;object-fit:cover;object-position:center bottom}
+.ph img.crop-lower-panel{height:60%;object-fit:cover;object-position:center bottom}
+.ph img.crop-plancha{height:75%;object-fit:cover;object-position:center bottom}
+.ph img.crop-centered-product{object-fit:cover;object-position:center 48%}
 .n{padding:9px 2px 0;font-size:13px;font-weight:700;line-height:1.3;min-height:43px}
 .p{margin:8px auto 12px;width:fit-content;background:#f9e7e4;color:#b3201c;border-radius:20px;padding:6px 14px;font-weight:800;font-size:15px}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
@@ -234,49 +238,49 @@ const BASE_PRODUCTOS = [
     {n:"Q. cremoso La Paulina", p:null, img:"https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3271491_f.jpg", crop:"right-panel"},
     {n:"Q. cremoso Alma Lactea", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0gtv18bliN5wWbm4Qyzm4HMRvoQAKm6P5fH68FcCi_5pTkVorSNewDS_R&s=10"},
     {n:"Q. cremoso El faisan", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuewYaXfND-ads5WOdiuOp34ZYT0dkewHsoWsvd2UiiF5xW9QJmfTMdWPf&s=10"},
-    {n:"Q. cremoso La Finca", p:null, img:""},
+    {n:"Q. cremoso La Finca", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTzpVXTJBG9Dwv7T8gTmO6NxZOY_TLYIsieMa9eDi0HCwc3z7oA9nU3qoZ&s=10"},
     {n:"Q. cremoso los troncos", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9bt2nkj3PMY7FQrjx50e4vWxGq6npuk5j3534kRhZbHOc4gJ8cfBS-lM&s=10"},
     {n:"Q. por salut Punta del Agua", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_709437-MLA107345816233_022026-O.webp"},
     {n:"Q. por salut Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04933-683x1024.jpg"},
-    {n:"Q. por salut Barraza", p:null, img:""},
+    {n:"Q. por salut Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_943823-MLA106643946206_022026-T.webp"},
     {n:"Q. por salut s/sal Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04877-683x1024.jpg"},
     {n:"Q. por salut s/sal Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_974077-MLA106682110024_022026-T.webp"},
     {n:"Muzzarella barraza cilindro", p:null, img:"https://acdn-us.mitiendanube.com/stores/005/600/084/products/181-b3af558072d552152717456270476675-1024-1024.png"},
-    {n:"Muzzarella Lucrecia", p:null, img:""},
-    {n:"Muzza El Gauchito plancha", p:null, img:""},
-    {n:"Muzza El Gauchito", p:null, img:""}
+    {n:"Muzzarella Lucrecia", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYRq4rsNguoKvZLKa3xrcoIpFcWhdrHB455j2W761CfpSjXqZTQ1ULGa4&s=10"},
+    {n:"Muzza El Gauchito plancha", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBMoXiSDqaHhYulJ1m4UwfxPvugrcdM90ysVM8YrB62cM6keJ-ygF_Ho_U&s=10", crop:"plancha"},
+    {n:"Muzza El Gauchito", p:null, img:"https://www.canagro.com.ar/img/productos_muzzarella.png"}
   ]],
   ["🧀","Quesos en barra",[
-    {n:"Barra punta del agua", p:null, img:""},
-    {n:"Barra Los troncos", p:null, img:""},
-    {n:"Barra Rondo", p:null, img:""},
-    {n:"Barra Lucrecia", p:null, img:""},
-    {n:"Barra La tarantela", p:null, img:""},
-    {n:"Barra Alma Lactea", p:null, img:""},
-    {n:"Barra La Paulina", p:null, img:""},
-    {n:"Fiambrin La Quesera", p:null, img:""},
-    {n:"Fiambrin la serenisima", p:null, img:""},
+    {n:"Barra punta del agua", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSWP8LkLrkMC7JM4i5QK3nv846Pi6tNDID0JtIHJO1bnflawBOU6Z5EaWM&s=10"},
+    {n:"Barra Los troncos", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_747555-MLA78031427401_072024-O.webp", crop:"lower-panel"},
+    {n:"Barra Rondo", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_754987-MLA41214983753_032020-O.webp"},
+    {n:"Barra Lucrecia", p:null, img:"https://res.cloudinary.com/dg9rn6b7o/image/upload/v1777489250/distrialma/2809-1777489250695.png"},
+    {n:"Barra La tarantela", p:null, img:"https://www.cosenzadelicatessen.com.ar/web/image/product.product/405/image_1920?unique=33b809e"},
+    {n:"Barra Alma Lactea", p:null, img:"https://res.cloudinary.com/dg9rn6b7o/image/upload/v1774464960/distrialma/9029-1774464960460.jpg", crop:"centered-product"},
+    {n:"Barra La Paulina", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/168929-800-auto?v=638485545654200000&width=800&height=auto&aspect=true"},
+    {n:"Fiambrin La Quesera", p:null, img:"https://semas.ar/wp-content/uploads/2024/08/6a0bb4a012316d54de63c6198d5b13bd.webp"},
+    {n:"Fiambrin la serenisima", p:null, img:"https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2024090111170023424-213ca9f1b33ff729b317362510628386-1024-1024.webp"},
     {n:"Cheddar serenisima", p:null, img:""},
-    {n:"Cheddar Cayelac", p:null, img:""},
-    {n:"Pategras Sancor", p:null, img:""},
-    {n:"Pategras La Paulina", p:null, img:""},
-    {n:"Fontina Paulina", p:null, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"}
+    {n:"Cheddar Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04904-683x1024.jpg"},
+    {n:"Cheddar La Paulina", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/151/835/products/2060301-cdf1e27d6f59a675c815881742611757-1024-1024.webp"}
   ]],
   ["🧀","Quesos postre",[
     {n:"Holanda Cayelac", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_821259-MLA84726680792_052025-O.webp"},
     {n:"Pategras Paulina", p:null, img:""},
+    {n:"Pategras Sancor", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10"},
+    {n:"Pategras La Paulina", p:null, img:""},
     {n:"Mar del plata doble A", p:null, img:""},
-    {n:"Mar del plata Maria Luisa", p:null, img:""},
+    {n:"Mar del plata Maria Luisa", p:null, img:"https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png"},
     {n:"Mar del plata Santa Lucia", p:null, img:""},
-    {n:"Fontina la paulina", p:null, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"},
-    {n:"Fontina Cayelac", p:null, img:""},
-    {n:"Queso azul Bavaria", p:null, img:"https://d22fxaf9t8d39k.cloudfront.net/5da9d0633e2601ff9ea80a9cd6a90b9d1127bb5b97b3b96fe8fefeddd3386127321757.jpg"},
-    {n:"Queso azul Quesera", p:null, img:""},
-    {n:"Queso azul Lucrecia", p:null, img:"https://cdn.pedix.app/G8jdCpschHlicLJi2F8i/products/1718846639060.png?size=800x800"},
-    {n:"Queso azul Emperador", p:null, img:""},
+    {n:"Fontina Paulina", p:null, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"},
+    {n:"Fontina Cayelac", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdKvuLVND1bbs7ad8YSPL8wRUwhsSCbbAQa3qQI-N_FbCgC9ZbJAJzU3f&s=10"},
+    {n:"Queso azul Bavaria", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBCS3q5fi8g-CgMQ9yncaeP1Awfjyj6peIs9LcpJS-Fg&s=10"},
+    {n:"Queso azul Quesera", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_809996-MLA114538306318_082026-T.webp"},
+    {n:"Queso azul Lucrecia", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamt3-gpPShSdqGPRo9qwuV8eoyM72m9pKXdtZrXCvmg&s=10"},
+    {n:"Queso azul Emperador", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWXplkcAk6tfmISl_cCkotbHPDTOx0hYRtpaJ5F5kuObZ7_h6vrAZUaPg&s=10"},
     {n:"Provoleta Doble A", p:null, img:""},
-    {n:"Provoleta Santa Rosa", p:null, img:""},
-    {n:"Provoleta Cayelac", p:null, img:""}
+    {n:"Provoleta Santa Rosa", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/169554/QUESO-PROVOLETA-SANTA-ROSA-PARR-XKG-1-9887.jpg?v=638584581641700000"},
+    {n:"Provoleta Cayelac", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRODps5w6RSUIgKJ7nEh50MNQ2x8hn8lCp2DQ_XsbRlBaGyNRFiJzl9AMLs&s=10", crop:"lower-product"}
   ]],
   ["🧀","Quesos duros",[
     {n:"Sardo fresco Santa Lucía", p:null, img:""},
@@ -285,27 +289,27 @@ const BASE_PRODUCTOS = [
     {n:"Sardo Lucrecia", p:null, img:""},
     {n:"Sardo Santa Rosa", p:null, img:""},
     {n:"Provolin Santa lucía", p:null, img:""},
-    {n:"Provolone Cayelac", p:null, img:""},
+    {n:"Provolone Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04960-683x1024.jpg"},
     {n:"Romanito Santa Lucía", p:null, img:""},
     {n:"Reggianito Santa Lucía", p:null, img:""},
-    {n:"Reggianito Melincué", p:null, img:""},
-    {n:"Provolone Santa Rosa", p:null, img:""},
+    {n:"Reggianito Melincué", p:null, img:"https://distribuidorapg.com.ar/wp-content/uploads/2025/07/Melincue-Reggianito_sin_pintar.webp"},
+    {n:"Provolone Santa Rosa", p:null, img:"https://acdn-us.mitiendanube.com/stores/861/458/products/provolone-horma1001-3037ff1c7e953f15d815797150663592-1024-1024.webp"},
     {n:"Reggianito Trelau", p:null, img:""},
-    {n:"Parmesano Melincué", p:null, img:""},
+    {n:"Parmesano Melincué", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7i71EiQsEir62Sz4O2VJQezwuC_afhF18otxmCT0Y9fnYvZgkem1ki0R&s=10"},
   ]],
   ["GB","Varios lácteos y panificación",[
     {n:"Ricota La niña", p:null, img:""},
     {n:"Ricota Trelau", p:null, img:"https://tienda.distribuidoraelcriollo.com/productos/1230.jpg"},
     {n:"Manteca x 100 tonadita", p:null, img:"https://gruposanisidrovirtual.com.ar/img/productos/4662.jpg"},
-    {n:"Manteca x 200 tonadita", p:null, img:""},
+    {n:"Manteca x 200 tonadita", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4M6ttAx-Y90-YM5dN97kPYnYVQ4zoWvj_2Fm0WtKmNg&s=10"},
     {n:"Grasa vacuna Esani x 500 gr", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/665870/Grasa-Vacuna-Comestible-Esani-X-500g-1-863510.jpg?v=637671658166570000"},
-    {n:"Grasa porcina Esani x 500 gr", p:null, img:""},
-    {n:"Fainalind display", p:null, img:""},
+    {n:"Grasa porcina Esani x 500 gr", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/695354/Grasa-Porcina-Comestible-Esani-X-500g-1-863511.jpg?v=637848777740130000"},
+    {n:"Fainalind display", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfBBGQCnbCEe828v2MclOnM7s9r2ldrqg-77BsTedlQA&s=10"},
     {n:"Queso rallado suelto x kg", p:null, img:""},
     {n:"Levadura levex 10 x 50 gr", p:null, img:"https://arjosimarprod.vtexassets.com/arquivos/ids/165529-800-auto?aspect=true&height=auto&v=637733757731870000&width=800"},
     {n:"Levadura levex seca", p:null, img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/172/573/products/levex1-ca307e5eb11baeed0a15978069207388-640-0.webp"},
     {n:"Levadura Calsa x 20x50gr", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/764095/Levadura-Calsa-50-Gr-1-10546.jpg?v=638084649646600000"},
-    {n:"Tapa rotisera Sabroricas", p:null, img:""}
+    {n:"Tapa rotisera Sabroricas", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHUgfxkmAs4Uh4Tw-quAnDRqhb1f3R45Y006ofSUwtZA&s=10"}
   ]]
 ];
 
