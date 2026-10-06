@@ -57,15 +57,15 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Barra La Paulina | [elnenearg.vtexassets.com](https://elnenearg.vtexassets.com/arquivos/ids/168929-800-auto?v=638485545654200000&width=800&height=auto&aspect=true) |
 | Fiambrin La Quesera | [semas.ar](https://semas.ar/wp-content/uploads/2024/08/6a0bb4a012316d54de63c6198d5b13bd.webp) |
 | Fiambrin la serenisima | [dcdn-us.mitiendanube.com](https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2024090111170023424-213ca9f1b33ff729b317362510628386-1024-1024.webp) |
-| Cheddar Cayelac | [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04904-683x1024.jpg) |
+| Cheddar Cayelac | [Cayelac (PNG recortado)](fotos-cliente/cheddar-cayelac.png) — original: [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04904-683x1024.jpg) |
 | Pategras Sancor | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10) |
-| Pategras Paulina / Pategras La Paulina | [Polar Distribuciones](https://polardistribuciones.com.ar/1541-large_default/queso-pategras-la-paulina.jpg) |
+| Pategras La Paulina | [La Paulina (PNG oficial)](fotos-cliente/pategras-la-paulina.png) — original: [La Paulina](https://www.lapaulina.com.ar/es/productos/quesos-semiduros/pategras) |
 | Mar del plata Maria Luisa | [dequesos.com.ar](https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png) |
-| Fontina Cayelac | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdKvuLVND1bbs7ad8YSPL8wRUwhsSCbbAQa3qQI-N_FbCgC9ZbJAJzU3f&s=10) |
+| Fontina Cayelac | [Cayelac (PNG recortado)](fotos-cliente/fontina-cayelac.png) — original: [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdKvuLVND1bbs7ad8YSPL8wRUwhsSCbbAQa3qQI-N_FbCgC9ZbJAJzU3f&s=10) |
 | Queso azul Bavaria | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBCS3q5fi8g-CgMQ9yncaeP1Awfjyj6peIs9LcpJS-Fg&s=10) |
 | Queso azul Quesera | [http2.mlstatic.com](https://http2.mlstatic.com/D_Q_NP_2X_809996-MLA114538306318_082026-T.webp) |
 | Queso azul Lucrecia | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamt3-gpPShSdqGPRo9qwuV8eoyM72m9pKXdtZrXCvmg&s=10) |
-| Queso azul Emperador | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWXplkcAk6tfmISl_cCkotbHPDTOx0hYRtpaJ5F5kuObZ7_h6vrAZUaPg&s=10) |
+| Queso azul Emperador | [PNG recortado](fotos-cliente/queso-azul-emperador.png) — original: [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWXplkcAk6tfmISl_cCkotbHPDTOx0hYRtpaJ5F5kuObZ7_h6vrAZUaPg&s=10) |
 | Provoleta Santa Rosa | [elnenearg.vtexassets.com](https://elnenearg.vtexassets.com/arquivos/ids/169554/QUESO-PROVOLETA-SANTA-ROSA-PARR-XKG-1-9887.jpg?v=638584581641700000) |
 | Provoleta Cayelac | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRODps5w6RSUIgKJ7nEh50MNQ2x8hn8lCp2DQ_XsbRlBaGyNRFiJzl9AMLs&s=10) |
 | Provolone Cayelac | [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04960-683x1024.jpg) |
@@ -76,6 +76,8 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Grasa porcina Esani x 500 gr | [jumboargentina.vtexassets.com](https://jumboargentina.vtexassets.com/arquivos/ids/695354/Grasa-Porcina-Comestible-Esani-X-500g-1-863511.jpg?v=637848777740130000) |
 | Fainalind display | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfBBGQCnbCEe828v2MclOnM7s9r2ldrqg-77BsTedlQA&s=10) |
 | Tapa rotisera Sabroricas | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHUgfxkmAs4Uh4Tw-quAnDRqhb1f3R45Y006ofSUwtZA&s=10) |
+
+Las fotos indicadas como PNG recortado se guardan localmente en formato cuadrado para evitar márgenes vacíos y problemas de carga de servidores externos.
 | Q. por salut Punta del Agua | [http2.mlstatic.com](https://http2.mlstatic.com/D_NQ_NP_709437-MLA107345816233_022026-O.webp) |
 | Muzzarella barraza cilindro | [acdn-us.mitiendanube.com](https://acdn-us.mitiendanube.com/stores/005/600/084/products/181-b3af558072d552152717456270476675-1024-1024.png) |
 | Fontina Paulina | [acdn.mitiendanube.com](https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg) |
