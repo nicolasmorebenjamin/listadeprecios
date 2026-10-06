@@ -59,6 +59,7 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Fiambrin la serenisima | [dcdn-us.mitiendanube.com](https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2024090111170023424-213ca9f1b33ff729b317362510628386-1024-1024.webp) |
 | Cheddar Cayelac | [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04904-683x1024.jpg) |
 | Pategras Sancor | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10) |
+| Pategras Paulina / Pategras La Paulina | [Polar Distribuciones](https://polardistribuciones.com.ar/1541-large_default/queso-pategras-la-paulina.jpg) |
 | Mar del plata Maria Luisa | [dequesos.com.ar](https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png) |
 | Fontina Cayelac | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdKvuLVND1bbs7ad8YSPL8wRUwhsSCbbAQa3qQI-N_FbCgC9ZbJAJzU3f&s=10) |
 | Queso azul Bavaria | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBCS3q5fi8g-CgMQ9yncaeP1Awfjyj6peIs9LcpJS-Fg&s=10) |
@@ -101,8 +102,6 @@ En **Encurtidos**, se agregaron fotos únicamente a las variedades con una refer
 | Matambre carne imperial | Matambres |
 | Matambre pollo imperial | Matambres |
 | Cheddar serenisima | Quesos en barra |
-| Pategras La Paulina | Quesos postre |
-| Pategras Paulina | Quesos postre |
 | Mar del plata doble A | Quesos postre |
 | Mar del plata Santa Lucia | Quesos postre |
 | Provoleta Doble A | Quesos postre |

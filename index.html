@@ -47,7 +47,7 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .card{position:relative;text-align:center;min-width:0;padding:10px 10px 2px;background:var(--c);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .card:hover{transform:translateY(-3px);border-color:#d3262266;box-shadow:0 12px 28px #39251a18}
 .ph{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:12px;overflow:hidden;padding:8px;box-sizing:border-box}
-.ph img{width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important}
+.ph img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important}
 .ph img.crop-right-panel{width:80%;object-fit:cover;object-position:left center}
 .ph img.crop-lower-product{height:70%;object-fit:cover;object-position:center bottom}
 .ph img.crop-lower-panel{height:60%;object-fit:cover;object-position:center bottom}
@@ -265,9 +265,9 @@ const BASE_PRODUCTOS = [
   ]],
   ["🧀","Quesos postre",[
     {n:"Holanda Cayelac", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_821259-MLA84726680792_052025-O.webp"},
-    {n:"Pategras Paulina", p:null, img:""},
+    {n:"Pategras Paulina", p:null, img:"https://polardistribuciones.com.ar/1541-large_default/queso-pategras-la-paulina.jpg"},
     {n:"Pategras Sancor", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10"},
-    {n:"Pategras La Paulina", p:null, img:""},
+    {n:"Pategras La Paulina", p:null, img:"https://polardistribuciones.com.ar/1541-large_default/queso-pategras-la-paulina.jpg"},
     {n:"Mar del plata doble A", p:null, img:""},
     {n:"Mar del plata Maria Luisa", p:null, img:"https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png"},
     {n:"Mar del plata Santa Lucia", p:null, img:""},
