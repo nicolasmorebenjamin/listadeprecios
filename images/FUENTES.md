@@ -36,6 +36,17 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Batata en lata x 5kg | [www.laiberoespanola.com.ar](https://www.laiberoespanola.com.ar/foto.php?mini=0&origen=foto1%7C3344) |
 | Batata c/cacao lata x 5kg | [d2j6dbq0eux0bg.cloudfront.net](https://d2j6dbq0eux0bg.cloudfront.net/images/51759127/2092236779.jpg) |
 | Membrillo en lata x 5kg | [www.lainsuperablevirtual.com.ar](https://www.lainsuperablevirtual.com.ar/Articulo_Foto_Multi/2403_0.jpeg) |
+| Batata c/cacao lata x 5 kg Cayfar | [d22fxaf9t8d39k.cloudfront.net](https://d22fxaf9t8d39k.cloudfront.net/ceddd5eed6352e8b6a135cbaf043b27bd04d587ba2ece42679b271de8c7d6ed2325300.jpg) |
+| P. bombon Esnaola x 5kg | [http2.mlstatic.com](https://http2.mlstatic.com/D_NQ_NP_686161-MLA89870670001_082025-O.webp) |
+| Batata c/guinda x 5kg Esnaola | [http2.mlstatic.com](https://http2.mlstatic.com/D_NQ_NP_611507-MLA41802813983_052020-O.webp) |
+| Q. cremoso Barraza | [http2.mlstatic.com](https://http2.mlstatic.com/D_Q_NP_2X_757644-MLA110607334227_042026-T.webp) |
+| Q. cremoso La Paulina | [statics.dinoonline.com.ar](https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3271491_f.jpg) |
+| Q. cremoso Alma Lactea | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0gtv18bliN5wWbm4Qyzm4HMRvoQAKm6P5fH68FcCi_5pTkVorSNewDS_R&s=10) |
+| Q. cremoso El faisan | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuewYaXfND-ads5WOdiuOp34ZYT0dkewHsoWsvd2UiiF5xW9QJmfTMdWPf&s=10) |
+| Q. cremoso los troncos | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9bt2nkj3PMY7FQrjx50e4vWxGq6npuk5j3534kRhZbHOc4gJ8cfBS-lM&s=10) |
+| Q. por salut Cayelac | [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04933-683x1024.jpg) |
+| Q. por salut s/sal Barraza | [http2.mlstatic.com](https://http2.mlstatic.com/D_Q_NP_2X_974077-MLA106682110024_022026-T.webp) |
+| Q. por salut s/sal Cayelac | [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04877-683x1024.jpg) |
 | Q. por salut Punta del Agua | [http2.mlstatic.com](https://http2.mlstatic.com/D_NQ_NP_709437-MLA107345816233_022026-O.webp) |
 | Muzzarella barraza cilindro | [acdn-us.mitiendanube.com](https://acdn-us.mitiendanube.com/stores/005/600/084/products/181-b3af558072d552152717456270476675-1024-1024.png) |
 | Fontina Paulina | [acdn.mitiendanube.com](https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg) |
@@ -64,18 +75,8 @@ La sección **Encurtidos** quedó sin fotos por indicación del cliente. Las tar
 | Panceta salada miguez | Pancetas |
 | Matambre carne imperial | Matambres |
 | Matambre pollo imperial | Matambres |
-| Batata c/cacao lata x 5 kg | Dulces Cayfar |
-| P. bombon Esnaola x 5kg | Dulces Esnaola |
-| Batata c/guinda x 5kg | Dulces Esnaola |
-| Q. cremoso Barraza | Quesos blandos |
-| Q. cremoso Alma Lactea | Quesos blandos |
-| Q. cremoso El faisan | Quesos blandos |
 | Q. cremoso La Finca | Quesos blandos |
-| Q. cremoso los troncos | Quesos blandos |
-| Q. por salut Cayelac | Quesos blandos |
 | Q. por salut Barraza | Quesos blandos |
-| Q. por salut s/sal Cayelac | Quesos blandos |
-| Q. por salut s/sal Barraza | Quesos blandos |
 | Muzzarella Lucrecia | Quesos blandos |
 | Muzza El Gauchito plancha | Quesos blandos |
 | Muzza El Gauchito | Quesos blandos |

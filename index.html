@@ -48,6 +48,7 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .card:hover{transform:translateY(-3px);border-color:#d3262266;box-shadow:0 12px 28px #39251a18}
 .ph{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:12px;overflow:hidden;padding:8px;box-sizing:border-box}
 .ph img{width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important}
+.ph img.crop-right-panel{width:80%;object-fit:cover;object-position:left center}
 .n{padding:9px 2px 0;font-size:13px;font-weight:700;line-height:1.3;min-height:43px}
 .p{margin:8px auto 12px;width:fit-content;background:#f9e7e4;color:#b3201c;border-radius:20px;padding:6px 14px;font-weight:800;font-size:15px}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
@@ -217,29 +218,29 @@ const BASE_PRODUCTOS = [
     {n:"Batata c/cacao cajón x 5 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/142/266/products/cacao-batata-cayfar-x5-30-3e5b7b9f6610537fb917479375419621-640-0.jpg"},
     {n:"Membrillo cajón x 5 kg", p:null, img:"https://d2r9epyceweg5n.cloudfront.net/stores/001/142/266/products/ingresos-421-3d5cdfcbdb9bf27e9516864112521642-640-0.webp"},
     {n:"Batata lata x 5 kg", p:null, img:"https://www.glorilact.com.ar/Imagenes/Productos/106/main.jpg"},
-    {n:"Batata c/cacao lata x 5 kg", p:null, img:""},
+    {n:"Batata c/cacao lata x 5 kg", p:null, img:"https://d22fxaf9t8d39k.cloudfront.net/ceddd5eed6352e8b6a135cbaf043b27bd04d587ba2ece42679b271de8c7d6ed2325300.jpg"},
     {n:"Membrillo lata x 5 kg", p:null, img:"https://ss-cnt-001c.esmsv.com/r/content/host2/1b8436dad41801e33025ae5e6e72f44b/img/products/00865.webp"}
   ]],
   ["🍯","Dulces Esnaola",[
     {n:"Batata en lata x 5kg", p:null, img:"https://www.laiberoespanola.com.ar/foto.php?mini=0&origen=foto1%7C3344"},
     {n:"Batata c/cacao lata x 5kg", p:null, img:"https://d2j6dbq0eux0bg.cloudfront.net/images/51759127/2092236779.jpg"},
     {n:"Membrillo en lata x 5kg", p:null, img:"https://www.lainsuperablevirtual.com.ar/Articulo_Foto_Multi/2403_0.jpeg"},
-    {n:"P. bombon Esnaola x 5kg", p:null, img:""},
-    {n:"Batata c/guinda x 5kg", p:null, img:""}
+    {n:"P. bombon Esnaola x 5kg", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_686161-MLA89870670001_082025-O.webp"},
+    {n:"Batata c/guinda x 5kg", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_611507-MLA41802813983_052020-O.webp"}
   ]],
   ["🧀","Quesos blandos",[
-    {n:"Q. cremoso Barraza", p:null, img:""},
+    {n:"Q. cremoso Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_757644-MLA110607334227_042026-T.webp"},
     {n:"Q. cremoso Punta del agua", p:null, img:"images/queso-cremoso-punta.webp"},
-    {n:"Q. cremoso La Paulina", p:null, img:"images/queso-cremoso-paulina.webp"},
-    {n:"Q. cremoso Alma Lactea", p:null, img:""},
-    {n:"Q. cremoso El faisan", p:null, img:""},
+    {n:"Q. cremoso La Paulina", p:null, img:"https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3271491_f.jpg", crop:"right-panel"},
+    {n:"Q. cremoso Alma Lactea", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0gtv18bliN5wWbm4Qyzm4HMRvoQAKm6P5fH68FcCi_5pTkVorSNewDS_R&s=10"},
+    {n:"Q. cremoso El faisan", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuewYaXfND-ads5WOdiuOp34ZYT0dkewHsoWsvd2UiiF5xW9QJmfTMdWPf&s=10"},
     {n:"Q. cremoso La Finca", p:null, img:""},
-    {n:"Q. cremoso los troncos", p:null, img:""},
+    {n:"Q. cremoso los troncos", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9bt2nkj3PMY7FQrjx50e4vWxGq6npuk5j3534kRhZbHOc4gJ8cfBS-lM&s=10"},
     {n:"Q. por salut Punta del Agua", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_709437-MLA107345816233_022026-O.webp"},
-    {n:"Q. por salut Cayelac", p:null, img:""},
+    {n:"Q. por salut Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04933-683x1024.jpg"},
     {n:"Q. por salut Barraza", p:null, img:""},
-    {n:"Q. por salut s/sal Cayelac", p:null, img:""},
-    {n:"Q. por salut s/sal Barraza", p:null, img:""},
+    {n:"Q. por salut s/sal Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04877-683x1024.jpg"},
+    {n:"Q. por salut s/sal Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_974077-MLA106682110024_022026-T.webp"},
     {n:"Muzzarella barraza cilindro", p:null, img:"https://acdn-us.mitiendanube.com/stores/005/600/084/products/181-b3af558072d552152717456270476675-1024-1024.png"},
     {n:"Muzzarella Lucrecia", p:null, img:""},
     {n:"Muzza El Gauchito plancha", p:null, img:""},
@@ -321,7 +322,7 @@ function R() {
 
   $('l').innerHTML = S.map((s, si) => {
     const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img src="${x.img}" alt="${x.n}" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+      `<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
     ).join('');
     
     return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
