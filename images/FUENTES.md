@@ -38,6 +38,11 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Batata c/cacao lata x 5 kg Cayfar | [d22fxaf9t8d39k.cloudfront.net](https://d22fxaf9t8d39k.cloudfront.net/ceddd5eed6352e8b6a135cbaf043b27bd04d587ba2ece42679b271de8c7d6ed2325300.jpg) |
 | P. bombon Esnaola x 5kg | [http2.mlstatic.com](https://http2.mlstatic.com/D_NQ_NP_686161-MLA89870670001_082025-O.webp) |
 | Batata c/guinda x 5kg Esnaola | [http2.mlstatic.com](https://http2.mlstatic.com/D_NQ_NP_611507-MLA41802813983_052020-O.webp) |
+| Ac. verdes 0 x 2 kg / 5 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/mor1kg11-dec1615d0f5a50c84015928425770468-1024-1024.webp) |
+| Ac. verdes 00 x 2 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/mor1kg1-dec1615d0f5a50c84015928425219144-1024-1024.webp) |
+| Ac. verdes c/ morrón x 1 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/whatsapp-image-2020-06-22-at-2-34-23-pm1-3cab00a9651bf0374015930970282870-480-0.webp) |
+| Ac. Negra 0 x 2 kg / 5 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg-11-19843ec25f1924d8c715926721208452-1024-1024.webp) |
+| Ac. Negra 00 x 2 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg11-19843ec25f1924d8c715928419969736-1024-1024.webp) |
 | Q. cremoso La Finca | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTzpVXTJBG9Dwv7T8gTmO6NxZOY_TLYIsieMa9eDi0HCwc3z7oA9nU3qoZ&s=10) |
 | Q. por salut Barraza | [http2.mlstatic.com](https://http2.mlstatic.com/D_Q_NP_2X_943823-MLA106643946206_022026-T.webp) |
 | Muzzarella Lucrecia | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYRq4rsNguoKvZLKa3xrcoIpFcWhdrHB455j2W761CfpSjXqZTQ1ULGa4&s=10) |
@@ -53,7 +58,6 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Fiambrin La Quesera | [semas.ar](https://semas.ar/wp-content/uploads/2024/08/6a0bb4a012316d54de63c6198d5b13bd.webp) |
 | Fiambrin la serenisima | [dcdn-us.mitiendanube.com](https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2024090111170023424-213ca9f1b33ff729b317362510628386-1024-1024.webp) |
 | Cheddar Cayelac | [www.cayelac.com.ar](https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04904-683x1024.jpg) |
-| Cheddar La Paulina | [dcdn-us.mitiendanube.com](https://dcdn-us.mitiendanube.com/stores/001/151/835/products/2060301-cdf1e27d6f59a675c815881742611757-1024-1024.webp) |
 | Pategras Sancor | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10) |
 | Mar del plata Maria Luisa | [dequesos.com.ar](https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png) |
 | Fontina Cayelac | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwdKvuLVND1bbs7ad8YSPL8wRUwhsSCbbAQa3qQI-N_FbCgC9ZbJAJzU3f&s=10) |
@@ -84,7 +88,7 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 
 ## Fotos pendientes
 
-La sección **Encurtidos** quedó sin fotos por indicación del cliente. Las tarjetas con foto vacía de otras secciones siguen pendientes de una referencia exacta.
+En **Encurtidos**, se agregaron fotos únicamente a las variedades con una referencia Morando coincidente. Las demás aceitunas y encurtidos quedan pendientes de una foto Morando exacta. Las tarjetas con foto vacía de otras secciones siguen pendientes de una referencia exacta.
 
 | Producto | Sección |
 | --- | --- |
