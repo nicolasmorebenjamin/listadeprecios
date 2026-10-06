@@ -388,22 +388,34 @@ async function actualizarPrecios() {
     aplicarPrecios(preciosDocs);
     status.textContent = 'Precios sincronizados · ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
   } catch (error) {
-    try {
-      const respaldo = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
-        if (!r.ok) throw new Error('No se pudo consultar el respaldo de precios');
-        return r.json();
-      });
-      if (!respaldo || !Object.keys(respaldo).length) throw new Error('El respaldo de precios está vacío');
-      aplicarPrecios(respaldo);
-      status.textContent = 'Mostrando la última lista guardada; se reintentará la sincronización.';
-    } catch (errorRespaldo) {
-      R();
-      status.textContent = 'No se pudieron actualizar los precios. Se volverá a intentar automáticamente.';
-    }
+    const hayPreciosGuardados = S.some(categoria => categoria.a.some(producto => producto.p != null));
+    status.textContent = hayPreciosGuardados
+      ? 'Mostrando la última lista guardada; se reintentará la sincronización.'
+      : 'No se pudieron actualizar los precios. Se volverá a intentar automáticamente.';
   }
 }
 
-actualizarPrecios();
+async function iniciarCatalogo() {
+  // Mostrar los productos de inmediato mientras se consultan las fuentes de precios.
+  R();
+  $('syncStatus').textContent = 'Cargando la última lista guardada…';
+
+  try {
+    const respaldo = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
+      if (!r.ok) throw new Error('No se pudo consultar el respaldo de precios');
+      return r.json();
+    });
+    if (!respaldo || !Object.keys(respaldo).length) throw new Error('El respaldo de precios está vacío');
+    aplicarPrecios(respaldo);
+    $('syncStatus').textContent = 'Mostrando la última lista guardada · Actualizando precios…';
+  } catch (errorRespaldo) {
+    $('syncStatus').textContent = 'Consultando precios actualizados…';
+  }
+
+  await actualizarPrecios();
+}
+
+iniciarCatalogo();
 // Si la página queda abierta, consulta nuevamente el documento cada minuto.
 setInterval(() => {
   if (document.visibilityState === 'visible') actualizarPrecios();
