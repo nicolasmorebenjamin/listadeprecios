@@ -43,7 +43,9 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | Ac. verdes c/ morrón x 1 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/whatsapp-image-2020-06-22-at-2-34-23-pm1-3cab00a9651bf0374015930970282870-480-0.webp) |
 | Ac. Negra 0 x 2 kg / 5 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg-11-19843ec25f1924d8c715926721208452-1024-1024.webp) |
 | Ac. Negra 00 x 2 kg | [Pescaderías Pelegrini](https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg11-19843ec25f1924d8c715928419969736-1024-1024.webp) |
-| Q. cremoso La Finca | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTzpVXTJBG9Dwv7T8gTmO6NxZOY_TLYIsieMa9eDi0HCwc3z7oA9nU3qoZ&s=10) |
+| Q. cremoso El Faisán | [PNG recortado](fotos-cliente/cremoso-el-faisan.png) — original: [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuewYaXfND-ads5WOdiuOp34ZYT0dkewHsoWsvd2UiiF5xW9QJmfTMdWPf&s=10) |
+| Q. cremoso La Finca | [PNG recortado](fotos-cliente/cremoso-la-finca.png) — original: [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTzpVXTJBG9Dwv7T8gTmO6NxZOY_TLYIsieMa9eDi0HCwc3z7oA9nU3qoZ&s=10) |
+| Q. cremoso Los Troncos | [PNG recortado](fotos-cliente/cremoso-los-troncos.png) — original: [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9bt2nkj3PMY7FQrjx50e4vWxGq6npuk5j3534kRhZbHOc4gJ8cfBS-lM&s=10) |
 | Q. por salut Barraza | [http2.mlstatic.com](https://http2.mlstatic.com/D_Q_NP_2X_943823-MLA106643946206_022026-T.webp) |
 | Muzzarella Lucrecia | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYRq4rsNguoKvZLKa3xrcoIpFcWhdrHB455j2W761CfpSjXqZTQ1ULGa4&s=10) |
 | Muzza El Gauchito plancha | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBMoXiSDqaHhYulJ1m4UwfxPvugrcdM90ysVM8YrB62cM6keJ-ygF_Ho_U&s=10) |
