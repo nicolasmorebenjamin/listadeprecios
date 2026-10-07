@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lista de precios</title>
 <meta name="theme-color" content="#d32622">
-<link rel="icon" type="image/svg+xml" href="favicon.svg"><style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
 :root{--bg:#f7f4ef;--c:#fff;--t:#241b18;--m:#796d66;--r:#d32622;--b:#eee8e1;--line:#e9e1d8;--shadow:0 8px 24px #39251a0d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#171310;--c:#211b17;--t:#f7eee6;--m:#b7a99e;--b:#302721;--line:#3a3029;--shadow:0 8px 24px #0003}}
 :root[data-theme=dark]{--bg:#171310;--c:#211b17;--t:#f7eee6;--m:#b7a99e;--b:#302721;--line:#3a3029;--shadow:0 8px 24px #0003}
@@ -156,12 +157,12 @@ const BASE_PRODUCTOS = [
     {n:"Jamón crudo el rey", p:null, img:""},
     {n:"Jamón crudo serrano El Rey", p:null, img:""},
     {n:"J crudo listo Don José", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_613794-MLA45759419891_042021-O.webp"},
-    {n:"J crudo c/cuero 4718", p:null, img:""}
+    {n:"J crudo c/cuero 4718", p:null, img:"images/fotos-cliente/jamon-crudo-4718.png"}
   ]],
   ["🥩","Bondiolas y lomos",[
     {n:"Bondiola Paladini", p:null, img:"images/catalogo/bondiola-paladini.jpg"},
     {n:"Bondiola La Reina", p:null, img:"images/bondiola-la-reina.webp"},
-    {n:"Bondiola Jonelli", p:null, img:""},
+    {n:"Bondiola Jonelli", p:null, img:"images/fotos-cliente/bondiola-jonelli.png"},
     {n:"Bondiola Luvianka", p:null, img:"images/catalogo/bondiola-luvianka.jpg"},
     {n:"Lomo bocatti", p:null, img:"images/catalogo/lomo-bocatti.jpg"},
     {n:"Lomo Horneado Luvianka", p:null, img:"images/catalogo/lomo-horneado-luvianka.jpg"},
@@ -180,7 +181,7 @@ const BASE_PRODUCTOS = [
   ["🍖","Matambres",[
     {n:"Matambre carne serrano", p:null, img:"images/matambre-carne-serrano.webp"},
     {n:"Matambre Cerdo serrano", p:null, img:"images/fotos-cliente/matambre-cerdo-serrano.webp"},
-    {n:"Matambre carne imperial", p:null, img:""},
+    {n:"Matambre carne imperial", p:null, img:"images/fotos-cliente/matambre-carne-imperial.png"},
     {n:"Matambre pollo imperial", p:null, img:""},
     {n:"Fiambre de pollo 214", p:null, img:"images/catalogo/fiambre-pollo-214.jpg"}
   ]],
@@ -267,7 +268,7 @@ const BASE_PRODUCTOS = [
     {n:"Pategras La Paulina", p:null, img:"images/fotos-cliente/pategras-la-paulina.png"},
     {n:"Mar del plata doble A", p:null, img:""},
     {n:"Mar del plata Maria Luisa", p:null, img:"https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png"},
-    {n:"Mar del plata Santa Lucia", p:null, img:""},
+    {n:"Mar del plata Santa Lucia", p:null, img:"images/fotos-cliente/mar-del-plata-santa-lucia.png"},
     {n:"Fontina Paulina", p:null, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"},
     {n:"Fontina Cayelac", p:null, img:"images/fotos-cliente/fontina-cayelac.png"},
     {n:"Queso azul Bavaria", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBCS3q5fi8g-CgMQ9yncaeP1Awfjyj6peIs9LcpJS-Fg&s=10"},
@@ -281,20 +282,21 @@ const BASE_PRODUCTOS = [
   ["🧀","Quesos duros",[
     {n:"Sardo fresco Santa Lucía", p:null, img:"images/fotos-cliente/sardo-fresco-santa-lucia.png"},
     {n:"Sardo semi Santa Lucía", p:null, img:"images/fotos-cliente/sardo-semi-santa-lucia.png"},
-    {n:"Sardo duro Santa Lucía", p:null, img:""},
+    {n:"Sardo duro Santa Lucía", p:null, img:"images/fotos-cliente/sardo-duro-santa-lucia.png"},
     {n:"Sardo Lucrecia", p:null, img:""},
     {n:"Sardo Santa Rosa", p:null, img:""},
     {n:"Provolin Santa lucía", p:null, img:""},
     {n:"Provolone Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04960-683x1024.jpg"},
-    {n:"Romanito Santa Lucía", p:null, img:""},
-    {n:"Reggianito Santa Lucía", p:null, img:""},
+    {n:"Romanito Santa Lucía", p:null, img:"images/fotos-cliente/romanito-santa-lucia.png"},
+    {n:"Reggianito Santa Lucía", p:null, img:"images/fotos-cliente/sbrinz-santa-lucia.png"},
     {n:"Reggianito Melincué", p:null, img:"https://distribuidorapg.com.ar/wp-content/uploads/2025/07/Melincue-Reggianito_sin_pintar.webp"},
     {n:"Provolone Santa Rosa", p:null, img:"https://acdn-us.mitiendanube.com/stores/861/458/products/provolone-horma1001-3037ff1c7e953f15d815797150663592-1024-1024.webp"},
+    {n:"Provolone Santa Lucía", p:null, img:"images/fotos-cliente/provolone-santa-lucia.png"},
     {n:"Reggianito Trelau", p:null, img:""},
     {n:"Parmesano Melincué", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7i71EiQsEir62Sz4O2VJQezwuC_afhF18otxmCT0Y9fnYvZgkem1ki0R&s=10"},
   ]],
   ["GB","Varios lácteos y panificación",[
-    {n:"Ricota La niña", p:null, img:""},
+    {n:"Ricota La niña", p:null, img:"images/fotos-cliente/ricota-la-nina.png"},
     {n:"Ricota Trelau", p:null, img:"https://tienda.distribuidoraelcriollo.com/productos/1230.jpg"},
     {n:"Manteca x 100 tonadita", p:null, img:"https://gruposanisidrovirtual.com.ar/img/productos/4662.jpg"},
     {n:"Manteca x 200 tonadita", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4M6ttAx-Y90-YM5dN97kPYnYVQ4zoWvj_2Fm0WtKmNg&s=10"},
@@ -386,34 +388,22 @@ async function actualizarPrecios() {
     aplicarPrecios(preciosDocs);
     status.textContent = 'Precios sincronizados · ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
   } catch (error) {
-    const hayPreciosGuardados = S.some(categoria => categoria.a.some(producto => producto.p != null));
-    status.textContent = hayPreciosGuardados
-      ? 'Mostrando la última lista guardada; se reintentará la sincronización.'
-      : 'No se pudieron actualizar los precios. Se volverá a intentar automáticamente.';
+    try {
+      const respaldo = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
+        if (!r.ok) throw new Error('No se pudo consultar el respaldo de precios');
+        return r.json();
+      });
+      if (!respaldo || !Object.keys(respaldo).length) throw new Error('El respaldo de precios está vacío');
+      aplicarPrecios(respaldo);
+      status.textContent = 'Mostrando la última lista guardada; se reintentará la sincronización.';
+    } catch (errorRespaldo) {
+      R();
+      status.textContent = 'No se pudieron actualizar los precios. Se volverá a intentar automáticamente.';
+    }
   }
 }
 
-async function iniciarCatalogo() {
-  // Mostrar los productos de inmediato mientras se consultan las fuentes de precios.
-  R();
-  $('syncStatus').textContent = 'Cargando la última lista guardada…';
-
-  try {
-    const respaldo = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
-      if (!r.ok) throw new Error('No se pudo consultar el respaldo de precios');
-      return r.json();
-    });
-    if (!respaldo || !Object.keys(respaldo).length) throw new Error('El respaldo de precios está vacío');
-    aplicarPrecios(respaldo);
-    $('syncStatus').textContent = 'Mostrando la última lista guardada · Actualizando precios…';
-  } catch (errorRespaldo) {
-    $('syncStatus').textContent = 'Consultando precios actualizados…';
-  }
-
-  await actualizarPrecios();
-}
-
-iniciarCatalogo();
+actualizarPrecios();
 // Si la página queda abierta, consulta nuevamente el documento cada minuto.
 setInterval(() => {
   if (document.visibilityState === 'visible') actualizarPrecios();
