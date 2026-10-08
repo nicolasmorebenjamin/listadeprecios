@@ -154,8 +154,8 @@ const BASE_PRODUCTOS = [
     {n:"J crudo parma La Reina", p:null, img:"images/jamon-crudo-la-reina.webp"},
     {n:"J crudo La Reina", p:null, img:"images/jamon-crudo-la-reina.webp"},
     {n:"Jamón crudo JM", p:null, img:"images/fotos-cliente/jamon-crudo-jm.webp"},
-    {n:"Jamón crudo el rey", p:null, img:""},
-    {n:"Jamón crudo serrano El Rey", p:null, img:""},
+    {n:"Jamón crudo sin cuero El Rey", p:null, img:"images/fotos-cliente/jamon-crudo-sin-cuero-el-rey.png"},
+    {n:"Jamón crudo serrano El Rey", p:null, img:"images/fotos-cliente/jamon-crudo-serrano-el-rey.png"},
     {n:"J crudo listo Don José", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_613794-MLA45759419891_042021-O.webp"},
     {n:"J crudo c/cuero 4718", p:null, img:"images/fotos-cliente/jamon-crudo-4718.png"}
   ]],
@@ -265,11 +265,11 @@ const BASE_PRODUCTOS = [
   ["🧀","Quesos postre",[
     {n:"Holanda Cayelac", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_821259-MLA84726680792_052025-O.webp"},
     {n:"Pategras Sancor", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10"},
-    {n:"Pategras La Paulina", p:null, img:"images/fotos-cliente/pategras-la-paulina.png"},
+    {n:"Pategras La Paulina", p:18500, img:"images/fotos-cliente/pategras-la-paulina.png"},
     {n:"Mar del plata doble A", p:null, img:""},
     {n:"Mar del plata Santa Lucia", p:null, img:"images/fotos-cliente/mar-del-plata-santa-lucia.png"},
     {n:"Mar del plata Maria Luisa", p:null, img:"https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png"},
-    {n:"Fontina Paulina", p:null, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"},
+    {n:"Fontina Paulina", p:19500, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"},
     {n:"Fontina Cayelac", p:null, img:"images/fotos-cliente/fontina-cayelac.png"},
     {n:"Queso azul Bavaria", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBCS3q5fi8g-CgMQ9yncaeP1Awfjyj6peIs9LcpJS-Fg&s=10"},
     {n:"Queso azul Quesera", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_809996-MLA114538306318_082026-T.webp"},
@@ -285,13 +285,12 @@ const BASE_PRODUCTOS = [
     {n:"Sardo duro Santa Lucía", p:null, img:"images/fotos-cliente/sardo-duro-santa-lucia.png"},
     {n:"Sardo Lucrecia", p:null, img:""},
     {n:"Sardo Santa Rosa", p:null, img:""},
-    {n:"Provolin Santa lucía", p:null, img:""},
+    {n:"Provolin Santa Lucía", p:null, img:"images/fotos-cliente/provolone-santa-lucia.png"},
     {n:"Provolone Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04960-683x1024.jpg"},
     {n:"Romanito Santa Lucía", p:null, img:"images/fotos-cliente/romanito-santa-lucia.png"},
     {n:"Reggianito Santa Lucía", p:null, img:"images/fotos-cliente/sbrinz-santa-lucia.png"},
     {n:"Reggianito Melincué", p:null, img:"https://distribuidorapg.com.ar/wp-content/uploads/2025/07/Melincue-Reggianito_sin_pintar.webp"},
     {n:"Provolone Santa Rosa", p:null, img:"https://acdn-us.mitiendanube.com/stores/861/458/products/provolone-horma1001-3037ff1c7e953f15d815797150663592-1024-1024.webp"},
-    {n:"Provolone Santa Lucía", p:null, img:"images/fotos-cliente/provolone-santa-lucia.png"},
     {n:"Reggianito Trelau", p:null, img:""},
     {n:"Parmesano Melincué", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7i71EiQsEir62Sz4O2VJQezwuC_afhF18otxmCT0Y9fnYvZgkem1ki0R&s=10"},
   ]],
@@ -354,6 +353,7 @@ function cargarPrecios() {
 const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
 const ALIAS_PRECIOS = {
   "jamon natural grassetto": "jamon natural graseto",
+  "jamon crudo sin cuero el rey": "jamon crudo el rey",
   "mortadela c/pistacho bocatti": "mortadela c /pistacho bocatti",
   "aceit negras s/carozo x 5 kg": "aceit negras s/carozo x 5 k g"
 };
