@@ -13,7 +13,8 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 | `images/fotos-cliente/jamon-natural-grassetto.webp` | Jamón natural Grassetto | Foto enviada por el cliente |
 | `images/fotos-cliente/jamon-crudo-jm.webp` | Jamón crudo JM | Foto enviada por el cliente |
 | `images/fotos-cliente/jamon-crudo-sin-cuero-el-rey.png` | Jamón crudo sin cuero El Rey | Foto enviada por el cliente |
-| `images/fotos-cliente/jamon-crudo-serrano-el-rey.png` | Jamón crudo serrano El Rey | Foto enviada por el cliente |
+| `images/fotos-cliente/jamon-crudo-sin-cuero-el-rey.png` | Jamón crudo serrano El Rey | Foto enviada por el cliente (compartida con jamón crudo sin cuero) |
+| `images/fotos-cliente/holanda-doble-aa.png` | Queso Holanda Doble AA | Foto enviada por el cliente |
 | `images/fotos-cliente/matambre-cerdo-serrano.webp` | Matambre de cerdo Serrano | Foto enviada por el cliente |
 | `images/antonativa/jamon-cocido-barril-cabana.png` | Jamón cocido Cabaña | [Catálogo oficial Cabaña Antonativa](https://antonativa.com/productos/) |
 
@@ -121,6 +122,4 @@ En **Encurtidos**, se agregaron fotos únicamente a las variedades con una refer
 | Reggianito Santa Lucía | Quesos duros |
 | Reggianito Trelau | Quesos duros |
 | Ricota La niña | Varios lácteos y panificación |
-| Queso rallado suelto x kg | Varios lácteos y panificación |
-
-Las fotos de `images/catalogo/` corresponden a los productos coincidentes del PDF **Catálogo Electo** compartido anteriormente.
+| Queso rallado suelto x kg | Varios lácteos y pa
