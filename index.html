@@ -407,4 +407,9 @@ async function actualizarPrecios() {
 
 actualizarPrecios();
 // Si la página queda abierta, consulta nuevamente el documento cada minuto.
-setInterva
+setInterval(() => {
+  if (document.visibilityState === 'visible') actualizarPrecios();
+}, 60 * 1000);
+</script>
+</body>
+</html>

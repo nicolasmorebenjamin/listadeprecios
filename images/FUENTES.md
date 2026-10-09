@@ -122,4 +122,6 @@ En **Encurtidos**, se agregaron fotos únicamente a las variedades con una refer
 | Reggianito Santa Lucía | Quesos duros |
 | Reggianito Trelau | Quesos duros |
 | Ricota La niña | Varios lácteos y panificación |
-| Queso rallado suelto x kg | Varios lácteos y pa
+| Queso rallado suelto x kg | Varios lácteos y panificación |
+
+Las fotos de `images/catalogo/` corresponden a los productos coincidentes del PDF **Catálogo Electo** compartido anteriormente.
