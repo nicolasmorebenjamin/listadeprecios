@@ -46,8 +46,8 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}
 .card{position:relative;text-align:center;min-width:0;padding:10px 10px 2px;background:var(--c);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .card:hover{transform:translateY(-3px);border-color:#d3262266;box-shadow:0 12px 28px #39251a18}
-.ph{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:12px;overflow:hidden;padding:8px;box-sizing:border-box}
-.ph img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important}
+.ph{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:12px;overflow:hidden;padding:4px;box-sizing:border-box}
+.ph img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important;filter:contrast(1.04) saturate(1.04)}
 .ph img.crop-right-panel{width:80%;object-fit:cover;object-position:left center}
 .ph img.crop-lower-product{height:70%;object-fit:cover;object-position:center bottom}
 .ph img.crop-lower-panel{height:60%;object-fit:cover;object-position:center bottom}
@@ -251,7 +251,7 @@ const BASE_PRODUCTOS = [
   ]],
   ["🧀","Quesos en barra",[
     {n:"Barra punta del agua", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSWP8LkLrkMC7JM4i5QK3nv846Pi6tNDID0JtIHJO1bnflawBOU6Z5EaWM&s=10"},
-    {n:"Barra Los troncos", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_747555-MLA78031427401_072024-O.webp", crop:"lower-panel"},
+
     {n:"Barra Rondo", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_754987-MLA41214983753_032020-O.webp"},
     {n:"Barra Lucrecia", p:null, img:"https://res.cloudinary.com/dg9rn6b7o/image/upload/v1777489250/distrialma/2809-1777489250695.png"},
     {n:"Barra La tarantela", p:null, img:"https://www.cosenzadelicatessen.com.ar/web/image/product.product/405/image_1920?unique=33b809e"},
