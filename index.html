@@ -50,9 +50,9 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .ph img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important;filter:contrast(1.04) saturate(1.04)}
 .ph img{cursor:zoom-in}
 .ph img:focus-visible{outline:3px solid var(--r);outline-offset:2px}
-.image-dialog{position:fixed;width:min(92vw,820px);max-width:none;max-height:92vh;margin:auto;padding:48px 16px 16px;border:1px solid var(--line);border-radius:18px;background:var(--c);color:var(--t);box-shadow:0 18px 70px #0008}
+.image-dialog{position:fixed;width:fit-content;max-width:min(92vw,820px);max-height:92vh;margin:auto;padding:48px 16px 16px;border:1px solid var(--line);border-radius:18px;background:var(--c);color:var(--t);box-shadow:0 18px 70px #0008}
 .image-dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}
-.image-dialog img{display:block;width:100%;height:min(72vh,720px);object-fit:contain;background:#fff;border-radius:10px}
+.image-dialog img{display:block;width:auto;height:auto;max-width:calc(92vw - 64px);max-height:min(72vh,720px);object-fit:contain;background:#fff;border-radius:10px;margin:0 auto}
 .image-dialog .image-caption{text-align:center;margin:12px 0 0;font-size:14px;font-weight:700}
 .image-dialog .image-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:var(--c);color:var(--t);font-size:24px;line-height:1;cursor:pointer}
 .ph img.crop-right-panel{width:80%;object-fit:cover;object-position:left center}
@@ -107,28 +107,28 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
     {n:"Jamón cocido Paladini", p:null, img:"paladini.JPG"},
-    {n:"Jamón cocido Calchaquí", p:null, img:"images/catalogo/jamon-calchaqui.jpg"},
-    {n:"Jamón cocido Sadia", p:null, img:"images/catalogo/jamon-sadia.jpg"},
+    {n:"Jamón cocido Calchaquí", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/167253/JAMON-COCIDO-CALCHAQUI-NATURAL-XKLG-1-12277.jpg?v=638239953697130000"},
+    {n:"Jamón cocido Sadia", p:null, img:"https://cdn11.bigcommerce.com/s-ftsflnse4o/images/stencil/1280x1280/products/3441451/13951105/D_830954-MLA73409406485_122023-O__32949.1747240560.jpg?c=1"},
     {n:"Jamón cocido tres cruces", p:null, img:"images/fotos-cliente/jamon-cocido-tres-cruces.jpg"},
-    {n:"Jamón cocido 214", p:null, img:"images/catalogo/jamon-214.jpg"},
+    {n:"Jamón cocido 214", p:null, img:"https://maioccodistribuciones.com.ar/wp-content/uploads/2022/07/214-Jamon-Cocido-Etiqueta-Dorada.jpg"},
     {n:"J. cocido barril Luvianka", p:null, img:"images/catalogo/jamon-barril-luvianka.jpg"},
     {n:"J. cocido barril Cabaña", p:null, img:"images/antonativa/jamon-cocido-barril-cabana.png"},
     {n:"J. cocido Arivan", p:null, img:"images/fotos-cliente/jamon-arivan.webp"},
     {n:"Jamón cocido 266", p:null, img:"images/catalogo/jamon-266.jpg"},
     {n:"Jamón cocido Cosenza", p:null, img:"images/jamon-cosenza.webp"},
     {n:"Jamón natural Grassetto", p:null, img:"images/fotos-cliente/jamon-natural-grassetto.webp"},
-    {n:"Jamón natural Bocatti", p:null, img:"images/catalogo/jamon-natural-bocatti.jpg"},
-    {n:"Jamón natural Luvianka", p:null, img:"images/catalogo/jamon-natural-luvianka.jpg"},
+    {n:"Jamón natural Bocatti", p:null, img:"https://arcordiezb2c.vteximg.com.br/arquivos/ids/184981/Jamon-Cocido-Bocatti-x-Kg-1-18945.jpg?v=638593545690100000"},
+    {n:"Jamón natural Luvianka", p:null, img:"https://images.prismic.io/luvianka-landing-v2/aF2o83fc4bHWiw_z_LuviankaPiezas0087.JPG?auto=format%2Ccompress"},
     {n:"Jamón natural 266", p:null, img:"https://frigorificoelaljibe.com.ar/wp-content/uploads/2023/10/jamon-cocido-natural.png"},
     {n:"Jamón natural Don José", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ01WKaQXLuGkmqCKM8GHchi9nSKS6uCKt1UcpTBk4uVtXm9G1IJk_t1Fw&s"},
     {n:"Jamón natural jonelli", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVBDbNxmGXf6E4xwDhlPoCeXaCWaIfeG5sx76Txbtt5DhmVA-sxyMgCoM&s=10"}
   ]],
   ["🥓","Salames y salamines",[
-    {n:"Salame milán calchaquí", p:null, img:"images/catalogo/milan-calchaqui.jpg"},
-    {n:"Salame milán 214", p:null, img:"images/catalogo/milan-214.jpg"},
+    {n:"Salame milán calchaquí", p:null, img:"https://tienda.distribuidoraelcriollo.com/productos/2816.jpg"},
+    {n:"Salame milán 214", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/163258/SALAME-MILAN-214-XKLG-1-9895.jpg?v=637987557894030000"},
     {n:"Salame milán El Nahuel", p:null, img:"images/catalogo/milan-nahuel.jpg"},
-    {n:"Salame milán Miguez", p:null, img:"images/catalogo/milan-miguez.jpg"},
-    {n:"Salame milán Champion", p:null, img:"images/catalogo/milan-champion.jpg"},
+    {n:"Salame milán Miguez", p:null, img:"https://distribuidoradelsur.com.ar/sysmam/padmin/productos/img/optimizadas/salame%20miguez%20pieza%20completa.jpeg"},
+    {n:"Salame milán Champion", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/163281/SALAME-MILAN-CHAMPION-XKLG-1-9967.jpg?v=637987557953970000"},
     {n:"Salame milán Imperiale", p:null, img:"images/fotos-cliente/salame-imperiale.webp"},
     {n:"Salame cantimpalo Miguez", p:null, img:"images/salame-cantimpalo-miguez.webp"},
     {n:"Salamines Miguez", p:null, img:"images/salamin-miguez.webp"},
@@ -138,20 +138,20 @@ const BASE_PRODUCTOS = [
     {n:"Chorizo colorado 214", p:null, img:"https://cmorres.com.ar/wp-content/uploads/2021/08/chorizocandelario214.jpg"},
     {n:"Salame alerce campo austral", p:null, img:"images/fotos-cliente/salame-alerce-campo-austral.webp"},
     {n:"Salame de cerdo C. Austral", p:null, img:"images/fotos-cliente/salame-cerdo-campo-austral.webp"},
-    {n:"Salame fuet bocatti", p:null, img:"images/catalogo/fuet-bocatti.jpg"},
+    {n:"Salame fuet bocatti", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/904152/21620711001.jpg?v=639111898020900000"},
     {n:"Salame spianatta el nahuel", p:null, img:"images/catalogo/spianatta-nahuel.jpg"},
   ]],
   ["🍖","Paletas",[
     {n:"Paleta cocida Calchaquí", p:null, img:"images/catalogo/paleta-calchaqui.jpg"},
     {n:"Paleta cocida 214", p:null, img:"images/catalogo/paleta-214.jpg"},
-    {n:"Paleta cocida Luvianka", p:null, img:"images/paleta-luvianka.webp"},
+    {n:"Paleta cocida Luvianka", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/170453/PALETA-DE-CERDO-LUVIANKA-XKG-1-15026.jpg?v=638670441780000000"},
     {n:"Paleta cocida Barolo", p:null, img:"images/paleta-barolo.webp"},
     {n:"Paleta vaina calchaqui", p:null, img:"images/paleta-vaina-calchaqui.webp"},
     {n:"Paleta centurión", p:null, img:"images/paleta-centurion.webp"},
     {n:"Paleta cocida orfebre", p:null, img:"images/fotos-cliente/paleta-orfebre.png"}
   ]],
   ["🌭","Mortadelas",[
-    {n:"Mortadela bocha Calchaquí", p:null, img:"images/catalogo/mortadela-calchaqui.jpg"},
+    {n:"Mortadela bocha Calchaquí", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/168812/MORTADELA-CALCHAQUI-BOCHA-XKLG-21111-1-9875.jpg?v=638415237684870000"},
     {n:"Mortadela bocha 214", p:null, img:"images/catalogo/mortadela-214.jpg"},
     {n:"Mortadela bocha Luvianka", p:null, img:"images/catalogo/mortadela-luvianka.jpg"},
     {n:"Mortadela bocha Miguez", p:null, img:"images/mortadela-miguez.webp"},
@@ -171,14 +171,14 @@ const BASE_PRODUCTOS = [
     {n:"J crudo c/cuero 4718", p:null, img:"images/fotos-cliente/jamon-crudo-4718.png"}
   ]],
   ["🥩","Bondiolas y lomos",[
-    {n:"Bondiola Paladini", p:null, img:"images/catalogo/bondiola-paladini.jpg"},
+    {n:"Bondiola Paladini", p:null, img:"https://www.paladini.com.ar/assets/img/productos/productos/100-bondiola.png"},
     {n:"Bondiola Calchaquí", p:null, img:"images/fotos-cliente/bondiola-calchaqui.jpg"},
     {n:"Bondiola La Reina", p:null, img:"images/bondiola-la-reina.webp"},
     {n:"Bondiola Jonelli", p:null, img:"images/fotos-cliente/bondiola-jonelli.png"},
     {n:"Bondiola Luvianka", p:null, img:"images/catalogo/bondiola-luvianka.jpg"},
     {n:"Lomo bocatti", p:null, img:"images/catalogo/lomo-bocatti.jpg"},
-    {n:"Lomo Horneado Luvianka", p:null, img:"images/catalogo/lomo-horneado-luvianka.jpg"},
-    {n:"Lomo ahumado Luvianka", p:null, img:"images/catalogo/lomo-ahumado-luvianka.jpg"},
+    {n:"Lomo Horneado Luvianka", p:null, img:"https://images.prismic.io/luvianka-landing-v2/Z8I5j57c43Q3gZKE_LuviankaPiezas0071.JPG?auto=format%2Ccompress"},
+    {n:"Lomo ahumado Luvianka", p:null, img:"https://images.prismic.io/luvianka-landing-v2/Z8I5U57c43Q3gZJ__LuviankaPiezas0070.JPG?auto=format%2Ccompress"},
     {n:"Lomo ahumado 266", p:null, img:"images/catalogo/lomo-ahumado-266.jpg"},
     {n:"Pastrón", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvWxALsT79MfSYdcdC7t9s8D3nuWA6TkrCxRnXmCZJLA&s=10"}
   ]],
