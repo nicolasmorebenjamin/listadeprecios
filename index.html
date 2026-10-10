@@ -48,6 +48,13 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .card:hover{transform:translateY(-3px);border-color:#d3262266;box-shadow:0 12px 28px #39251a18}
 .ph{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:12px;overflow:hidden;padding:4px;box-sizing:border-box}
 .ph img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff;border-radius:6px;mix-blend-mode:normal !important;filter:contrast(1.04) saturate(1.04)}
+.ph img{cursor:zoom-in}
+.ph img:focus-visible{outline:3px solid var(--r);outline-offset:2px}
+.image-dialog{position:fixed;width:min(92vw,820px);max-width:none;max-height:92vh;margin:auto;padding:48px 16px 16px;border:1px solid var(--line);border-radius:18px;background:var(--c);color:var(--t);box-shadow:0 18px 70px #0008}
+.image-dialog::backdrop{background:#000b;backdrop-filter:blur(3px)}
+.image-dialog img{display:block;width:100%;height:min(72vh,720px);object-fit:contain;background:#fff;border-radius:10px}
+.image-dialog .image-caption{text-align:center;margin:12px 0 0;font-size:14px;font-weight:700}
+.image-dialog .image-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:var(--c);color:var(--t);font-size:24px;line-height:1;cursor:pointer}
 .ph img.crop-right-panel{width:80%;object-fit:cover;object-position:left center}
 .ph img.crop-lower-product{height:70%;object-fit:cover;object-position:center bottom}
 .ph img.crop-lower-panel{height:60%;object-fit:cover;object-position:center bottom}
@@ -85,6 +92,8 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
   <div id="l"><div class="loading">Cargando precios actualizados...</div></div>
   <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
 </div>
+
+<dialog id="imageDialog" class="image-dialog" aria-label="Foto ampliada"><button id="imageDialogClose" class="image-close" type="button" aria-label="Cerrar foto">×</button><img id="imageDialogPhoto" alt=""><p id="imageDialogCaption" class="image-caption"></p></dialog>
 
 <footer>
   <button id="up">Inicio ↑</button>
@@ -337,7 +346,7 @@ function R() {
 
   $('l').innerHTML = S.map((s, si) => {
     const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+      `<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
     ).join('');
     
     return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
@@ -386,6 +395,35 @@ function aplicarPrecios(preciosDocs) {
 
   R();
 }
+
+const imageDialog = $('imageDialog');
+const imageDialogPhoto = $('imageDialogPhoto');
+const imageDialogCaption = $('imageDialogCaption');
+
+function abrirFoto(img) {
+  imageDialogPhoto.src = img.currentSrc || img.src;
+  imageDialogPhoto.alt = img.alt;
+  imageDialogCaption.textContent = img.alt;
+  imageDialog.showModal();
+}
+
+$('l').addEventListener('click', e => {
+  const img = e.target.closest('.ph img');
+  if (img) abrirFoto(img);
+});
+
+$('l').addEventListener('keydown', e => {
+  const img = e.target.closest('.ph img');
+  if (img && (e.key === 'Enter' || e.key === ' ')) {
+    e.preventDefault();
+    abrirFoto(img);
+  }
+});
+
+$('imageDialogClose').onclick = () => imageDialog.close();
+imageDialog.addEventListener('click', e => {
+  if (e.target === imageDialog) imageDialog.close();
+});
 
 $('catsSelect').onchange = e => {
   const el = $('c' + e.target.value);
