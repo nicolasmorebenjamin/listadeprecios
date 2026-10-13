@@ -14,12 +14,14 @@
 body{margin:0;background:var(--bg);color:var(--t);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:76px}
 .top{position:relative;overflow:hidden;background:linear-gradient(112deg,#4f1715 0%,#8e211c 48%,#d32622 100%);color:#fff;padding:18px max(20px,calc((100vw - 1160px)/2));box-shadow:0 5px 22px #691b1626}.top::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 75% 20%,#f2a05b35,transparent 38%),linear-gradient(90deg,#2a0e0c33,transparent 65%);pointer-events:none}.top-inner{position:relative;max-width:1160px;min-height:174px;margin:0 auto;display:flex;align-items:center}.top-copy{position:relative;z-index:2;max-width:100%}.top-kicker{display:inline-flex;align-items:center;margin-bottom:11px;padding:6px 11px;border:1px solid #ffffff55;border-radius:999px;background:#ffffff14;color:#ffe4d8;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 
+
 h1{margin:0;font-size:clamp(26px,3.2vw,36px);font-weight:850;letter-spacing:.035em;text-shadow:0 3px 18px #240a08aa}
 .top p{margin:7px 0 0;color:#ffe5dc;font-size:14px;letter-spacing:.02em}
 .w{max-width:1160px;margin:0 auto;padding:22px 20px}
 .bar{display:flex;gap:8px;margin-bottom:10px}
 input[type=search]{flex:1;min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--c);color:var(--t);font-size:16px;box-shadow:var(--shadow);transition:border-color .18s,box-shadow .18s}
 input[type=search]:focus{outline:none;border-color:var(--r);box-shadow:0 0 0 3px #d3262222}
+
 
 .cats-wrap{position:relative;margin-bottom:8px}
 select#catsSelect{
@@ -40,6 +42,7 @@ select#catsSelect{
   cursor:pointer;
   outline:none;
 }
+
 
 h2{display:flex;align-items:center;gap:10px;margin:30px 0 14px;font-size:18px;font-weight:800;color:var(--t);padding:0 0 10px;border-bottom:1px solid var(--line)}
 h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r)}
@@ -66,11 +69,14 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
 :root[data-theme=dark] .p{background:#49231f;color:#ffb3a8}
 
+
 .loading{text-align:center;padding:40px 10px;font-weight:bold;color:var(--m);font-size:16px}
 .sync-status{text-align:center;color:var(--m);font-size:12px;padding:4px 0 10px}
 
+
 footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px 18px calc(10px + env(safe-area-inset-bottom,0px));font-size:13px;z-index:100}
 footer button{background:var(--c);color:var(--r);border:1px solid var(--line);padding:8px 14px;font-size:13px;font-weight:700;border-radius:12px;cursor:pointer;box-shadow:var(--shadow)}
+
 
 .whatsapp-float{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:110;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#35e276,#16b957);color:#fff;box-shadow:0 8px 24px #0005,0 0 0 5px #25d36622;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
 .whatsapp-daniel{left:24px}
@@ -95,11 +101,14 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
   <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
 </div>
 
+
 <dialog id="imageDialog" class="image-dialog" aria-label="Foto ampliada"><button id="imageDialogClose" class="image-close" type="button" aria-label="Cerrar foto">×</button><img id="imageDialogPhoto" alt=""><p id="imageDialogCaption" class="image-caption"></p></dialog>
+
 
 <footer>
   <button id="up">Inicio ↑</button>
 </footer>
+
 
 <a class="whatsapp-float whatsapp-daniel" href="https://wa.me/5491161943773" target="_blank" rel="noopener noreferrer" aria-label="Escribir a Daniel por WhatsApp: +54 9 11 6194-3773" title="Daniel · +54 9 11 6194-3773">
   <span class="whatsapp-name" aria-hidden="true">Daniel</span>
@@ -109,6 +118,7 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
   <span class="whatsapp-name" aria-hidden="true">Sebastián</span>
   <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8C7.7.8 1 7.5 1 15.8c0 2.6.7 5.1 1.9 7.3L.9 31l8.1-2.1a15 15 0 0 0 7 1.7h.1c8.3 0 15-6.7 15-15S24.3.8 16 .8Zm0 27.2h-.1a12.4 12.4 0 0 1-6.3-1.7l-.5-.3-4.8 1.3 1.3-4.7-.3-.5a12.3 12.3 0 1 1 10.7 5.9Zm6.8-9.2c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.3.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 3s1.2 3.5 1.4 3.7c.2.3 2.4 3.7 5.8 5.2.8.3 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.3-.8-.5Z"/></svg>
 </a>
+
 
 <script>
 const BASE_PRODUCTOS = [
@@ -249,6 +259,7 @@ const BASE_PRODUCTOS = [
     {n:"Batata c/cacao lata x 5 kg", p:null, img:"https://d22fxaf9t8d39k.cloudfront.net/ceddd5eed6352e8b6a135cbaf043b27bd04d587ba2ece42679b271de8c7d6ed2325300.jpg"},
     {n:"Membrillo lata x 5 kg", p:null, img:"https://ss-cnt-001c.esmsv.com/r/content/host2/1b8436dad41801e33025ae5e6e72f44b/img/products/00865.webp"},
 
+
   ]],
   ["🍯","Dulces Esnaola",[
     {n:"Batata en lata x 5kg", p:null, img:"https://www.laiberoespanola.com.ar/foto.php?mini=0&origen=foto1%7C3344"},
@@ -279,6 +290,7 @@ const BASE_PRODUCTOS = [
   ]],
   ["🧀","Quesos en barra",[
     {n:"Barra punta del agua", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSWP8LkLrkMC7JM4i5QK3nv846Pi6tNDID0JtIHJO1bnflawBOU6Z5EaWM&s=10"},
+
 
     {n:"Barra Rondo", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_754987-MLA41214983753_032020-O.webp"},
     {n:"Barra Lucrecia", p:null, img:"https://res.cloudinary.com/dg9rn6b7o/image/upload/v1777489250/distrialma/2809-1777489250695.png"},
@@ -357,7 +369,7 @@ const BASE_PRODUCTOS = [
     {n:"Harina caserita 0000 x 1 kg", p:1090, g:"Harinas y derivados", img:"https://cdn11.bigcommerce.com/s-3stx4pub31/images/stencil/1280x1280/products/3290/30137/Caserita_Harina_De_Trigo_0000_Wheat_Flour_Excellent_For_Homemade_Pasta_1_kg_1.1_lb__62173.1722536107.jpg?c=3"},
     {n:"Harina caserita leudante x1kg", p:1340, g:"Harinas y derivados", img:"https://masonlineprod.vtexassets.com/arquivos/ids/322373/0779259000106-02-5452.jpg?v=638506389928730000"},
     {n:"Pan rallado Santo pan x 5 kg", p:13660, g:"Harinas y derivados"},
-    {n:"Rebozador Santo pan x 5 kg", p:13660, g:"Harinas y derivados"},
+    {n:"Rebozador Santo pan x 5 kg", p:13660, g:"Harinas y derivados", img:"images/rebozador-santo-pan-5kg.jpg"},
     {n:"Fainalind x 5 kg", p:16750, g:"Harinas y derivados", img:"https://www.dicomere.com/img/productos/1167.jpg"},
     {n:"Fainalind x 10 kg", p:26950, g:"Harinas y derivados"},
     {n:"Maizena x 2 kg", p:11120, g:"Harinas y derivados", img:"https://tienda.distribuidoraelcriollo.com/productos/6815.jpg"},
@@ -365,18 +377,18 @@ const BASE_PRODUCTOS = [
     {n:"Tomate x 8 lts Cayfar", p:11850, g:"Enlatados", img:"https://http2.mlstatic.com/D_718998-MLA106177291159_012026-C.jpg"},
     {n:"Tomate x 8 lts Finca santiago", p:9720, g:"Enlatados"},
     {n:"Morrón rey de reyes x 800 gr", p:3350, g:"Enlatados", img:"https://dcdn.mitiendanube.com/stores/001/227/587/products/morrones-rey-de-reyes-lata-3843df05668f47ab6a17242447374532-640-0.jpg"},
-    {n:"Palmitos cumana x 800 gr", p:7300, g:"Enlatados", img:"https://saleciano.com.ar/imagenes/productos/G_GU_361.png"},
-    {n:"Arvejas cumaná x 850 gr", p:2060, g:"Enlatados", img:"https://saleciano.com.ar/imagenes/productos/G__GU_404.png"},
-    {n:"Morrón cumaná x 2.5 kg", p:11700, g:"Enlatados", img:"https://acdn-us.mitiendanube.com/stores/001/789/620/products/33930_mesa-de-trabajo-11-93923809a377fcbb4016581687675713-1024-1024.webp"},
+    {n:"Palmitos cumana x 800 gr", p:7300, g:"Enlatados", img:"images/palmitos-cumana-800g.jpg"},
+    {n:"Arvejas cumaná x 850 gr", p:2060, g:"Enlatados", img:"images/arvejas-cumana-840g.jpg"},
+    {n:"Morrón cumaná x 2.5 kg", p:11700, g:"Enlatados", img:"images/morron-cumana-25kg.jpg"},
     {n:"Atún cumaná entero x 1.88 kg", p:24310, g:"Enlatados", img:"https://saleciano.com.ar/imagenes/productos/W__WB_905_2.jpg"},
     {n:"Morron cumana x750gr", p:4100, g:"Enlatados", img:"https://acdn-us.mitiendanube.com/stores/001/143/643/products/4146-6abdf4cf2c122b420b17443866900989-640-0.webp"},
     {n:"Durazno Rio salado x 850 gr", p:2675, g:"Enlatados", img:"https://http2.mlstatic.com/D_NQ_NP_883234-MLA88776957812_082025-O.webp"},
     {n:"Durazno cumaná x 820 gr", p:3260, g:"Enlatados", img:"https://elnenearg.vtexassets.com/arquivos/ids/158016/DURAZNO-CUMANA-EN-MITADES-S-TACC-X820GR-1-4125.jpg?v=637956561688630000"},
-    {n:"Ananá cumaná rod x 836 gr", p:5010, g:"Enlatados", img:"https://elnenearg.vtexassets.com/arquivos/ids/158013-800-auto?aspect=true&height=auto&v=637956561675500000&width=800"},
+    {n:"Ananá cumaná rod x 836 gr", p:5010, g:"Enlatados", img:"images/anana-cumana-836g.jpg"},
     {n:"Ananá cumaná rod x 3 kg", p:18310, g:"Enlatados", img:"https://distribuidorachichi.com.ar/728-large_default/anana-en-rodajas-cumana-x-3-kg.jpg"},
-    {n:"Coctel cumaná x 820 gr", p:4500, g:"Enlatados", img:"https://http2.mlstatic.com/S_Q_NP_2X_809531-MLU73907048095_012024-V.webp"},
+    {n:"Coctel cumaná x 820 gr", p:4500, g:"Enlatados", img:"images/coctel-cumana-820g.jpg"},
     {n:"Choclo Cumaná grano x 820 gr", p:3100, g:"Enlatados"},
-    {n:"Choclo Cumaná grano x2.95 kg", p:10650, g:"Enlatados"},
+    {n:"Choclo Cumaná grano x2.95 kg", p:10650, g:"Enlatados", img:"images/choclo-cumana-295kg.jpg"},
     {n:"Mayonesa hellmans x 8 gr", p:14770, g:"Individuales"},
     {n:"Mayonesa Danica x 8 gr", p:8710, g:"Individuales"},
     {n:"Mayonesa Menoyo x 8 gr", p:9880, g:"Individuales"},
@@ -390,19 +402,19 @@ const BASE_PRODUCTOS = [
     {n:"Aceite Insya maiz 200x7cc", p:14000, g:"Individuales"},
     {n:"Vinagre Insya 200 x 7 cc", p:8950, g:"Individuales", img:"https://http2.mlstatic.com/D_NQ_NP_897951-MLA45754125944_042021-O.webp"},
     {n:"Ac girasol x 5 lts casaliva", p:19100, g:"Aceites y vinagres", img:"https://casaliva.com.ar/assets/img/vista1_0002_mezcla5lt.webp"},
-    {n:"Ac girasol x 5 lt Don Hugo", p:13770, g:"Aceites y vinagres", img:"https://http2.mlstatic.com/D_NQ_NP_751771-MLA99743622111_112025-O.webp"},
-    {n:"Ac FritoMac x 5 lt (p/freir)", p:18500, g:"Aceites y vinagres", img:"https://www.fritomac.com/img/productos/GIF-foxtex-1.jpg"},
+    {n:"Ac girasol x 5 lt Don Hugo", p:13770, g:"Aceites y vinagres", img:"images/aceite-don-hugo-5l.jpg"},
+    {n:"Ac FritoMac x 5 lt (p/freir)", p:18500, g:"Aceites y vinagres", img:"images/aceite-fritomac-5l.jpg"},
     {n:"Ac oliva R de leon x 500 cc", p:3560, g:"Aceites y vinagres", img:"https://acdn-us.mitiendanube.com/stores/002/625/145/products/aceite-reyleon-bdc05d0e8c1d7b1df217794629890949-1024-1024.webp"},
     {n:"Ac oliva R. de leon x 2 lts", p:12700, g:"Aceites y vinagres"},
     {n:"Ac oliva R de leon X 5 lts", p:25500, g:"Aceites y vinagres"},
-    {n:"Vinagre alcohol x 5 lts", p:7180, g:"Aceites y vinagres"},
+    {n:"Vinagre alcohol x 5 lts", p:7180, g:"Aceites y vinagres", img:"images/vinagre-alcohol-5l.jpg"},
     {n:"Vinagre manzana x 1 lt", p:1900, g:"Aceites y vinagres"},
     {n:"Vinagre de vino x 1 lt", p:1660, g:"Aceites y vinagres"},
-    {n:"Aceto balsamico x 3 lts", p:18370, g:"Aceites y vinagres"},
+    {n:"Aceto balsamico x 3 lts", p:18370, g:"Aceites y vinagres", img:"images/aceto-balsamico-3l.jpg"},
     {n:"Aceto balsamico x 500 cc", p:3270, g:"Aceites y vinagres"},
     {n:"Leche larga vida x1lt Ilolai", p:1880, g:"Frescos y lácteos", img:"https://modomarketar.vteximg.com.br/arquivos/ids/174045/Leche-Ilolay-Larga-Vida-Entera-X-1-Lt-1-7143.jpg?v=638920029696270000"},
     {n:"Crema x 5 lts Ramolac", p:43540, g:"Frescos y lácteos", img:"https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2025031209550360551-d79a46e8939c48e65617444625162410-640-0.webp"},
-    {n:"D. de leche x 5 kg Ramolac", p:21500, g:"Frescos y lácteos", img:"https://www.ramolac.com/products/images/phpi1ihgd.png"},
+    {n:"D. de leche x 5 kg Ramolac", p:21500, g:"Frescos y lácteos", img:"images/dulce-leche-ramolac-5kg.jpg"},
     {n:"Cheddar x 3.5 kg Milkaut", p:37520, g:"Frescos y lácteos", img:"https://masonlineprod.vtexassets.com/arquivos/ids/329383/Queso-Cheddar-Milkaut-3-5-Kg-1-59183.jpg?v=638575293896930000"},
     {n:"Cheddar x 3 kg Tonadita", p:25600, g:"Frescos y lácteos"},
     {n:"Cheddar x 3 kg Spalem", p:18760, g:"Frescos y lácteos"},
@@ -412,28 +424,28 @@ const BASE_PRODUCTOS = [
     {n:"Q crema Milkaut x 3,5 kg", p:30300, g:"Frescos y lácteos", img:"https://dcdn-us.mitiendanube.com/stores/001/181/598/products/photoroom_20250605_143228-67c2386b2c767e9a7c17491448727180-640-0.webp"},
     {n:"Q crema Tonadita x 3 kg", p:22650, g:"Frescos y lácteos", img:"https://madelein.com.ar/5720-large_default/queso-crema-cremette-clasico-tonadita-x-3kg.jpg"},
     {n:"Q Patagonia p/sushi x 3 kg", p:28550, g:"Frescos y lácteos"},
-    {n:"Adobo p/pizza x 1 kg", p:11700, g:"Condimentos Centurión"},
-    {n:"Aji molido x 1 kg", p:12550, g:"Condimentos Centurión"},
-    {n:"Ajo en polvo x 500 gr", p:6570, g:"Condimentos Centurión"},
-    {n:"Ajo granulado x 500 gr", p:9350, g:"Condimentos Centurión"},
-    {n:"Azucar impalpable x 1 kg", p:3980, g:"Condimentos Centurión"},
+    {n:"Adobo p/pizza x 1 kg", p:11700, g:"Condimentos Centurión", img:"images/adobo-pizza-centurion-1kg.jpg"},
+    {n:"Aji molido x 1 kg", p:12550, g:"Condimentos Centurión", img:"images/aji-molido-centurion-1kg.jpg"},
+    {n:"Ajo en polvo x 500 gr", p:6570, g:"Condimentos Centurión", img:"images/ajo-polvo-centurion-500g.jpg"},
+    {n:"Ajo granulado x 500 gr", p:9350, g:"Condimentos Centurión", img:"images/ajo-granulado-centurion-500g.jpg"},
+    {n:"Azucar impalpable x 1 kg", p:3980, g:"Condimentos Centurión", img:"images/azucar-impalpable-centurion-1kg.jpg"},
     {n:"Bicarbonato de sodio x 50 gr", p:330, g:"Condimentos Centurión"},
-    {n:"Chimichurri x 500 gr", p:6150, g:"Condimentos Centurión"},
+    {n:"Chimichurri x 500 gr", p:6150, g:"Condimentos Centurión", img:"images/chimichurri-centurion-500g.jpg"},
     {n:"Clavo de olor x 10 gr", p:1170, g:"Condimentos Centurión"},
     {n:"Coco rallado x500gr", p:9600, g:"Condimentos Centurión"},
-    {n:"Comino molido x 500", p:6200, g:"Condimentos Centurión"},
-    {n:"Condimento p/arroz x 500 gr", p:7790, g:"Condimentos Centurión"},
+    {n:"Comino molido x 500", p:6200, g:"Condimentos Centurión", img:"images/comino-centurion-500g.jpg"},
+    {n:"Condimento p/arroz x 500 gr", p:7790, g:"Condimentos Centurión", img:"images/condimento-arroz-centurion-500g.jpg"},
     {n:"Curcuma x 500 gr", p:8920, g:"Condimentos Centurión"},
     {n:"Curry x1kg", p:13200, g:"Condimentos Centurión"},
     {n:"Nuez moscada molida x500 gr", p:18100, g:"Condimentos Centurión"},
     {n:"Nuez moscada entera x500 gr", p:37250, g:"Condimentos Centurión"},
-    {n:"Oregano x 1 kg", p:11250, g:"Condimentos Centurión"},
+    {n:"Oregano x 1 kg", p:11250, g:"Condimentos Centurión", img:"images/oregano-centurion-1kg.jpg"},
     {n:"Pimentón ahumado x1kg", p:14770, g:"Condimentos Centurión"},
-    {n:"Pimenton selec. x 1 kg", p:11510, g:"Condimentos Centurión"},
-    {n:"Pimienta bca/mol x 500 gr", p:33770, g:"Condimentos Centurión"},
-    {n:"Pimienta neg/mol x 500 gr", p:19400, g:"Condimentos Centurión"},
+    {n:"Pimenton selec. x 1 kg", p:11510, g:"Condimentos Centurión", img:"images/pimenton-seleccionado-centurion-1kg.jpg"},
+    {n:"Pimienta bca/mol x 500 gr", p:33770, g:"Condimentos Centurión", img:"images/pimienta-blanca-centurion-500g.jpg"},
+    {n:"Pimienta neg/mol x 500 gr", p:19400, g:"Condimentos Centurión", img:"images/pimienta-negra-centurion-500g.jpg"},
     {n:"Polvo p/hornear 50x50", p:465, g:"Condimentos Centurión"},
-    {n:"Provenzal x 1 kg", p:16930, g:"Condimentos Centurión"},
+    {n:"Provenzal x 1 kg", p:16930, g:"Condimentos Centurión", img:"images/provenzal-centurion-1kg.jpg"},
     {n:"Sal fina celusal x 500", p:1140, g:"Condimentos Centurión"},
     {n:"Sal fina colosal x 500", p:620, g:"Condimentos Centurión"},
     {n:"Sal gruesa celusal x 1 kg", p:1700, g:"Condimentos Centurión"},
@@ -460,16 +472,20 @@ const BASE_PRODUCTOS = [
   ]]
 ];
 
+
 // Pegar aquí la URL /exec de la Web App de Apps Script para usar la sincronización desde Google.
 const URL_APPS_SCRIPT_PRECIOS = 'https://script.google.com/macros/s/AKfycbwqwNgWKcClFw-SuhQH0iGvvo0ZaLEG5dhZ35SgC-9V0kv6NMH3LqUjJZcx8Bbd6F5QFQ/exec';
+
 
 let S = BASE_PRODUCTOS.map(([e,t,a])=>({e,t,a:a.map(x=>({...x, img: x.img||null}))}));
 const $ = id => document.getElementById(id);
 const fm = p => (p == null || isNaN(p) || p === '') ? 'Consultar' : '$' + Number(p).toLocaleString('es-AR');
 
+
 function R() {
   const q = $('q').value.toLowerCase();$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
     S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
+
 
   $('l').innerHTML = S.map((s, si) => {
     const grupos = new Map();
@@ -493,6 +509,7 @@ function cargarPrecios() {
     });
   }
 
+
   return new Promise((resolve, reject) => {
     const callback = '__preciosCallback' + Date.now();
     const script = document.createElement('script');
@@ -505,6 +522,7 @@ function cargarPrecios() {
   });
 }
 
+
 const norm = str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
 const ALIAS_PRECIOS = {
   "jamon natural grassetto": "jamon natural graseto",
@@ -513,6 +531,7 @@ const ALIAS_PRECIOS = {
   "mortadela c/pistacho bocatti": "mortadela c /pistacho bocatti",
   "aceit negras s/carozo x 5 kg": "aceit negras s/carozo x 5 k g"
 };
+
 
 function aplicarPrecios(preciosDocs) {
   S.forEach(cat => {
@@ -525,12 +544,15 @@ function aplicarPrecios(preciosDocs) {
     });
   });
 
+
   R();
 }
+
 
 const imageDialog = $('imageDialog');
 const imageDialogPhoto = $('imageDialogPhoto');
 const imageDialogCaption = $('imageDialogCaption');
+
 
 function abrirFoto(img) {
   imageDialogPhoto.src = img.currentSrc || img.src;
@@ -539,10 +561,12 @@ function abrirFoto(img) {
   imageDialog.showModal();
 }
 
+
 $('l').addEventListener('click', e => {
   const img = e.target.closest('.ph img');
   if (img) abrirFoto(img);
 });
+
 
 $('l').addEventListener('keydown', e => {
   const img = e.target.closest('.ph img');
@@ -552,18 +576,22 @@ $('l').addEventListener('keydown', e => {
   }
 });
 
+
 $('imageDialogClose').onclick = () => imageDialog.close();
 imageDialog.addEventListener('click', e => {
   if (e.target === imageDialog) imageDialog.close();
 });
+
 
 $('catsSelect').onchange = e => {
   const el = $('c' + e.target.value);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 };
 
+
 $('q').oninput = R;
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
+
 
 async function actualizarPrecios() {
   const status = $('syncStatus');
@@ -587,6 +615,7 @@ async function actualizarPrecios() {
     }
   }
 }
+
 
 actualizarPrecios();
 // Si la página queda abierta, consulta nuevamente el documento cada minuto.
