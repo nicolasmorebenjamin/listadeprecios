@@ -43,6 +43,7 @@ select#catsSelect{
 
 h2{display:flex;align-items:center;gap:10px;margin:30px 0 14px;font-size:18px;font-weight:800;color:var(--t);padding:0 0 10px;border-bottom:1px solid var(--line)}
 h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r)}
+.subcat{margin:21px 0 10px;font-size:15px;font-weight:800;color:var(--t)}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}
 .card{position:relative;text-align:center;min-width:0;padding:10px 10px 2px;background:var(--c);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .card:hover{transform:translateY(-3px);border-color:#d3262266;box-shadow:0 12px 28px #39251a18}
@@ -335,6 +336,127 @@ const BASE_PRODUCTOS = [
     {n:"Levadura levex 10 x 50 gr", p:null, img:"https://arjosimarprod.vtexassets.com/arquivos/ids/165529-800-auto?aspect=true&height=auto&v=637733757731870000&width=800"},
     {n:"Levadura levex seca", p:null, img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/172/573/products/levex1-ca307e5eb11baeed0a15978069207388-640-0.webp"},
     {n:"Tapa rotisera Sabroricas", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHUgfxkmAs4Uh4Tw-quAnDRqhb1f3R45Y006ofSUwtZA&s=10"}
+  ]],
+  ["🛒","Línea gastronómica",[
+    {n:"Mayonesa Hellmans x 2.9 kg", p:13000, g:"Aderezos"},
+    {n:"Mayonesa Natura x 2.9 kg", p:13150, g:"Aderezos"},
+    {n:"Mayonesa Danica x 2.9 kg", p:8360, g:"Aderezos"},
+    {n:"Mayonesa Menoyo x 2.7 kg", p:7970, g:"Aderezos"},
+    {n:"Mayonesa Mayodan x 3 kg", p:7040, g:"Aderezos"},
+    {n:"Mostaza Savora x 3 kg", p:11165, g:"Aderezos"},
+    {n:"Mostaza Natura x 3 kg", p:7850, g:"Aderezos"},
+    {n:"Mostaza Danica x 3 kg", p:6570, g:"Aderezos"},
+    {n:"Ketchup Hellmans x 3 kg", p:13400, g:"Aderezos"},
+    {n:"Ketchup Natura x 3 kg", p:13500, g:"Aderezos"},
+    {n:"Ketchup Danica x 3 kg", p:9130, g:"Aderezos"},
+    {n:"Salsa golf Natura x 2.9 kg", p:15670, g:"Aderezos"},
+    {n:"Salsa golf Danica x 2.9 kg", p:10040, g:"Aderezos"},
+    {n:"Barbacoa hellmans x 3 kg", p:14250, g:"Aderezos"},
+    {n:"Barbacoa Danica x 3Kg", p:11200, g:"Aderezos"},
+    {n:"Harina caserita 000 x 1 kg", p:800, g:"Harinas y derivados"},
+    {n:"Harina caserita 0000 x 1 kg", p:1090, g:"Harinas y derivados"},
+    {n:"Harina caserita leudante x1kg", p:1340, g:"Harinas y derivados"},
+    {n:"Pan rallado Santo pan x 5 kg", p:13660, g:"Harinas y derivados"},
+    {n:"Rebozador Santo pan x 5 kg", p:13660, g:"Harinas y derivados"},
+    {n:"Fainalind x 5 kg", p:16750, g:"Harinas y derivados"},
+    {n:"Fainalind x 10 kg", p:26950, g:"Harinas y derivados"},
+    {n:"Maizena x 2 kg", p:11120, g:"Harinas y derivados"},
+    {n:"Maizena x 15 kg", p:48800, g:"Harinas y derivados"},
+    {n:"Tomate x 8 lts Cayfar", p:11850, g:"Enlatados"},
+    {n:"Tomate x 8 lts Finca santiago", p:9720, g:"Enlatados"},
+    {n:"Morrón rey de reyes x 800 gr", p:3350, g:"Enlatados"},
+    {n:"Palmitos cumana x 800 gr", p:7300, g:"Enlatados"},
+    {n:"Arvejas cumaná x 850 gr", p:2060, g:"Enlatados"},
+    {n:"Morrón cumaná x 2.5 kg", p:11700, g:"Enlatados"},
+    {n:"Atún cumaná entero x 1.88 kg", p:24310, g:"Enlatados"},
+    {n:"Morron cumana x750gr", p:4100, g:"Enlatados"},
+    {n:"Durazno Rio salado x 850 gr", p:2675, g:"Enlatados"},
+    {n:"Durazno cumaná x 820 gr", p:3260, g:"Enlatados"},
+    {n:"Ananá cumaná rod x 836 gr", p:5010, g:"Enlatados"},
+    {n:"Ananá cumaná rod x 3 kg", p:18310, g:"Enlatados"},
+    {n:"Coctel cumaná x 820 gr", p:4500, g:"Enlatados"},
+    {n:"Choclo Cumaná grano x 820 gr", p:3100, g:"Enlatados"},
+    {n:"Choclo Cumaná grano x2.95 kg", p:10650, g:"Enlatados"},
+    {n:"Mayonesa hellmans x 8 gr", p:14770, g:"Individuales"},
+    {n:"Mayonesa Danica x 8 gr", p:8710, g:"Individuales"},
+    {n:"Mayonesa Menoyo x 8 gr", p:9880, g:"Individuales"},
+    {n:"Mostaza Savora x 8 gr", p:12350, g:"Individuales"},
+    {n:"Mostaza Danica x 8 gr", p:8500, g:"Individuales"},
+    {n:"Ketchup hellmans x 8 gr", p:14820, g:"Individuales"},
+    {n:"Ketchup Danica x 8 gr", p:9950, g:"Individuales"},
+    {n:"Sal fina Insya 1000 unid", p:7650, g:"Individuales"},
+    {n:"Azucar Insya x 800 unid", p:12750, g:"Individuales"},
+    {n:"Edulcorante Insya x 400 ud", p:6380, g:"Individuales"},
+    {n:"Aceite Insya maiz 200x7cc", p:14000, g:"Individuales"},
+    {n:"Vinagre Insya 200 x 7 cc", p:8950, g:"Individuales"},
+    {n:"Ac girasol x 5 lts casaliva", p:19100, g:"Aceites y vinagres"},
+    {n:"Ac girasol x 5 lt Don Hugo", p:13770, g:"Aceites y vinagres"},
+    {n:"Ac FritoMac x 5 lt (p/freir)", p:18500, g:"Aceites y vinagres"},
+    {n:"Ac oliva R de leon x 500 cc", p:3560, g:"Aceites y vinagres"},
+    {n:"Ac oliva R. de leon x 2 lts", p:12700, g:"Aceites y vinagres"},
+    {n:"Ac oliva R de leon X 5 lts", p:25500, g:"Aceites y vinagres"},
+    {n:"Vinagre alcohol x 5 lts", p:7180, g:"Aceites y vinagres"},
+    {n:"Vinagre manzana x 1 lt", p:1900, g:"Aceites y vinagres"},
+    {n:"Vinagre de vino x 1 lt", p:1660, g:"Aceites y vinagres"},
+    {n:"Aceto balsamico x 3 lts", p:18370, g:"Aceites y vinagres"},
+    {n:"Aceto balsamico x 500 cc", p:3270, g:"Aceites y vinagres"},
+    {n:"Leche larga vida x1lt Ilolai", p:1880, g:"Frescos y lácteos"},
+    {n:"Crema x 5 lts Ramolac", p:43540, g:"Frescos y lácteos"},
+    {n:"D. de leche x 5 kg Ramolac", p:21500, g:"Frescos y lácteos"},
+    {n:"Cheddar x 3.5 kg Milkaut", p:37520, g:"Frescos y lácteos"},
+    {n:"Cheddar x 3 kg Tonadita", p:25600, g:"Frescos y lácteos"},
+    {n:"Cheddar x 3 kg Spalem", p:18760, g:"Frescos y lácteos"},
+    {n:"Cheddar Feteado Milkaut", p:45250, g:"Frescos y lácteos"},
+    {n:"Cheddar feteado Tonadita", p:25900, g:"Frescos y lácteos"},
+    {n:"Manteca pilon x 2,5 kg", p:null, g:"Frescos y lácteos"},
+    {n:"Q crema Milkaut x 3,5 kg", p:30300, g:"Frescos y lácteos"},
+    {n:"Q crema Tonadita x 3 kg", p:22650, g:"Frescos y lácteos"},
+    {n:"Q Patagonia p/sushi x 3 kg", p:28550, g:"Frescos y lácteos"},
+    {n:"Adobo p/pizza x 1 kg", p:11700, g:"Condimentos Centurión"},
+    {n:"Aji molido x 1 kg", p:12550, g:"Condimentos Centurión"},
+    {n:"Ajo en polvo x 500 gr", p:6570, g:"Condimentos Centurión"},
+    {n:"Ajo granulado x 500 gr", p:9350, g:"Condimentos Centurión"},
+    {n:"Azucar impalpable x 1 kg", p:3980, g:"Condimentos Centurión"},
+    {n:"Bicarbonato de sodio x 50 gr", p:330, g:"Condimentos Centurión"},
+    {n:"Chimichurri x 500 gr", p:6150, g:"Condimentos Centurión"},
+    {n:"Clavo de olor x 10 gr", p:1170, g:"Condimentos Centurión"},
+    {n:"Coco rallado x500gr", p:9600, g:"Condimentos Centurión"},
+    {n:"Comino molido x 500", p:6200, g:"Condimentos Centurión"},
+    {n:"Condimento p/arroz x 500 gr", p:7790, g:"Condimentos Centurión"},
+    {n:"Curcuma x 500 gr", p:8920, g:"Condimentos Centurión"},
+    {n:"Curry x1kg", p:13200, g:"Condimentos Centurión"},
+    {n:"Nuez moscada molida x500 gr", p:18100, g:"Condimentos Centurión"},
+    {n:"Nuez moscada entera x500 gr", p:37250, g:"Condimentos Centurión"},
+    {n:"Oregano x 1 kg", p:11250, g:"Condimentos Centurión"},
+    {n:"Pimentón ahumado x1kg", p:14770, g:"Condimentos Centurión"},
+    {n:"Pimenton selec. x 1 kg", p:11510, g:"Condimentos Centurión"},
+    {n:"Pimienta bca/mol x 500 gr", p:33770, g:"Condimentos Centurión"},
+    {n:"Pimienta neg/mol x 500 gr", p:19400, g:"Condimentos Centurión"},
+    {n:"Polvo p/hornear 50x50", p:465, g:"Condimentos Centurión"},
+    {n:"Provenzal x 1 kg", p:16930, g:"Condimentos Centurión"},
+    {n:"Sal fina celusal x 500", p:1140, g:"Condimentos Centurión"},
+    {n:"Sal fina colosal x 500", p:620, g:"Condimentos Centurión"},
+    {n:"Sal gruesa celusal x 1 kg", p:1700, g:"Condimentos Centurión"},
+    {n:"Sal gruesa colosal x 1 kg", p:930, g:"Condimentos Centurión"},
+    {n:"Sal entrefina celusal", p:1570, g:"Condimentos Centurión"},
+    {n:"Sal entrefina colosal", p:900, g:"Condimentos Centurión"},
+    {n:"D.Vicente caserito x 500 gr", p:3220, g:"Fideos y arroces"},
+    {n:"D.Vicente fettuccini x500gr", p:3240, g:"Fideos y arroces"},
+    {n:"D.Vicente Tallarin x 500 gr", p:3120, g:"Fideos y arroces"},
+    {n:"D.Vicente tirabuzón x500gr", p:3120, g:"Fideos y arroces"},
+    {n:"Lucchetti ave maria x500gr", p:1430, g:"Fideos y arroces"},
+    {n:"Lucchetti C.d.angel x500gr", p:2270, g:"Fideos y arroces"},
+    {n:"Lucchetti codito x 500 gr", p:1400, g:"Fideos y arroces"},
+    {n:"Lucchetti dedalito x 500 gr", p:1340, g:"Fideos y arroces"},
+    {n:"Lucchetti Letritas x 500 gr", p:1340, g:"Fideos y arroces"},
+    {n:"Lucchetti moños x 500 gr", p:2140, g:"Fideos y arroces"},
+    {n:"Lucchetti mostachol x500gr", p:1300, g:"Fideos y arroces"},
+    {n:"Lucchetti municionesx500gr", p:1430, g:"Fideos y arroces"},
+    {n:"Luc.nido fettuccini x 500 gr", p:2080, g:"Fideos y arroces"},
+    {n:"Luc. penne rigate x 500 gr", p:1300, g:"Fideos y arroces"},
+    {n:"Lucchetti spaghetti x500gr", p:1430, g:"Fideos y arroces"},
+    {n:"Lucchetti tallarin x 500 gr", p:1430, g:"Fideos y arroces"},
+    {n:"Lucchetti tirabuzón x500gr", p:1260, g:"Fideos y arroces"}
   ]]
 ];
 
@@ -350,14 +472,19 @@ function R() {
     S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
 
   $('l').innerHTML = S.map((s, si) => {
-    const it = s.a.map((x, i) => x.n.toLowerCase().includes(q) ? 
-      `<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>` : ''
+    const grupos = new Map();
+    s.a.forEach(x => {
+      if (!x.n.toLowerCase().includes(q)) return;
+      const grupo = x.g || '';
+      if (!grupos.has(grupo)) grupos.set(grupo, []);
+      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>`);
+    });
+    const it = [...grupos.entries()].map(([grupo, cards]) =>
+      `${grupo ? `<h3 class="subcat">${grupo}</h3>` : ''}<div class="g">${cards.join('')}</div>`
     ).join('');
-    
-    return it ? `<h2 id="c${si}">${s.t}</h2><div class="g">${it}</div>` : '';
+    return it ? `<h2 id="c${si}">${s.t}</h2>${it}` : '';
   }).join('');
 }
-
 function cargarPrecios() {
   if (!URL_APPS_SCRIPT_PRECIOS) {
     return fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
