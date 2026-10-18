@@ -136,7 +136,7 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 </div>
 
 <section id="orderPanel" class="order-panel" aria-labelledby="orderTitle" hidden>
-  <div class="order-header"><strong id="orderTitle">Tu pedido</strong><button id="toggleOrderDetails" class="order-expand" type="button" aria-controls="orderDetails" aria-expanded="false">Revisar pedido</button></div>
+  <div class="order-header"><strong id="orderTitle">Tu pedido</strong><button id="toggleOrderDetails" class="order-expand" type="button" aria-controls="orderDetails" aria-expanded="false">↑ Ver pedido</button></div>
   <div id="orderDetails" class="order-details" hidden>
     <ul id="orderItems" class="order-list"></ul>
     <p class="order-note">Elegí a quién enviárselo por WhatsApp.</p>
@@ -550,7 +550,7 @@ function renderPedido() {
   $('orderDetails').hidden = !detallesPedidoAbiertos;
   $('orderTitle').textContent = 'Tu pedido · ' + total + (total === 1 ? ' producto' : ' productos');
   const botonDetalle = $('toggleOrderDetails');
-  botonDetalle.textContent = modoPedido ? 'Listo' : (detallesPedidoAbiertos ? 'Ocultar' : 'Revisar pedido');
+  botonDetalle.textContent = modoPedido ? 'Listo' : (detallesPedidoAbiertos ? '↓ Ocultar pedido' : '↑ Ver pedido');
   botonDetalle.setAttribute('aria-expanded', String(detallesPedidoAbiertos));
   $('orderItems').innerHTML = Array.from(carrito.entries()).map(([clave, cantidad]) => {
     const [si, xi] = clave.split('-').map(Number);
