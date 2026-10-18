@@ -77,10 +77,14 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .add-product{display:none;position:absolute;right:9px;bottom:8px;width:34px;height:34px;place-items:center;border:0;border-radius:50%;background:var(--r);color:#fff;font-size:25px;font-weight:700;line-height:1;box-shadow:0 3px 10px #0004;cursor:pointer}
 .order-mode .add-product{display:grid}
 .add-product .add-count{position:absolute;top:-5px;right:-5px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border:2px solid var(--c);border-radius:99px;background:#201a16;color:#fff;font-size:10px;font-weight:800;line-height:1}
-.order-panel{position:fixed;z-index:115;left:12px;right:12px;bottom:calc(74px + env(safe-area-inset-bottom,0px));width:min(560px,calc(100vw - 24px));max-height:min(55vh,520px);margin:auto;padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--c);color:var(--t);box-shadow:0 12px 36px #0006;display:flex;flex-direction:column;gap:8px}
+.order-panel{position:fixed;z-index:115;left:12px;right:12px;bottom:calc(74px + env(safe-area-inset-bottom,0px));width:min(560px,calc(100vw - 24px));margin:auto;padding:11px 14px;border:1px solid var(--line);border-radius:16px;background:var(--c);color:var(--t);box-shadow:0 12px 36px #0006;display:flex;flex-direction:column;gap:8px}
 .order-panel[hidden]{display:none}
-.order-header{font-size:16px;font-weight:800}
-.order-list{margin:0;padding:0;overflow:auto;list-style:none;border-top:1px solid var(--line)}
+.order-panel.is-expanded{max-height:min(45vh,420px)}
+.order-header{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px;font-weight:800}
+.order-expand{flex:0 0 auto;min-height:34px;padding:6px 12px;border:1px solid var(--line);border-radius:10px;background:var(--b);color:var(--t);font-size:12px;font-weight:800;cursor:pointer}
+.order-details{display:flex;min-height:0;flex-direction:column;gap:8px}
+.order-details[hidden]{display:none}
+.order-list{flex:1;min-height:0;max-height:min(29vh,260px);margin:0;padding:0;overflow:auto;list-style:none;border-top:1px solid var(--line)}
 .order-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 2px;border-bottom:1px solid var(--line)}
 .order-product{min-width:0;font-size:13px;font-weight:700;line-height:1.3}
 .order-product small{display:block;margin-top:3px;color:var(--m);font-size:11px;font-weight:600}
@@ -92,8 +96,9 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .order-continue,.order-recipient{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 10px;border:0;border-radius:11px;background:var(--b);color:var(--t);font-size:13px;font-weight:800;text-align:center;text-decoration:none;cursor:pointer}
 .order-continue{grid-column:1/-1}
 .order-recipient{background:#19b85b;color:#fff}
+.order-panel :focus-visible{outline:3px solid #ed8c53;outline-offset:2px}
 body.order-open .whatsapp-float{visibility:hidden}
-@media(max-width:600px){.bar{gap:7px}.order-toggle{padding:0 12px;font-size:12px}.order-panel{left:8px;right:8px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);max-height:55vh;padding:12px}.order-list{max-height:23vh}.order-footer{gap:7px}.order-continue,.order-recipient{min-height:38px;font-size:12px}}
+@media(max-width:600px){.bar{gap:7px}.order-toggle{padding:0 12px;font-size:12px}.order-panel{left:8px;right:8px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);padding:10px 12px}.order-panel.is-expanded{max-height:42vh}.order-list{max-height:21vh}.order-header{font-size:14px}.order-expand{min-height:32px;padding:6px 10px}.order-footer{gap:7px}.order-continue,.order-recipient{min-height:38px;font-size:12px}}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
 :root[data-theme=dark] .p{background:#49231f;color:#ffb3a8}
 
@@ -131,10 +136,12 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 </div>
 
 <section id="orderPanel" class="order-panel" aria-labelledby="orderTitle" hidden>
-  <div class="order-header"><strong id="orderTitle">Tu pedido</strong></div>
-  <ul id="orderItems" class="order-list"></ul>
-  <p class="order-note">Elegí a quién enviárselo por WhatsApp.</p>
-  <div class="order-footer"><button id="continueOrder" class="order-continue" type="button">Seguir agregando</button><a id="sendSebastian" class="order-recipient" target="_blank" rel="noopener noreferrer">Sebastián</a><a id="sendDaniel" class="order-recipient" target="_blank" rel="noopener noreferrer">Daniel</a></div>
+  <div class="order-header"><strong id="orderTitle">Tu pedido</strong><button id="toggleOrderDetails" class="order-expand" type="button" aria-controls="orderDetails" aria-expanded="false">Revisar pedido</button></div>
+  <div id="orderDetails" class="order-details" hidden>
+    <ul id="orderItems" class="order-list"></ul>
+    <p class="order-note">Elegí a quién enviárselo por WhatsApp.</p>
+    <div class="order-footer"><button id="continueOrder" class="order-continue" type="button">Seguir agregando</button><a id="sendSebastian" class="order-recipient" target="_blank" rel="noopener noreferrer">Sebastián</a><a id="sendDaniel" class="order-recipient" target="_blank" rel="noopener noreferrer">Daniel</a></div>
+  </div>
 </section>
 
 <dialog id="imageDialog" class="image-dialog" aria-label="Foto ampliada"><button id="imageDialogClose" class="image-close" type="button" aria-label="Cerrar foto">×</button><img id="imageDialogPhoto" alt=""><p id="imageDialogCaption" class="image-caption"></p></dialog>
@@ -519,6 +526,7 @@ const fm = p => (p == null || isNaN(p) || p === '') ? 'Consultar' : '$' + Number
 
 const carrito = new Map();
 let modoPedido = false;
+let detallesPedidoAbiertos = false;
 const escaparHtml = texto => String(texto).replace(/[&<>"']/g, caracter => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[caracter]));
 function urlPedido(telefono) {
   const detalle = Array.from(carrito.entries()).map(([clave, cantidad]) => {
@@ -535,8 +543,15 @@ function renderPedido() {
   boton.setAttribute('aria-pressed', String(modoPedido));
   document.body.classList.toggle('order-mode', modoPedido);
   document.body.classList.toggle('order-open', total > 0);
-  $('orderPanel').hidden = total === 0;
+  if (!total) detallesPedidoAbiertos = false;
+  const panel = $('orderPanel');
+  panel.hidden = total === 0;
+  panel.classList.toggle('is-expanded', detallesPedidoAbiertos);
+  $('orderDetails').hidden = !detallesPedidoAbiertos;
   $('orderTitle').textContent = 'Tu pedido · ' + total + (total === 1 ? ' producto' : ' productos');
+  const botonDetalle = $('toggleOrderDetails');
+  botonDetalle.textContent = modoPedido ? 'Listo' : (detallesPedidoAbiertos ? 'Ocultar' : 'Revisar pedido');
+  botonDetalle.setAttribute('aria-expanded', String(detallesPedidoAbiertos));
   $('orderItems').innerHTML = Array.from(carrito.entries()).map(([clave, cantidad]) => {
     const [si, xi] = clave.split('-').map(Number);
     const producto = S[si] && S[si].a[xi];
@@ -638,8 +653,18 @@ $('orderToggle').addEventListener('click', () => {
   modoPedido = !modoPedido;
   renderPedido();
 });
+$('toggleOrderDetails').addEventListener('click', () => {
+  if (modoPedido) {
+    modoPedido = false;
+    detallesPedidoAbiertos = true;
+  } else {
+    detallesPedidoAbiertos = !detallesPedidoAbiertos;
+  }
+  renderPedido();
+});
 $('continueOrder').addEventListener('click', () => {
   modoPedido = true;
+  detallesPedidoAbiertos = false;
   renderPedido();
 });
 $('orderPanel').addEventListener('click', e => {
