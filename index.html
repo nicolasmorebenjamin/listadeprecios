@@ -66,6 +66,31 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .ph img.crop-centered-product{object-fit:cover;object-position:center 48%}
 .n{padding:9px 2px 0;font-size:13px;font-weight:700;line-height:1.3;min-height:43px}
 .p{margin:8px auto 12px;width:fit-content;background:#f9e7e4;color:#b3201c;border-radius:20px;padding:6px 14px;font-weight:800;font-size:15px}
+
+.order-toggle{flex:0 0 auto;border:0;border-radius:14px;padding:0 17px;background:var(--r);color:#fff;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer;box-shadow:var(--shadow)}
+.order-toggle:hover{filter:brightness(1.08)}
+.order-toggle:focus-visible,.add-product:focus-visible,.order-footer button:focus-visible,.order-footer a:focus-visible,.order-quantity button:focus-visible{outline:3px solid #ed8c53;outline-offset:2px}
+.order-mode .card{padding-bottom:42px}
+.add-product{display:none;position:absolute;right:9px;bottom:8px;width:34px;height:34px;place-items:center;border:0;border-radius:50%;background:var(--r);color:#fff;font-size:25px;font-weight:700;line-height:1;box-shadow:0 3px 10px #0004;cursor:pointer}
+.order-mode .add-product{display:grid}
+.add-product .add-count{position:absolute;top:-5px;right:-5px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border:2px solid var(--c);border-radius:99px;background:#201a16;color:#fff;font-size:10px;font-weight:800;line-height:1}
+.order-panel{position:fixed;z-index:115;left:12px;right:12px;bottom:calc(74px + env(safe-area-inset-bottom,0px));width:min(560px,calc(100vw - 24px));max-height:min(55vh,520px);margin:auto;padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--c);color:var(--t);box-shadow:0 12px 36px #0006;display:flex;flex-direction:column;gap:8px}
+.order-panel[hidden]{display:none}
+.order-header{font-size:16px;font-weight:800}
+.order-list{margin:0;padding:0;overflow:auto;list-style:none;border-top:1px solid var(--line)}
+.order-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 2px;border-bottom:1px solid var(--line)}
+.order-product{min-width:0;font-size:13px;font-weight:700;line-height:1.3}
+.order-product small{display:block;margin-top:3px;color:var(--m);font-size:11px;font-weight:600}
+.order-quantity{display:flex;align-items:center;gap:9px;flex:0 0 auto}
+.order-quantity button{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--t);font-size:18px;font-weight:700;cursor:pointer}
+.order-quantity b{min-width:12px;text-align:center;font-size:13px}
+.order-note{margin:0;color:var(--m);font-size:12px}
+.order-footer{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.order-continue,.order-recipient{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 10px;border:0;border-radius:11px;background:var(--b);color:var(--t);font-size:13px;font-weight:800;text-align:center;text-decoration:none;cursor:pointer}
+.order-continue{grid-column:1/-1}
+.order-recipient{background:#19b85b;color:#fff}
+body.order-open .whatsapp-float{visibility:hidden}
+@media(max-width:600px){.bar{gap:7px}.order-toggle{padding:0 12px;font-size:12px}.order-panel{left:8px;right:8px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);max-height:55vh;padding:12px}.order-list{max-height:23vh}.order-footer{gap:7px}.order-continue,.order-recipient{min-height:38px;font-size:12px}}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
 :root[data-theme=dark] .p{background:#49231f;color:#ffb3a8}
 
@@ -91,7 +116,7 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 <body>
 <header class="top"><div class="top-inner"><div class="top-copy"><span class="top-kicker">Fiambres · Quesos · Almacén</span><h1>LISTA DE PRECIOS</h1><p>Fiambres, quesos y almacén</p></div></div></header>
 <div class="w">
-  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."></div>
+  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Armar pedido</button></div>
   <div class="cats-wrap">
     <select id="catsSelect">
       <option value="" disabled selected>Ir a una categoría...</option>
@@ -101,6 +126,12 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
   <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
 </div>
 
+<section id="orderPanel" class="order-panel" aria-labelledby="orderTitle" hidden>
+  <div class="order-header"><strong id="orderTitle">Tu pedido</strong></div>
+  <ul id="orderItems" class="order-list"></ul>
+  <p class="order-note">Elegí a quién enviárselo por WhatsApp.</p>
+  <div class="order-footer"><button id="continueOrder" class="order-continue" type="button">Seguir agregando</button><a id="sendSebastian" class="order-recipient" target="_blank" rel="noopener noreferrer">Sebastián</a><a id="sendDaniel" class="order-recipient" target="_blank" rel="noopener noreferrer">Daniel</a></div>
+</section>
 
 <dialog id="imageDialog" class="image-dialog" aria-label="Foto ampliada"><button id="imageDialogClose" class="image-close" type="button" aria-label="Cerrar foto">×</button><img id="imageDialogPhoto" alt=""><p id="imageDialogCaption" class="image-caption"></p></dialog>
 
@@ -482,6 +513,42 @@ const $ = id => document.getElementById(id);
 const fm = p => (p == null || isNaN(p) || p === '') ? 'Consultar' : '$' + Number(p).toLocaleString('es-AR');
 
 
+const carrito = new Map();
+let modoPedido = false;
+const escaparHtml = texto => String(texto).replace(/[&<>"']/g, caracter => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[caracter]));
+function urlPedido(telefono) {
+  const detalle = Array.from(carrito.entries()).map(([clave, cantidad]) => {
+    const [si, xi] = clave.split('-').map(Number);
+    const producto = S[si] && S[si].a[xi];
+    return producto ? '- ' + cantidad + ' × ' + producto.n : '';
+  }).filter(Boolean).join('\n');
+  return 'https://wa.me/' + telefono + '?text=' + encodeURIComponent('Hola, quiero hacer este pedido:\n\n' + detalle);
+}
+function renderPedido() {
+  const total = Array.from(carrito.values()).reduce((suma, cantidad) => suma + cantidad, 0);
+  const boton = $('orderToggle');
+  boton.textContent = (modoPedido ? 'Terminar' : (total ? 'Seguir agregando' : 'Armar pedido')) + (total ? ' · ' + total : '');
+  boton.setAttribute('aria-pressed', String(modoPedido));
+  document.body.classList.toggle('order-mode', modoPedido);
+  document.body.classList.toggle('order-open', total > 0);
+  $('orderPanel').hidden = total === 0;
+  $('orderTitle').textContent = 'Tu pedido · ' + total + (total === 1 ? ' producto' : ' productos');
+  $('orderItems').innerHTML = Array.from(carrito.entries()).map(([clave, cantidad]) => {
+    const [si, xi] = clave.split('-').map(Number);
+    const producto = S[si] && S[si].a[xi];
+    if (!producto) return '';
+    return '<li><span class="order-product">' + escaparHtml(producto.n) + '<small>' + escaparHtml(fm(producto.p)) + '</small></span><div class="order-quantity"><button type="button" data-action="minus" data-key="' + clave + '" aria-label="Quitar uno">−</button><b>' + cantidad + '</b><button type="button" data-action="plus" data-key="' + clave + '" aria-label="Agregar uno">+</button></div></li>';
+  }).join('');
+  $('sendSebastian').href = total ? urlPedido('5491153442331') : '#';
+  $('sendDaniel').href = total ? urlPedido('5491161943773') : '#';
+  document.querySelectorAll('.add-product').forEach(botonProducto => {
+    const cantidad = carrito.get(botonProducto.dataset.key) || 0;
+    botonProducto.innerHTML = cantidad ? '<span aria-hidden="true">+</span><span class="add-count">' + cantidad + '</span>' : '+';
+    botonProducto.setAttribute('aria-label', cantidad ? 'Agregar otro; ' + cantidad + ' en el pedido' : 'Agregar al pedido');
+    botonProducto.setAttribute('aria-pressed', String(cantidad > 0));
+  });
+}
+
 function R() {
   const q = $('q').value.toLowerCase();$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
     S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
@@ -489,17 +556,18 @@ function R() {
 
   $('l').innerHTML = S.map((s, si) => {
     const grupos = new Map();
-    s.a.forEach(x => {
+    s.a.forEach((x, xi) => {
       if (!x.n.toLowerCase().includes(q)) return;
       const grupo = x.g || '';
       if (!grupos.has(grupo)) grupos.set(grupo, []);
-      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div></div>`);
+      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div><button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button></div>`);
     });
     const it = [...grupos.entries()].map(([grupo, cards]) =>
       `${grupo ? `<h3 class="subcat">${grupo}</h3>` : ''}<div class="g">${cards.join('')}</div>`
     ).join('');
     return it ? `<h2 id="c${si}">${s.t}</h2>${it}` : '';
   }).join('');
+  renderPedido();
 }
 function cargarPrecios() {
   if (!URL_APPS_SCRIPT_PRECIOS) {
@@ -562,7 +630,36 @@ function abrirFoto(img) {
 }
 
 
+$('orderToggle').addEventListener('click', () => {
+  modoPedido = !modoPedido;
+  renderPedido();
+});
+$('continueOrder').addEventListener('click', () => {
+  modoPedido = true;
+  renderPedido();
+});
+$('orderPanel').addEventListener('click', e => {
+  const boton = e.target.closest('[data-action]');
+  if (!boton) return;
+  const clave = boton.dataset.key;
+  const cantidad = carrito.get(clave) || 0;
+  if (boton.dataset.action === 'plus') carrito.set(clave, cantidad + 1);
+  if (boton.dataset.action === 'minus') {
+    if (cantidad <= 1) carrito.delete(clave);
+    else carrito.set(clave, cantidad - 1);
+  }
+  renderPedido();
+});
 $('l').addEventListener('click', e => {
+  const agregar = e.target.closest('.add-product');
+  if (agregar && modoPedido) {
+    e.preventDefault();
+    e.stopPropagation();
+    const clave = agregar.dataset.key;
+    carrito.set(clave, (carrito.get(clave) || 0) + 1);
+    renderPedido();
+    return;
+  }
   const img = e.target.closest('.ph img');
   if (img) abrirFoto(img);
 });
@@ -590,6 +687,7 @@ $('catsSelect').onchange = e => {
 
 
 $('q').oninput = R;
+renderPedido();
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
 
