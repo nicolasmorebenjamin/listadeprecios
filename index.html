@@ -18,6 +18,9 @@ body{margin:0;background:var(--bg);color:var(--t);font-family:system-ui,-apple-s
 h1{margin:0;font-size:clamp(26px,3.2vw,36px);font-weight:850;letter-spacing:.035em;text-shadow:0 3px 18px #240a08aa}
 .top p{margin:7px 0 0;color:#ffe5dc;font-size:14px;letter-spacing:.02em}
 .w{max-width:1160px;margin:0 auto;padding:22px 20px}
+
+.quantity-note{display:flex;align-items:center;gap:9px;margin:0 0 12px;padding:10px 13px;border:1px solid #d3262238;border-radius:13px;background:color-mix(in srgb,var(--r) 8%,var(--c));color:var(--t);font-size:13px;font-weight:750}
+.quantity-note span:first-child{font-size:16px}
 .bar{display:flex;gap:8px;margin-bottom:10px}
 input[type=search]{flex:1;min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--c);color:var(--t);font-size:16px;box-shadow:var(--shadow);transition:border-color .18s,box-shadow .18s}
 input[type=search]:focus{outline:none;border-color:var(--r);box-shadow:0 0 0 3px #d3262222}
@@ -116,7 +119,8 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 <body>
 <header class="top"><div class="top-inner"><div class="top-copy"><span class="top-kicker">Fiambres · Quesos · Almacén</span><h1>LISTA DE PRECIOS</h1><p>Fiambres, quesos y almacén</p></div></div></header>
 <div class="w">
-  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Armar pedido</button></div>
+  <div class="quantity-note"><span aria-hidden="true">💬</span><span>Consultá por precio por cantidad</span></div>
+  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Cargar pedido</button></div>
   <div class="cats-wrap">
     <select id="catsSelect">
       <option value="" disabled selected>Ir a una categoría...</option>
@@ -527,7 +531,7 @@ function urlPedido(telefono) {
 function renderPedido() {
   const total = Array.from(carrito.values()).reduce((suma, cantidad) => suma + cantidad, 0);
   const boton = $('orderToggle');
-  boton.textContent = (modoPedido ? 'Terminar' : (total ? 'Seguir agregando' : 'Armar pedido')) + (total ? ' · ' + total : '');
+  boton.textContent = (modoPedido ? 'Terminar' : (total ? 'Seguir agregando' : 'Cargar pedido')) + (total ? ' · ' + total : '');
   boton.setAttribute('aria-pressed', String(modoPedido));
   document.body.classList.toggle('order-mode', modoPedido);
   document.body.classList.toggle('order-open', total > 0);
