@@ -22,6 +22,10 @@ Las fotos del catálogo se mantienen junto al sitio para cargar rápido. Las ref
 
 | Producto | Enlace |
 | --- | --- |
+| Aceite de oliva Reino de León x 2 lts | [Mercado Libre](https://http2.mlstatic.com/D_NQ_NP_603173-MLA93115797089_092025-O.webp) |
+| Vinagre de manzana Marvavic x 1 lt | [Casa Segal](https://www.casa-segal.com/producto/vinagre-manzana-marvavic-1lt/) |
+| Vinagre de vino Marvavic x 1 lt | [Toledo Digital](https://www.toledodigital.com.ar/vinagre-de-vino-marvavic-1l-10655/p) |
+| Aceto balsámico Monterey x 500 cc | [Provifood](https://provifood.com/productos/aceto-balsamico-pet-x500cc-monterrey/) |
 | Jamón natural 266 | [frigorificoelaljibe.com.ar](https://frigorificoelaljibe.com.ar/wp-content/uploads/2023/10/jamon-cocido-natural.png) |
 | Jamón natural Don José | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ01WKaQXLuGkmqCKM8GHchi9nSKS6uCKt1UcpTBk4uVtXm9G1IJk_t1Fw&s) |
 | Jamón natural jonelli | [encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVBDbNxmGXf6E4xwDhlPoCeXaCWaIfeG5sx76Txbtt5DhmVA-sxyMgCoM&s=10) |
