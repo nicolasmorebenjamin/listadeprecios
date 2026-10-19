@@ -579,7 +579,7 @@ function R() {
       if (!x.n.toLowerCase().includes(q)) return;
       const grupo = x.g || '';
       if (!grupos.has(grupo)) grupos.set(grupo, []);
-      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div><button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button></div>`);
+      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" referrerpolicy="no-referrer" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div><button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button></div>`);
     });
     const it = [...grupos.entries()].map(([grupo, cards]) =>
       `${grupo ? `<h3 class="subcat">${grupo}</h3>` : ''}<div class="g">${cards.join('')}</div>`
