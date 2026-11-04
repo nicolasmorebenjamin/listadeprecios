@@ -622,7 +622,6 @@ const ALIAS_PRECIOS = {
 
 function aplicarPrecios(preciosDocs) {
   S.forEach(cat => {
-    if (norm(cat.t) === "linea gastronomica") return;
     cat.a.forEach(prod => {
       const pBuscado = norm(prod.n);
       const clave = preciosDocs[pBuscado] !== undefined ? pBuscado : ALIAS_PRECIOS[pBuscado];
