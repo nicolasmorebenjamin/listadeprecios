@@ -69,13 +69,9 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .ph img.crop-centered-product{object-fit:cover;object-position:center 48%}
 .n{padding:9px 2px 0;font-size:13px;font-weight:700;line-height:1.3;min-height:43px}
 .p{margin:8px auto 12px;width:fit-content;background:#f9e7e4;color:#b3201c;border-radius:20px;padding:6px 14px;font-weight:800;font-size:15px}
-.p.consult{background:#f4ead1;color:#74510a}
 
 .order-toggle{flex:0 0 auto;border:0;border-radius:14px;padding:0 17px;background:var(--r);color:#fff;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer;box-shadow:var(--shadow)}
 .order-toggle:hover{filter:brightness(1.08)}
-.order-hint{margin:-2px 0 12px;padding:9px 12px;border-radius:11px;background:var(--b);color:var(--m);font-size:13px;font-weight:650}
-.results-status{margin:10px 2px 8px;color:var(--m);font-size:12px;font-weight:650}
-.empty-results{padding:28px 16px;border:1px dashed var(--line);border-radius:14px;background:var(--c);color:var(--m);text-align:center;font-size:14px;font-weight:650}
 .order-toggle:focus-visible,.add-product:focus-visible,.order-footer button:focus-visible,.order-footer a:focus-visible,.order-quantity button:focus-visible{outline:3px solid #ed8c53;outline-offset:2px}
 .order-mode .card{padding-bottom:42px}
 .add-product{display:none;position:absolute;right:9px;bottom:8px;width:34px;height:34px;place-items:center;border:0;border-radius:50%;background:var(--r);color:#fff;font-size:25px;font-weight:700;line-height:1;box-shadow:0 3px 10px #0004;cursor:pointer}
@@ -105,8 +101,6 @@ body.order-open .whatsapp-float{visibility:hidden}
 @media(max-width:600px){.bar{gap:7px}.order-toggle{padding:0 12px;font-size:12px}.order-panel{left:8px;right:8px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);padding:10px 12px}.order-panel.is-expanded{max-height:42vh}.order-list{max-height:21vh}.order-header{font-size:14px}.order-expand{min-height:32px;padding:6px 10px}.order-footer{gap:7px}.order-continue,.order-recipient{min-height:38px;font-size:12px}}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
 :root[data-theme=dark] .p{background:#49231f;color:#ffb3a8}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p.consult{background:#44391f;color:#f4d68b}}
-:root[data-theme=dark] .p.consult{background:#44391f;color:#f4d68b}
 
 
 .loading{text-align:center;padding:40px 10px;font-weight:bold;color:var(--m);font-size:16px}
@@ -128,16 +122,15 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 </style>
 </head>
 <body>
-<header class="top"><div class="top-inner"><div class="top-copy"><span class="top-kicker">Fiambres · Quesos · Almacén</span><h1>LISTA DE PRECIOS</h1><p>Buscá productos y armá tu pedido por WhatsApp</p></div></div></header>
+<header class="top"><div class="top-inner"><div class="top-copy"><span class="top-kicker">Fiambres · Quesos · Almacén</span><h1>LISTA DE PRECIOS</h1><p>Fiambres, quesos y almacén</p></div></div></header>
 <div class="w">
   <div class="quantity-note"><span aria-hidden="true">💬</span><span>Consultá por precio por cantidad</span></div>
-  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..." aria-label="Buscar productos"><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Armar pedido</button></div><p id="orderHint" class="order-hint" hidden>Elegí los productos y tocá + para sumarlos al pedido.</p>
+  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Cargar pedido</button></div>
   <div class="cats-wrap">
     <select id="catsSelect">
-      <option value="" disabled selected>Saltar a una categoría...</option>
+      <option value="" disabled selected>Ir a una categoría...</option>
     </select>
   </div>
-  <p id="resultsStatus" class="results-status" aria-live="polite"></p>
   <div id="l"><div class="loading">Cargando precios actualizados...</div></div>
   <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
 </div>
@@ -548,9 +541,8 @@ function urlPedido(telefono) {
 function renderPedido() {
   const total = Array.from(carrito.values()).reduce((suma, cantidad) => suma + cantidad, 0);
   const boton = $('orderToggle');
-  boton.textContent = (modoPedido ? 'Finalizar selección' : (total ? 'Seguir agregando' : 'Armar pedido')) + (total ? ' · ' + total : '');
+  boton.textContent = (modoPedido ? 'Terminar' : (total ? 'Seguir agregando' : 'Cargar pedido')) + (total ? ' · ' + total : '');
   boton.setAttribute('aria-pressed', String(modoPedido));
-  $('orderHint').hidden = !modoPedido;
   document.body.classList.toggle('order-mode', modoPedido);
   document.body.classList.toggle('order-open', total > 0);
   if (!total) detallesPedidoAbiertos = false;
@@ -579,18 +571,8 @@ function renderPedido() {
 }
 
 function R() {
-  const q = $('q').value.toLowerCase();
-  const categorias = [
-    {nombre:"Fiambres", items:["Jamones","Salames y salamines","Paletas","Mortadelas","Jamón crudo","Bondiolas y lomos","Pancetas","Matambres","Varios fiambres"]},
-    {nombre:"Quesos y lácteos", items:["Quesos blandos","Quesos en barra","Quesos postre","Quesos duros","Varios lácteos y panificación"]},
-    {nombre:"Almacén y gastronomía", items:["Encurtidos","Dulces Cayfar","Dulces Esnaola","Línea gastronómica"]}
-  ];
-  const opciones = categorias.map(grupo => `<optgroup label="${grupo.nombre}">${S.map((s,i)=>grupo.items.includes(s.t)?`<option value="${i}">${s.e} ${s.t}</option>`:"").join("")}</optgroup>`).join("");
-  $('catsSelect').innerHTML = '<option value="" disabled selected>Saltar a una categoría...</option>' + opciones;
-  const totalProductos = S.reduce((total,s)=>total+s.a.length,0);
-  const encontrados = S.reduce((total,s)=>total+s.a.filter(x=>x.n.toLowerCase().includes(q)).length,0);
-  $('resultsStatus').textContent = q ? `${encontrados} de ${totalProductos} productos` : `${totalProductos} productos en la lista`;
-  if (!encontrados) { $('l').innerHTML = '<div class="empty-results">No encontramos productos con esa búsqueda. Probá con otro nombre.</div>'; return; }
+  const q = $('q').value.toLowerCase();$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
+    S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
 
 
   $('l').innerHTML = S.map((s, si) => {
@@ -599,7 +581,7 @@ function R() {
       if (!x.n.toLowerCase().includes(q)) return;
       const grupo = x.g || '';
       if (!grupos.has(grupo)) grupos.set(grupo, []);
-      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" referrerpolicy="no-referrer" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p${x.p == null || isNaN(x.p) || x.p === \'\' ? " consult" : ""}">${fm(x.p)}</div><button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button></div>`);
+      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" referrerpolicy="no-referrer" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div><button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button></div>`);
     });
     const it = [...grupos.entries()].map(([grupo, cards]) =>
       `${grupo ? `<h3 class="subcat">${grupo}</h3>` : ''}<div class="g">${cards.join('')}</div>`
