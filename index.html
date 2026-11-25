@@ -3,9 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Lista de precios</title>
+<title>Lista de precios · Fiambres, quesos y almacén</title>
+<meta name="description" content="Precios actualizados de fiambres, quesos y almacén. Armá tu pedido y envialo por WhatsApp.">
 <meta name="theme-color" content="#d32622">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://nicolasmorebenjamin.github.io/listadeprecios/">
+<meta property="og:title" content="Lista de precios · Fiambres, quesos y almacén">
+<meta property="og:description" content="Precios actualizados. Armá tu pedido y envialo por WhatsApp.">
+<meta property="og:image" content="https://nicolasmorebenjamin.github.io/listadeprecios/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
 <style>
 :root{--bg:#f7f4ef;--c:#fff;--t:#241b18;--m:#796d66;--r:#d32622;--b:#eee8e1;--line:#e9e1d8;--shadow:0 8px 24px #39251a0d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#171310;--c:#211b17;--t:#f7eee6;--m:#b7a99e;--b:#302721;--line:#3a3029;--shadow:0 8px 24px #0003}}
@@ -21,13 +33,25 @@ h1{margin:0;font-size:clamp(26px,3.2vw,36px);font-weight:850;letter-spacing:.035
 
 .quantity-note{display:flex;align-items:center;gap:9px;margin:0 0 12px;padding:10px 13px;border:1px solid #d3262238;border-radius:13px;background:color-mix(in srgb,var(--r) 8%,var(--c));color:var(--t);font-size:13px;font-weight:750}
 .quantity-note span:first-child{font-size:16px}
+.controls{position:sticky;top:0;z-index:60;margin:0 -20px;padding:10px 20px 2px;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px)}
+.controls.is-stuck{border-bottom:1px solid var(--line);box-shadow:0 8px 18px #0000000f}
+.sync-status{display:flex;align-items:center;justify-content:center;gap:7px;margin:0 0 10px;color:var(--m);font-size:12.5px;font-weight:650;text-align:center}
+.sync-status:empty{display:none}
+.sync-status::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:#19b85b;box-shadow:0 0 0 3px #19b85b26}
+.sync-status.is-stale::before{background:#e0a020;box-shadow:0 0 0 3px #e0a02026}
 .bar{display:flex;gap:8px;margin-bottom:10px}
 input[type=search]{flex:1;min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--c);color:var(--t);font-size:16px;box-shadow:var(--shadow);transition:border-color .18s,box-shadow .18s}
 input[type=search]:focus{outline:none;border-color:var(--r);box-shadow:0 0 0 3px #d3262222}
 
 
-.cats-wrap{position:relative;margin-bottom:8px}
+.cats-wrap{position:relative;display:flex;gap:8px;margin-bottom:8px}
+.view-toggle{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:0 14px;border:1px solid var(--line);border-radius:14px;background:var(--c);color:var(--t);font-size:13px;font-weight:750;white-space:nowrap;cursor:pointer;box-shadow:var(--shadow)}
+.view-toggle:hover{border-color:#d3262266}
+.view-toggle:focus-visible{outline:3px solid #ed8c53;outline-offset:2px}
+.view-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 select#catsSelect{
+  flex:1;
+  min-width:0;
   width:100%;
   padding:12px 14px;
   border-radius:14px;
@@ -47,7 +71,7 @@ select#catsSelect{
 }
 
 
-h2{display:flex;align-items:center;gap:10px;margin:30px 0 14px;font-size:18px;font-weight:800;color:var(--t);padding:0 0 10px;border-bottom:1px solid var(--line)}
+h2{scroll-margin-top:128px;display:flex;align-items:center;gap:10px;margin:30px 0 14px;font-size:18px;font-weight:800;color:var(--t);padding:0 0 10px;border-bottom:1px solid var(--line)}
 h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r)}
 .subcat{margin:21px 0 10px;font-size:15px;font-weight:800;color:var(--t)}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}
@@ -68,7 +92,25 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .ph img.crop-plancha{height:75%;object-fit:cover;object-position:center bottom}
 .ph img.crop-centered-product{object-fit:cover;object-position:center 48%}
 .n{padding:9px 2px 0;font-size:13px;font-weight:700;line-height:1.3;min-height:43px}
-.p{margin:8px auto 12px;width:fit-content;background:#f9e7e4;color:#b3201c;border-radius:20px;padding:6px 14px;font-weight:800;font-size:15px}
+.p{margin:8px auto 12px;width:fit-content;background:#f9e7e4;color:#b3201c;border-radius:20px;padding:6px 14px;font-weight:800;font-size:15px;white-space:nowrap}
+.p .u{margin-left:3px;font-size:11px;font-weight:700;opacity:.75}
+.p.consult{background:transparent;color:var(--m);border:1px dashed var(--line);font-size:13px;font-weight:750}
+.ph.empty{background:var(--b);font-size:34px}
+.ph.empty span{opacity:.6;filter:grayscale(.35)}
+
+/* Vista en lista: una fila por producto */
+.list-view .g{grid-template-columns:1fr;gap:0;background:var(--c);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.list-view .card{display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:12px;padding:7px 12px;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+.list-view .card:last-child{border-bottom:0}
+.list-view .card:hover{transform:none;box-shadow:none;background:color-mix(in srgb,var(--r) 4%,var(--c))}
+.list-view .ph{width:46px;height:46px;padding:2px;border-radius:9px;font-size:22px}
+.list-view .ph img{border-radius:5px}
+.list-view .n{padding:0;min-height:0;font-size:14px;font-weight:650}
+.list-view .p{margin:0;padding:5px 11px;font-size:14px}
+.list-view.order-mode .card{padding-bottom:7px;padding-right:96px}
+.list-view .add-product,.list-view .remove-product{top:50%;bottom:auto;transform:translateY(-50%)}
+.list-view .add-product{right:12px}
+.list-view .remove-product{right:52px}
 
 .order-toggle{flex:0 0 auto;border:0;border-radius:14px;padding:0 17px;background:var(--r);color:#fff;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer;box-shadow:var(--shadow)}
 .order-toggle:hover{filter:brightness(1.08)}
@@ -99,42 +141,46 @@ h2::before{content:"";width:5px;height:23px;border-radius:5px;background:var(--r
 .order-continue{grid-column:1/-1}
 .order-recipient{background:#19b85b;color:#fff}
 .order-panel :focus-visible{outline:3px solid #ed8c53;outline-offset:2px}
-body.order-open .whatsapp-float{visibility:hidden}
 @media(max-width:600px){.bar{gap:7px}.order-toggle{padding:0 12px;font-size:12px}.order-panel{left:8px;right:8px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);padding:10px 12px}.order-panel.is-expanded{max-height:42vh}.order-list{max-height:21vh}.order-header{font-size:14px}.order-expand{min-height:32px;padding:6px 10px}.order-footer{gap:7px}.order-continue,.order-recipient{min-height:38px;font-size:12px}}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p{background:#49231f;color:#ffb3a8}}
 :root[data-theme=dark] .p{background:#49231f;color:#ffb3a8}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .p.consult{background:transparent;color:var(--m)}}
+:root[data-theme=dark] .p.consult{background:transparent;color:var(--m)}
 
 
 .loading{text-align:center;padding:40px 10px;font-weight:bold;color:var(--m);font-size:16px}
-.sync-status{text-align:center;color:var(--m);font-size:12px;padding:4px 0 10px}
 
 
 footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px 18px calc(10px + env(safe-area-inset-bottom,0px));font-size:13px;z-index:100}
 footer button{background:var(--c);color:var(--r);border:1px solid var(--line);padding:8px 14px;font-size:13px;font-weight:700;border-radius:12px;cursor:pointer;box-shadow:var(--shadow)}
+footer button:focus-visible,.wa-btn:focus-visible{outline:3px solid #ed8c53;outline-offset:2px}
 
-
-.whatsapp-float{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:110;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#35e276,#16b957);color:#fff;box-shadow:0 8px 24px #0005,0 0 0 5px #25d36622;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
-.whatsapp-daniel{left:24px}
-.whatsapp-sebastian{right:24px}
-.whatsapp-float:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 12px 28px #0007,0 0 0 7px #25d36630}
-.whatsapp-float:focus-visible{outline:3px solid #fff;outline-offset:4px}
-.whatsapp-float svg{width:32px;height:32px;fill:currentColor}
-.whatsapp-name{position:absolute;left:50%;bottom:68px;transform:translateX(-50%);white-space:nowrap;padding:6px 11px;border:1px solid #ffffff1c;border-radius:999px;background:#201a16;color:#fff;font-size:12px;font-weight:750;line-height:1.2;box-shadow:0 4px 16px #0004;pointer-events:none}
-@media(max-width:600px){.top{padding:14px 18px}.top-inner{min-height:150px}.top-copy{max-width:100%}.top-kicker{font-size:9px;letter-spacing:.1em;margin-bottom:9px;padding:5px 8px}.top h1{font-size:clamp(21px,6vw,25px);white-space:nowrap}.w{padding:16px 14px}.g{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:8px 8px 1px;border-radius:14px}.ph{border-radius:10px}.n{font-size:12.5px;min-height:40px}.whatsapp-float{bottom:calc(78px + env(safe-area-inset-bottom,0px));width:58px;height:58px}.whatsapp-daniel{left:16px}.whatsapp-sebastian{right:16px}.whatsapp-name{bottom:64px;font-size:11px;padding:5px 9px}}
+/* Contacto por WhatsApp dentro de la barra inferior (no tapa productos) */
+.wa{display:flex;align-items:center;gap:8px;min-width:0}
+.wa-label{color:var(--m);font-size:12px;font-weight:700;white-space:nowrap}
+.wa-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 13px 8px 10px;border-radius:12px;background:#19b85b;color:#fff;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap;box-shadow:0 3px 10px #19b85b40;transition:filter .15s}
+.wa-btn:hover{filter:brightness(1.08)}
+.wa-btn svg{width:18px;height:18px;flex:0 0 auto;fill:currentColor}
+@media(max-width:600px){.top{padding:14px 18px}.top-inner{min-height:132px}.top-copy{max-width:100%}.top-kicker{font-size:9px;letter-spacing:.1em;margin-bottom:9px;padding:5px 8px}.top h1{font-size:clamp(21px,6vw,25px);white-space:nowrap}.w{padding:16px 14px}.controls{margin:0 -14px;padding:8px 14px 2px}h2{scroll-margin-top:118px}.g{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:8px 8px 1px;border-radius:14px}.ph{border-radius:10px}.n{font-size:12.5px;min-height:40px}.view-toggle{padding:0 12px}.view-toggle .vt-text{display:none}.list-view .card{gap:10px;padding:7px 10px}.list-view.order-mode .card{grid-template-columns:46px minmax(0,1fr);row-gap:4px}.list-view.order-mode .ph{grid-row:span 2}.list-view.order-mode .p{justify-self:start;padding:3px 10px;font-size:13px}.list-view .n{font-size:13.5px}footer{padding-left:12px;padding-right:12px}.wa-label{display:none}.wa{gap:6px}.wa-btn{padding:8px 11px 8px 9px}}
+@media(max-width:350px){.wa-btn{font-size:12px;padding:7px 8px}.wa-btn svg{width:16px;height:16px}footer button{padding:8px 10px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="top-inner"><div class="top-copy"><span class="top-kicker">Fiambres · Quesos · Almacén</span><h1>LISTA DE PRECIOS</h1><p>Fiambres, quesos y almacén</p></div></div></header>
+<header class="top"><div class="top-inner"><div class="top-copy"><span class="top-kicker">Fiambres · Quesos · Almacén</span><h1>LISTA DE PRECIOS</h1><p>Armá tu pedido y envialo por WhatsApp</p></div></div></header>
 <div class="w">
-  <div class="quantity-note"><span aria-hidden="true">💬</span><span>Consultá por precio por cantidad</span></div>
-  <div class="bar"><input type="search" id="q" placeholder="Buscar producto..."><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Cargar pedido</button></div>
-  <div class="cats-wrap">
-    <select id="catsSelect">
-      <option value="" disabled selected>Ir a una categoría...</option>
-    </select>
+  <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
+  <div class="quantity-note"><span aria-hidden="true">💬</span><span>¿Comprás en cantidad? Consultanos por un precio especial.</span></div>
+  <div id="controlsSentinel" style="height:1px"></div>
+  <div class="controls" id="controls">
+    <div class="bar"><input type="search" id="q" placeholder="Buscar producto..." aria-label="Buscar producto"><button id="orderToggle" class="order-toggle" type="button" aria-pressed="false">Cargar pedido</button></div>
+    <div class="cats-wrap">
+      <select id="catsSelect" aria-label="Ir a una categoría">
+        <option value="" disabled selected>Ir a una categoría...</option>
+      </select>
+      <button id="viewToggle" class="view-toggle" type="button" aria-pressed="false"></button>
+    </div>
   </div>
   <div id="l"><div class="loading">Cargando precios actualizados...</div></div>
-  <div id="syncStatus" class="sync-status" role="status" aria-live="polite"></div>
 </div>
 
 <section id="orderPanel" class="order-panel" aria-labelledby="orderTitle" hidden>
@@ -150,18 +196,13 @@ footer button{background:var(--c);color:var(--r);border:1px solid var(--line);pa
 
 
 <footer>
-  <button id="up">Inicio ↑</button>
+  <button id="up" type="button" aria-label="Volver al inicio">↑ Inicio</button>
+  <div class="wa">
+    <span class="wa-label">Consultas:</span>
+    <a class="wa-btn" href="https://wa.me/5491161943773" target="_blank" rel="noopener noreferrer" aria-label="Escribir a Daniel por WhatsApp: +54 9 11 6194-3773" title="Daniel · +54 9 11 6194-3773"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8C7.7.8 1 7.5 1 15.8c0 2.6.7 5.1 1.9 7.3L.9 31l8.1-2.1a15 15 0 0 0 7 1.7h.1c8.3 0 15-6.7 15-15S24.3.8 16 .8Zm0 27.2h-.1a12.4 12.4 0 0 1-6.3-1.7l-.5-.3-4.8 1.3 1.3-4.7-.3-.5a12.3 12.3 0 1 1 10.7 5.9Zm6.8-9.2c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.3.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 3s1.2 3.5 1.4 3.7c.2.3 2.4 3.7 5.8 5.2.8.3 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.3-.8-.5Z"/></svg>Daniel</a>
+    <a class="wa-btn" href="https://wa.me/5491153442331" target="_blank" rel="noopener noreferrer" aria-label="Escribir a Sebastián por WhatsApp: +54 9 11 5344-2331" title="Sebastián · +54 9 11 5344-2331"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8C7.7.8 1 7.5 1 15.8c0 2.6.7 5.1 1.9 7.3L.9 31l8.1-2.1a15 15 0 0 0 7 1.7h.1c8.3 0 15-6.7 15-15S24.3.8 16 .8Zm0 27.2h-.1a12.4 12.4 0 0 1-6.3-1.7l-.5-.3-4.8 1.3 1.3-4.7-.3-.5a12.3 12.3 0 1 1 10.7 5.9Zm6.8-9.2c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.3.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 3s1.2 3.5 1.4 3.7c.2.3 2.4 3.7 5.8 5.2.8.3 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.3-.8-.5Z"/></svg>Sebastián</a>
+  </div>
 </footer>
-
-
-<a class="whatsapp-float whatsapp-daniel" href="https://wa.me/5491161943773" target="_blank" rel="noopener noreferrer" aria-label="Escribir a Daniel por WhatsApp: +54 9 11 6194-3773" title="Daniel · +54 9 11 6194-3773">
-  <span class="whatsapp-name" aria-hidden="true">Daniel</span>
-  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8C7.7.8 1 7.5 1 15.8c0 2.6.7 5.1 1.9 7.3L.9 31l8.1-2.1a15 15 0 0 0 7 1.7h.1c8.3 0 15-6.7 15-15S24.3.8 16 .8Zm0 27.2h-.1a12.4 12.4 0 0 1-6.3-1.7l-.5-.3-4.8 1.3 1.3-4.7-.3-.5a12.3 12.3 0 1 1 10.7 5.9Zm6.8-9.2c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.3.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 3s1.2 3.5 1.4 3.7c.2.3 2.4 3.7 5.8 5.2.8.3 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.3-.8-.5Z"/></svg>
-</a>
-<a class="whatsapp-float whatsapp-sebastian" href="https://wa.me/5491153442331" target="_blank" rel="noopener noreferrer" aria-label="Escribir a Sebastián por WhatsApp: +54 9 11 5344-2331" title="Sebastián · +54 9 11 5344-2331">
-  <span class="whatsapp-name" aria-hidden="true">Sebastián</span>
-  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8C7.7.8 1 7.5 1 15.8c0 2.6.7 5.1 1.9 7.3L.9 31l8.1-2.1a15 15 0 0 0 7 1.7h.1c8.3 0 15-6.7 15-15S24.3.8 16 .8Zm0 27.2h-.1a12.4 12.4 0 0 1-6.3-1.7l-.5-.3-4.8 1.3 1.3-4.7-.3-.5a12.3 12.3 0 1 1 10.7 5.9Zm6.8-9.2c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.8.2-.3.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 3s1.2 3.5 1.4 3.7c.2.3 2.4 3.7 5.8 5.2.8.3 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.3-.8-.5Z"/></svg>
-</a>
 
 
 <script>
@@ -169,56 +210,56 @@ const BASE_PRODUCTOS = [
   ["🍖","Jamones",[
     {n:"Jamón cocido Paladini", p:null, img:"paladini.JPG"},
     {n:"Jamón cocido Calchaquí", p:null, img:"images/fotos-cliente/jamon-cocido-calchaqui.jpg"},
-    {n:"Jamón cocido Sadia", p:12100, img:"https://cdn11.bigcommerce.com/s-ftsflnse4o/images/stencil/1280x1280/products/3441451/13951105/D_830954-MLA73409406485_122023-O__32949.1747240560.jpg?c=1"},
+    {n:"Jamón cocido Sadia", p:12100, img:"images/externas/jamon-cocido-sadia.webp"},
     {n:"Jamón cocido 214", p:null, img:"images/fotos-cliente/jamon-cocido-214.jpg"},
     {n:"J. cocido barril Luvianka", p:null, img:"images/catalogo/jamon-barril-luvianka.jpg"},
-    {n:"J. cocido barril Cabaña", p:null, img:"images/antonativa/jamon-cocido-barril-cabana.png"},
+    {n:"J. cocido barril Cabaña", p:null, img:"images/antonativa/jamon-cocido-barril-cabana.webp"},
     {n:"J. cocido Arivan", p:null, img:"images/fotos-cliente/jamon-arivan.webp"},
     {n:"Jamón cocido 266", p:null, img:"images/catalogo/jamon-266.jpg"},
     {n:"Jamón cocido Cosenza", p:null, img:"images/jamon-cosenza.webp"},
     {n:"Jamón natural Grassetto", p:null, img:"images/fotos-cliente/jamon-natural-grassetto.webp"},
-    {n:"Jamón natural Bocatti", p:null, img:"https://arcordiezb2c.vteximg.com.br/arquivos/ids/184981/Jamon-Cocido-Bocatti-x-Kg-1-18945.jpg?v=638593545690100000"},
-    {n:"Jamón natural Luvianka", p:null, img:"https://images.prismic.io/luvianka-landing-v2/aF2o83fc4bHWiw_z_LuviankaPiezas0087.JPG?auto=format%2Ccompress"},
-    {n:"Jamón natural 266", p:null, img:"https://frigorificoelaljibe.com.ar/wp-content/uploads/2023/10/jamon-cocido-natural.png"},
-    {n:"Jamón natural Don José", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ01WKaQXLuGkmqCKM8GHchi9nSKS6uCKt1UcpTBk4uVtXm9G1IJk_t1Fw&s"},
-    {n:"Jamón natural jonelli", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVBDbNxmGXf6E4xwDhlPoCeXaCWaIfeG5sx76Txbtt5DhmVA-sxyMgCoM&s=10"},
+    {n:"Jamón natural Bocatti", p:null, img:"images/externas/jamon-natural-bocatti.webp"},
+    {n:"Jamón natural Luvianka", p:null, img:"images/externas/jamon-natural-luvianka.webp"},
+    {n:"Jamón natural 266", p:null, img:"images/externas/jamon-natural-266.webp"},
+    {n:"Jamón natural Don José", p:null, img:"images/externas/jamon-natural-don-jose.webp"},
+    {n:"Jamón natural jonelli", p:null, img:"images/externas/jamon-natural-jonelli.webp"},
     {n:"Fiambre de pata de cerdo Don José", p:7900, img:"images/fotos-cliente/fiambre-pata-don-jose.jpg"}
   ]],
   ["🥓","Salames y salamines",[
-    {n:"Salame milán calchaquí", p:null, img:"https://tienda.distribuidoraelcriollo.com/productos/2816.jpg"},
-    {n:"Salame milán 214", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/163258/SALAME-MILAN-214-XKLG-1-9895.jpg?v=637987557894030000"},
+    {n:"Salame milán calchaquí", p:null, img:"images/externas/salame-milan-calchaqui.webp"},
+    {n:"Salame milán 214", p:null, img:"images/externas/salame-milan-214.webp"},
     {n:"Salame milán El Nahuel", p:null, img:"images/catalogo/milan-nahuel.jpg"},
-    {n:"Salame milán Miguez", p:null, img:"https://distribuidoradelsur.com.ar/sysmam/padmin/productos/img/optimizadas/salame%20miguez%20pieza%20completa.jpeg"},
-    {n:"Salame milán Champion", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/163281/SALAME-MILAN-CHAMPION-XKLG-1-9967.jpg?v=637987557953970000"},
+    {n:"Salame milán Miguez", p:null, img:"images/externas/salame-milan-miguez.webp"},
+    {n:"Salame milán Champion", p:null, img:"images/externas/salame-milan-champion.webp"},
     {n:"Salame milán El Familiar", p:null, img:""},
     {n:"Salame milán Imperiale", p:null, img:"images/fotos-cliente/salame-imperiale.webp"},
     {n:"Salame cantimpalo Miguez", p:null, img:"images/salame-cantimpalo-miguez.webp"},
     {n:"Salamines Miguez", p:null, img:"images/salamin-miguez.webp"},
     {n:"Salamines 214", p:null, img:"images/catalogo/salamin-214-fino.jpg"},
     {n:"Longaniza bastón Miguez", p:null, img:"images/longaniza-miguez.webp"},
-    {n:"Longaniza bastón 214", p:null, img:"https://www.riosma.com/adminriosma/views/img/plantilla/logo-longaniza-tipo-baston-404-347.png"},
-    {n:"Chorizo colorado 214", p:null, img:"https://cmorres.com.ar/wp-content/uploads/2021/08/chorizocandelario214.jpg"},
+    {n:"Longaniza bastón 214", p:null, img:"images/externas/longaniza-baston-214.webp"},
+    {n:"Chorizo colorado 214", p:null, img:"images/externas/chorizo-colorado-214.webp"},
     {n:"Salame alerce campo austral", p:null, img:"images/fotos-cliente/salame-alerce-campo-austral.webp"},
     {n:"Salame de cerdo C. Austral", p:null, img:"images/fotos-cliente/salame-cerdo-campo-austral.webp"},
-    {n:"Salame fuet bocatti", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/904152/21620711001.jpg?v=639111898020900000"},
+    {n:"Salame fuet bocatti", p:null, u:"", img:"images/externas/salame-fuet-bocatti.webp"},
     {n:"Salame spianatta el nahuel", p:null, img:"images/catalogo/spianatta-nahuel.jpg"},
   ]],
   ["🍖","Paletas",[
-    {n:"Paleta cocida Calchaquí", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/166833-800-auto?aspect=true&height=auto&v=638198373734570000&width=800"},
+    {n:"Paleta cocida Calchaquí", p:null, img:"images/externas/paleta-cocida-calchaqui.webp"},
     {n:"Paleta cocida 214", p:null, img:"images/catalogo/paleta-214.jpg"},
-    {n:"Paleta cocida Luvianka", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/170453/PALETA-DE-CERDO-LUVIANKA-XKG-1-15026.jpg?v=638670441780000000"},
+    {n:"Paleta cocida Luvianka", p:null, img:"images/externas/paleta-cocida-luvianka.webp"},
     {n:"Paleta cocida Barolo", p:null, img:"images/paleta-barolo.webp"},
     {n:"Paleta vaina calchaqui", p:null, img:"images/paleta-vaina-calchaqui.webp"},
     {n:"Paleta centurión", p:null, img:"images/paleta-centurion.webp"},
-    {n:"Paleta cocida orfebre", p:null, img:"images/fotos-cliente/paleta-orfebre.png"}
+    {n:"Paleta cocida orfebre", p:null, img:"images/fotos-cliente/paleta-orfebre.webp"}
   ]],
   ["🌭","Mortadelas",[
-    {n:"Mortadela bocha Calchaquí", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/168812/MORTADELA-CALCHAQUI-BOCHA-XKLG-21111-1-9875.jpg?v=638415237684870000"},
+    {n:"Mortadela bocha Calchaquí", p:null, img:"images/externas/mortadela-bocha-calchaqui.webp"},
     {n:"Mortadela bocha 214", p:null, img:"images/catalogo/mortadela-214.jpg"},
     {n:"Mortadela bocha Luvianka", p:null, img:"images/catalogo/mortadela-luvianka.jpg"},
     {n:"Mortadela bocha Miguez", p:null, img:"images/mortadela-miguez.webp"},
     {n:"Mortadela bocha Champion", p:null, img:"images/catalogo/mortadela-champion.jpg"},
-    {n:"Mortadela c/pistacho Bocatti", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSphPfyq7frBLkA66noyedWv91cA1yA78cS08eIq0hSZ-P82ArPus8eq_fr&s=10"},
+    {n:"Mortadela c/pistacho Bocatti", p:null, img:"images/externas/mortadela-c-pistacho-bocatti.webp"},
     {n:"Mortadela Cabaña Antonativa", p:null, img:"images/mortadela-cabana-antonativa.webp"}
   ]],
   ["🥩","Jamón crudo",[
@@ -227,24 +268,24 @@ const BASE_PRODUCTOS = [
     {n:"J crudo La Reina", p:null, img:"images/jamon-crudo-la-reina.webp"},
     {n:"Jamón crudo JM", p:null, img:"images/fotos-cliente/jamon-crudo-jm.webp"},
     {n:"J crudo parma montesano", p:null, img:"images/fotos-cliente/jamon-crudo-parma-montesano.jpg"},
-    {n:"Jamón crudo sin cuero El Rey", p:null, img:"images/fotos-cliente/jamon-crudo-sin-cuero-el-rey.png"},
+    {n:"Jamón crudo sin cuero El Rey", p:null, img:"images/fotos-cliente/jamon-crudo-sin-cuero-el-rey.webp"},
     {n:"Jamón crudo serrano El Rey", p:null, img:"images/fotos-cliente/jamon-crudo-serrano-el-rey.jpg"},
-    {n:"J crudo listo Don José", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_613794-MLA45759419891_042021-O.webp"},
-    {n:"J crudo c/cuero 4718", p:null, img:"images/fotos-cliente/jamon-crudo-4718.png"}
+    {n:"J crudo listo Don José", p:null, img:"images/externas/j-crudo-listo-don-jose.webp"},
+    {n:"J crudo c/cuero 4718", p:null, img:"images/fotos-cliente/jamon-crudo-4718.webp"}
   ]],
   ["🥩","Bondiolas y lomos",[
     {n:"Bondiola Paladini", p:null, img:"images/fotos-cliente/bondiola-paladini-cliente.jpg"},
     {n:"Bondiola Calchaquí", p:null, img:"images/fotos-cliente/bondiola-calchaqui.jpg"},
     {n:"Bondiola La Reina", p:null, img:"images/bondiola-la-reina.webp"},
-    {n:"Bondiola Jonelli", p:null, img:"images/fotos-cliente/bondiola-jonelli.png"},
-    {n:"Bondiola Luvianka", p:null, img:"https://http2.mlstatic.com/D_Q_NP_817713-MLA77461136560_072024-O.webp"},
+    {n:"Bondiola Jonelli", p:null, img:"images/fotos-cliente/bondiola-jonelli.webp"},
+    {n:"Bondiola Luvianka", p:null, img:"images/externas/bondiola-luvianka.webp"},
     {n:"Lomo bocatti", p:null, img:"images/fotos-cliente/lomo-bocatti-cliente.jpg"},
-    {n:"Lomo Horneado Luvianka", p:null, img:"https://images.prismic.io/luvianka-landing-v2/Z8I5j57c43Q3gZKE_LuviankaPiezas0071.JPG?auto=format%2Ccompress"},
-    {n:"Lomo ahumado Luvianka", p:null, img:"https://images.prismic.io/luvianka-landing-v2/Z8I5U57c43Q3gZJ__LuviankaPiezas0070.JPG?auto=format%2Ccompress"},
+    {n:"Lomo Horneado Luvianka", p:null, img:"images/externas/lomo-horneado-luvianka.webp"},
+    {n:"Lomo ahumado Luvianka", p:null, img:"images/externas/lomo-ahumado-luvianka.webp"},
     {n:"Lomo ahumado 266", p:null, img:"images/catalogo/lomo-ahumado-266.jpg"},
-    {n:"Pastrón", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvWxALsT79MfSYdcdC7t9s8D3nuWA6TkrCxRnXmCZJLA&s=10"}
+    {n:"Pastrón", p:null, alias:"pastrami", img:"images/externas/pastron.webp"}
   ]],
-  ["BAC","Pancetas",[
+  ["🥓","Pancetas",[
     {n:"Panceta ahumada Calchaquí", p:null, img:"images/catalogo/panceta-calchaqui.jpg"},
     {n:"Panceta ahumada 214", p:null, img:"images/catalogo/panceta-214.jpg"},
     {n:"Panceta ahumada Luvianka", p:null, img:"images/catalogo/panceta-luvianka.jpg"},
@@ -255,34 +296,34 @@ const BASE_PRODUCTOS = [
   ["🍖","Matambres",[
     {n:"Matambre carne serrano", p:null, img:"images/matambre-carne-serrano.webp"},
     {n:"Matambre Cerdo serrano", p:null, img:"images/fotos-cliente/matambre-cerdo-serrano.webp"},
-    {n:"Matambre carne imperial", p:null, img:"images/fotos-cliente/matambre-carne-imperial.png"},
+    {n:"Matambre carne imperial", p:null, img:"images/fotos-cliente/matambre-carne-imperial.webp"},
     {n:"Matambre pollo imperial", p:null, img:""},
-    {n:"Fiambre de pollo 214", p:null, img:"https://dev.administranet.com.ar/catalogo/la-nacional/Articulo_Foto/foto1_447_0.jpeg"}
+    {n:"Fiambre de pollo 214", p:null, img:"images/externas/fiambre-de-pollo-214.webp"}
   ]],
   ["🍽️","Varios fiambres",[
-    {n:"Salchichón Luvianka", p:null, img:"https://acdn-us.mitiendanube.com/stores/001/157/846/products/lungo-521-bfeb1d9b5d5125e8b216345676051819-640-0.webp"},
+    {n:"Salchichón Luvianka", p:null, img:"images/externas/salchichon-luvianka.webp"},
     {n:"Queso de cerdo 266", p:null, img:"images/catalogo/queso-cerdo-266.jpg"},
-    {n:"Mortadelita Paladini", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/170946-800-auto?aspect=true&height=auto&v=638718717699870000&width=800"},
-    {n:"Leber Paladini", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/178414-800-600?aspect=true&height=600&v=636383362797500000&width=800"},
-    {n:"Salchichas champifiesta x 6", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMUy2Y5jSSOPWELN1E6QrNtZyvkWCmMFOXzrYV-cj3cg&s=10"},
+    {n:"Mortadelita Paladini", p:null, u:"", img:"images/externas/mortadelita-paladini.webp"},
+    {n:"Leber Paladini", p:null, alias:"leberwurst pate", u:"", img:"images/externas/leber-paladini.webp"},
+    {n:"Salchichas champifiesta x 6", p:null, img:"images/externas/salchichas-champifiesta-x-6.webp"},
     {n:"Salchichas Depin x 6", p:null, img:"images/fotos-cliente/salchichas-depin-x6.jpg"},
   ]],
-  ["🫒","Encurtidos",[
-    {n:"Ac. verdes 0 x 2 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/mor1kg11-dec1615d0f5a50c84015928425770468-1024-1024.webp"},
-    {n:"Ac. verdes 00 x 2 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/mor1kg1-dec1615d0f5a50c84015928425219144-1024-1024.webp"},
+  ["🥒","Encurtidos",[
+    {n:"Ac. verdes 0 x 2 kg", p:null, img:"images/externas/ac-verdes-0-x-2-kg.webp"},
+    {n:"Ac. verdes 00 x 2 kg", p:null, img:"images/externas/ac-verdes-00-x-2-kg.webp"},
     {n:"Ac. verdes 000 x 2 kg", p:null, img:""},
     {n:"Ac. verdes s/ carozo x 2 kg", p:null, img:""},
     {n:"Ac. verdes s/ carozo x 5 kg", p:null, img:""},
-    {n:"Ac. verdes c/ morrón x 1 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/whatsapp-image-2020-06-22-at-2-34-23-pm1-3cab00a9651bf0374015930970282870-480-0.webp"},
+    {n:"Ac. verdes c/ morrón x 1 kg", p:null, img:"images/externas/ac-verdes-c-morron-x-1-kg.webp"},
     {n:"Ac. verdes rodajas x 2 kg", p:null, img:""},
     {n:"Aceitunas rodajas x 2 kg", p:null, img:""},
     {n:"Ac. verdes rodajas x 4 kg", p:null, img:""},
-    {n:"Ac. Verdes 0 x 5 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/mor1kg11-dec1615d0f5a50c84015928425770468-1024-1024.webp"},
+    {n:"Ac. Verdes 0 x 5 kg", p:null, img:"images/externas/ac-verdes-0-x-2-kg.webp"},
     {n:"Aceitunas verdes 000 x 5 kg", p:null, img:""},
     {n:"Ac. Verdes pizzera x 5 kg", p:null, img:""},
-    {n:"Ac. Negra 0 x 2 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg-11-19843ec25f1924d8c715926721208452-1024-1024.webp"},
+    {n:"Ac. Negra 0 x 2 kg", p:null, img:"images/externas/ac-negra-0-x-2-kg.webp"},
     {n:"Ac. Negra 0 x 1 kg", p:null, img:""},
-    {n:"Ac. Negra 00 x 2 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg11-19843ec25f1924d8c715928419969736-1024-1024.webp"},
+    {n:"Ac. Negra 00 x 2 kg", p:null, img:"images/externas/ac-negra-00-x-2-kg.webp"},
     {n:"Aceitunas griegas x 2 kg", p:null, img:""},
     {n:"Aceitunas negras 000 x 5 kg", p:null, img:""},
     {n:"Ac. Negra 000 x 2 kg", p:null, img:""},
@@ -290,231 +331,230 @@ const BASE_PRODUCTOS = [
     {n:"Pickles x 2kg", p:null, img:""},
     {n:"Ajíes en frasco x 900 gr", p:null, img:""},
     {n:"Berenjenas x 1 kg", p:null, img:""},
-    {n:"Anchoas 60 x 3 unidades", p:null, img:"", img:"https://acdn.mitiendanube.com/stores/001/582/570/products/60x3-web1-b6102675e5662542ba16940601504151-640-0.png"},
+    {n:"Anchoas 60 x 3 unidades", p:null, img:"", img:"images/externas/anchoas-60-x-3-unidades.webp"},
     {n:"Pepinillo x 2 kg", p:null, img:""},
-    {n:"Pickle x 5 kg", p:null, img:"", img:"https://http2.mlstatic.com/D_NQ_NP_695366-MLA81634144691_122024-O.webp"},
-    {n:"Aceitunas negras 0 x 5 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/233/438/products/nmor1kg-11-19843ec25f1924d8c715926721208452-1024-1024.webp"},
+    {n:"Pickle x 5 kg", p:null, img:"", img:"images/externas/pickle-x-5-kg.webp"},
+    {n:"Aceitunas negras 0 x 5 kg", p:null, img:"images/externas/ac-negra-0-x-2-kg.webp"},
     {n:"Aceit negras s/carozo x 5 kg", p:null, img:""},
     {n:"Lupines x 2 kg", p:null, img:""}
   ]],
   ["🍯","Dulces Cayfar",[
-    {n:"Batata cajón x 5 kg", p:null, img:"https://www.josesolanilla.com.ar/contenido/productos/original/1759780975.png"},
-    {n:"Batata c/cacao cajón x 5 kg", p:null, img:"https://dcdn-us.mitiendanube.com/stores/001/142/266/products/cacao-batata-cayfar-x5-30-3e5b7b9f6610537fb917479375419621-640-0.jpg"},
-    {n:"Membrillo cajón x 5 kg", p:null, img:"https://d2r9epyceweg5n.cloudfront.net/stores/001/142/266/products/ingresos-421-3d5cdfcbdb9bf27e9516864112521642-640-0.webp"},
-    {n:"Batata lata x 5 kg", p:null, img:"https://www.glorilact.com.ar/Imagenes/Productos/106/main.jpg"},
-    {n:"Batata c/cacao lata x 5 kg", p:null, img:"https://d22fxaf9t8d39k.cloudfront.net/ceddd5eed6352e8b6a135cbaf043b27bd04d587ba2ece42679b271de8c7d6ed2325300.jpg"},
-    {n:"Membrillo lata x 5 kg", p:null, img:"https://ss-cnt-001c.esmsv.com/r/content/host2/1b8436dad41801e33025ae5e6e72f44b/img/products/00865.webp"},
+    {n:"Batata cajón x 5 kg", p:null, img:"images/externas/batata-cajon-x-5-kg.webp"},
+    {n:"Batata c/cacao cajón x 5 kg", p:null, img:"images/externas/batata-c-cacao-cajon-x-5-kg.webp"},
+    {n:"Membrillo cajón x 5 kg", p:null, img:"images/externas/membrillo-cajon-x-5-kg.webp"},
+    {n:"Batata lata x 5 kg", p:null, img:"images/externas/batata-lata-x-5-kg.webp"},
+    {n:"Batata c/cacao lata x 5 kg", p:null, img:"images/externas/batata-c-cacao-lata-x-5-kg.webp"},
+    {n:"Membrillo lata x 5 kg", p:null, img:"images/externas/membrillo-lata-x-5-kg.webp"},
 
 
   ]],
   ["🍯","Dulces Esnaola",[
-    {n:"Batata en lata x 5kg", p:null, img:"https://www.laiberoespanola.com.ar/foto.php?mini=0&origen=foto1%7C3344"},
-    {n:"Batata c/cacao lata x 5kg", p:null, img:"https://d2j6dbq0eux0bg.cloudfront.net/images/51759127/2092236779.jpg"},
-    {n:"Membrillo en lata x 5kg", p:null, img:"https://www.lainsuperablevirtual.com.ar/Articulo_Foto_Multi/2403_0.jpeg"},
-    {n:"P. bombon Esnaola x 5kg", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_686161-MLA89870670001_082025-O.webp"},
-    {n:"Batata c/guinda x 5kg", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_611507-MLA41802813983_052020-O.webp"},
+    {n:"Batata en lata x 5kg", p:null, img:"images/externas/batata-en-lata-x-5kg.webp"},
+    {n:"Batata c/cacao lata x 5kg", p:null, img:"images/externas/batata-c-cacao-lata-x-5kg.webp"},
+    {n:"Membrillo en lata x 5kg", p:null, img:"images/externas/membrillo-en-lata-x-5kg.webp"},
+    {n:"P. bombon Esnaola x 5kg", p:null, img:"images/externas/p-bombon-esnaola-x-5kg.webp"},
+    {n:"Batata c/guinda x 5kg", p:null, img:"images/externas/batata-c-guinda-x-5kg.webp"},
     {n:"Zapallo lata x 5 kg", p:null, img:"images/fotos-cliente/zapallo-lata-esnaola.jpg"},
   ]],
   ["🧀","Quesos blandos",[
-    {n:"Q. cremoso Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_757644-MLA110607334227_042026-T.webp"},
+    {n:"Q. cremoso Barraza", p:null, img:"images/externas/q-cremoso-barraza.webp"},
     {n:"Q. cremoso Punta del agua", p:null, img:"images/queso-cremoso-punta.webp"},
-    {n:"Q. cremoso La Paulina", p:null, img:"https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3271491_f.jpg", crop:"right-panel"},
-    {n:"Q. cremoso Alma Lactea", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0gtv18bliN5wWbm4Qyzm4HMRvoQAKm6P5fH68FcCi_5pTkVorSNewDS_R&s=10"},
+    {n:"Q. cremoso La Paulina", p:null, img:"images/externas/q-cremoso-la-paulina.webp", crop:"right-panel"},
+    {n:"Q. cremoso Alma Lactea", p:null, img:"images/externas/q-cremoso-alma-lactea.webp"},
     {n:"Q. cremoso El faisan", p:null, img:"images/fotos-cliente/cremoso-el-faisan.png"},
-    {n:"Q. cremoso La Finca", p:null, img:"images/fotos-cliente/cremoso-la-finca.png"},
+    {n:"Q. cremoso La Finca", p:null, img:"images/fotos-cliente/cremoso-la-finca.webp"},
     {n:"Q. cremoso Ramolac", p:null, img:"images/fotos-cliente/ramolac-cremoso.jpg"},
-    {n:"Q. cremoso los troncos", p:null, img:"images/fotos-cliente/cremoso-los-troncos.png"},
-    {n:"Q. por salut Punta del Agua", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_709437-MLA107345816233_022026-O.webp"},
-    {n:"Q. por salut Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04933-683x1024.jpg"},
-    {n:"Q. por salut Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_943823-MLA106643946206_022026-T.webp"},
-    {n:"Q. por salut s/sal Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04877-683x1024.jpg"},
-    {n:"Q. por salut s/sal Barraza", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_974077-MLA106682110024_022026-T.webp"},
-        {n:"Muzzarella Barraza cilindro", p:null, img:"https://acdn-us.mitiendanube.com/stores/005/600/084/products/181-b3af558072d552152717456270476675-1024-1024.png"},
-    {n:"Muzzarella Lucrecia", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYRq4rsNguoKvZLKa3xrcoIpFcWhdrHB455j2W761CfpSjXqZTQ1ULGa4&s=10"},
+    {n:"Q. cremoso los troncos", p:null, img:"images/fotos-cliente/cremoso-los-troncos.webp"},
+    {n:"Q. por salut Punta del Agua", p:null, img:"images/externas/q-por-salut-punta-del-agua.webp"},
+    {n:"Q. por salut Cayelac", p:null, img:"images/externas/q-por-salut-cayelac.webp"},
+    {n:"Q. por salut Barraza", p:null, img:"images/externas/q-por-salut-barraza.webp"},
+    {n:"Q. por salut s/sal Cayelac", p:null, img:"images/externas/q-por-salut-s-sal-cayelac.webp"},
+    {n:"Q. por salut s/sal Barraza", p:null, img:"images/externas/q-por-salut-s-sal-barraza.webp"},
+        {n:"Muzzarella Barraza cilindro", p:null, img:"images/externas/muzzarella-barraza-cilindro.webp"},
+    {n:"Muzzarella Lucrecia", p:null, img:"images/externas/muzzarella-lucrecia.webp"},
     {n:"Muzzarella Cabaña cilindro", p:null, img:""},
-    {n:"Muzzarella El Gauchito plancha", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBMoXiSDqaHhYulJ1m4UwfxPvugrcdM90ysVM8YrB62cM6keJ-ygF_Ho_U&s=10", crop:"plancha"},
-    {n:"Muzzarella El Gauchito", p:null, img:"https://www.canagro.com.ar/img/productos_muzzarella.png"}
+    {n:"Muzzarella El Gauchito plancha", p:null, img:"images/externas/muzzarella-el-gauchito-plancha.webp", crop:"plancha"},
+    {n:"Muzzarella El Gauchito", p:null, img:"images/externas/muzzarella-el-gauchito.webp"}
   ]],
   ["🧀","Quesos en barra",[
-    {n:"Barra punta del agua", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSWP8LkLrkMC7JM4i5QK3nv846Pi6tNDID0JtIHJO1bnflawBOU6Z5EaWM&s=10"},
+    {n:"Barra punta del agua", p:null, img:"images/externas/barra-punta-del-agua.webp"},
 
 
-    {n:"Barra Rondo", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_754987-MLA41214983753_032020-O.webp"},
-    {n:"Barra Lucrecia", p:null, img:"https://res.cloudinary.com/dg9rn6b7o/image/upload/v1777489250/distrialma/2809-1777489250695.png"},
-    {n:"Barra La tarantela", p:null, img:"https://www.cosenzadelicatessen.com.ar/web/image/product.product/405/image_1920?unique=33b809e"},
-    {n:"Barra Alma Lactea", p:null, img:"https://res.cloudinary.com/dg9rn6b7o/image/upload/v1774464960/distrialma/9029-1774464960460.jpg", crop:"centered-product"},
-    {n:"Barra La Paulina", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/168929-800-auto?v=638485545654200000&width=800&height=auto&aspect=true"},
-    {n:"Fiambrin La Quesera", p:null, img:"https://semas.ar/wp-content/uploads/2024/08/6a0bb4a012316d54de63c6198d5b13bd.webp"},
+    {n:"Barra Rondo", p:null, img:"images/externas/barra-rondo.webp"},
+    {n:"Barra Lucrecia", p:null, img:"images/externas/barra-lucrecia.webp"},
+    {n:"Barra La tarantela", p:null, img:"images/externas/barra-la-tarantela.webp"},
+    {n:"Barra Alma Lactea", p:null, img:"images/externas/barra-alma-lactea.webp", crop:"centered-product"},
+    {n:"Barra La Paulina", p:null, img:"images/externas/barra-la-paulina.webp"},
+    {n:"Fiambrin La Quesera", p:null, img:"images/externas/fiambrin-la-quesera.webp"},
     {n:"Fiambrin Spalem", p:null, img:"images/fotos-cliente/fiambrin-spalem.jpg"},
-    {n:"Fiambrin la serenisima", p:null, img:"https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2024090111170023424-213ca9f1b33ff729b317362510628386-1024-1024.webp"},
+    {n:"Fiambrin la serenisima", p:null, img:"images/externas/fiambrin-la-serenisima.webp"},
     {n:"Cheddar serenisima", p:null, img:""},
-    {n:"Cheddar Cayelac", p:null, img:"images/fotos-cliente/cheddar-cayelac.png"},
+    {n:"Cheddar Cayelac", p:null, img:"images/fotos-cliente/cheddar-cayelac.webp"},
   ]],
   ["🧀","Quesos postre",[
     {n:"Mar del plata doble A", p:null, img:"images/fotos-cliente/holanda-doble-aa.png"},
-    {n:"Holanda Cayelac", p:null, img:"https://http2.mlstatic.com/D_NQ_NP_821259-MLA84726680792_052025-O.webp"},
-    {n:"Pategras Sancor", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZPScEIhVpPayUzAtksbJO1VJ5K2zqXjvGGNsX2IjwQ&s=10"},
-    {n:"Pategras La Paulina", p:18500, img:"images/fotos-cliente/pategras-la-paulina.png"},
-    ,
-    {n:"Mar del plata Santa Lucia", p:null, img:"images/fotos-cliente/mar-del-plata-santa-lucia.png"},
-    {n:"Mar del plata Maria Luisa", p:null, img:"https://dequesos.com.ar/wp-content/uploads/2021/03/Queso-Holando-Maria-Luisa-con-fondo.png"},
-    {n:"Fontina Paulina", p:19500, img:"https://acdn.mitiendanube.com/stores/861/458/products/hogar_fontina1-a015fad9992d23ae0915797183764812-640-0.jpg"},
-    {n:"Fontina Cayelac", p:null, img:"images/fotos-cliente/fontina-cayelac.png"},
-    {n:"Queso azul Bavaria", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBCS3q5fi8g-CgMQ9yncaeP1Awfjyj6peIs9LcpJS-Fg&s=10"},
-    {n:"Queso azul Quesera", p:null, img:"https://http2.mlstatic.com/D_Q_NP_2X_809996-MLA114538306318_082026-T.webp"},
-    {n:"Queso azul Lucrecia", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamt3-gpPShSdqGPRo9qwuV8eoyM72m9pKXdtZrXCvmg&s=10"},
-    {n:"Queso azul Emperador", p:null, img:"images/fotos-cliente/queso-azul-emperador.png"},
-    {n:"Provoleta AA", p:null, img:"images/fotos-cliente/provoleta-doble-aa.jpg"},
-    {n:"Provoleta Santa Rosa", p:null, img:"https://elnenearg.vtexassets.com/arquivos/ids/169554/QUESO-PROVOLETA-SANTA-ROSA-PARR-XKG-1-9887.jpg?v=638584581641700000"},
-    {n:"Provoleta Cayelac", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRODps5w6RSUIgKJ7nEh50MNQ2x8hn8lCp2DQ_XsbRlBaGyNRFiJzl9AMLs&s=10", crop:"lower-product"},
+    {n:"Holanda Cayelac", p:null, img:"images/externas/holanda-cayelac.webp"},
+    {n:"Pategras Sancor", p:null, img:"images/externas/pategras-sancor.webp"},
+    {n:"Pategras La Paulina", p:18500, img:"images/fotos-cliente/pategras-la-paulina.webp"},
+    {n:"Mar del plata Santa Lucia", p:null, img:"images/fotos-cliente/mar-del-plata-santa-lucia.webp"},
+    {n:"Mar del plata Maria Luisa", p:null, img:"images/externas/mar-del-plata-maria-luisa.webp"},
+    {n:"Fontina Paulina", p:19500, img:"images/externas/fontina-paulina.webp"},
+    {n:"Fontina Cayelac", p:null, img:"images/fotos-cliente/fontina-cayelac.webp"},
+    {n:"Queso azul Bavaria", p:null, img:"images/externas/queso-azul-bavaria.webp"},
+    {n:"Queso azul Quesera", p:null, img:"images/externas/queso-azul-quesera.webp"},
+    {n:"Queso azul Lucrecia", p:null, img:"images/externas/queso-azul-lucrecia.webp"},
+    {n:"Queso azul Emperador", p:null, img:"images/fotos-cliente/queso-azul-emperador.webp"},
+    {n:"Provoleta AA", p:null, img:"images/fotos-cliente/provoleta-doble-aa.webp"},
+    {n:"Provoleta Santa Rosa", p:null, img:"images/externas/provoleta-santa-rosa.webp"},
+    {n:"Provoleta Cayelac", p:null, img:"images/externas/provoleta-cayelac.webp", crop:"lower-product"},
     {n:"Queso atuel Santa Rosa", p:null, img:"images/fotos-cliente/queso-atuel-santa-rosa.jpg"},
   ]],
   ["🧀","Quesos duros",[
-    {n:"Sardo fresco Santa Lucía", p:null, img:"images/fotos-cliente/sardo-fresco-santa-lucia.png"},
-    {n:"Sardo semi Santa Lucía", p:null, img:"images/fotos-cliente/sardo-semi-santa-lucia.png"},
-    {n:"Sardo duro Santa Lucía", p:null, img:"images/fotos-cliente/sardo-duro-santa-lucia.png"},
+    {n:"Sardo fresco Santa Lucía", p:null, img:"images/fotos-cliente/sardo-fresco-santa-lucia.webp"},
+    {n:"Sardo semi Santa Lucía", p:null, img:"images/fotos-cliente/sardo-semi-santa-lucia.webp"},
+    {n:"Sardo duro Santa Lucía", p:null, img:"images/fotos-cliente/sardo-duro-santa-lucia.webp"},
         {n:"Sardo Santa Rosa", p:null, img:"images/fotos-cliente/sardo-santa-rosa.svg"},
-    {n:"Provolin Santa Lucía", p:null, img:"images/fotos-cliente/provolone-santa-lucia.png"},
-    {n:"Provolone Cayelac", p:null, img:"https://www.cayelac.com.ar/wp-content/uploads/2025/11/DSC04960-683x1024.jpg"},
-    {n:"Romanito Santa Lucía", p:null, img:"images/fotos-cliente/romanito-santa-lucia.png"},
-    {n:"Reggianito Santa Lucía", p:null, img:"images/fotos-cliente/sbrinz-santa-lucia.png"},
-    {n:"Reggianito Melincué", p:null, img:"https://distribuidorapg.com.ar/wp-content/uploads/2025/07/Melincue-Reggianito_sin_pintar.webp"},
-    {n:"Provolone Santa Rosa", p:null, img:"https://acdn-us.mitiendanube.com/stores/861/458/products/provolone-horma1001-3037ff1c7e953f15d815797150663592-1024-1024.webp"},
-    {n:"Parmesano Melincué", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7i71EiQsEir62Sz4O2VJQezwuC_afhF18otxmCT0Y9fnYvZgkem1ki0R&s=10"},
+    {n:"Provolin Santa Lucía", p:null, img:"images/fotos-cliente/provolone-santa-lucia.webp"},
+    {n:"Provolone Cayelac", p:null, img:"images/externas/provolone-cayelac.webp"},
+    {n:"Romanito Santa Lucía", p:null, img:"images/fotos-cliente/romanito-santa-lucia.webp"},
+    {n:"Reggianito Santa Lucía", p:null, img:"images/fotos-cliente/sbrinz-santa-lucia.webp"},
+    {n:"Reggianito Melincué", p:null, img:"images/externas/reggianito-melincue.webp"},
+    {n:"Provolone Santa Rosa", p:null, img:"images/externas/provolone-santa-rosa.webp"},
+    {n:"Parmesano Melincué", p:null, img:"images/externas/parmesano-melincue.webp"},
   ]],
-  ["GB","Varios lácteos y panificación",[
-    {n:"Ricota La niña", p:null, img:"images/fotos-cliente/ricota-la-nina.png"},
-    {n:"Ricota Trelau", p:null, img:"https://tienda.distribuidoraelcriollo.com/productos/1230.jpg"},
-    {n:"Manteca x 100 tonadita", p:null, img:"https://gruposanisidrovirtual.com.ar/img/productos/4662.jpg"},
-    {n:"Manteca x 200 tonadita", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4M6ttAx-Y90-YM5dN97kPYnYVQ4zoWvj_2Fm0WtKmNg&s=10"},
-    {n:"Grasa vacuna Esani x 500 gr", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/665870/Grasa-Vacuna-Comestible-Esani-X-500g-1-863510.jpg?v=637671658166570000"},
-    {n:"Grasa porcina Esani x 500 gr", p:null, img:"https://jumboargentina.vtexassets.com/arquivos/ids/695354/Grasa-Porcina-Comestible-Esani-X-500g-1-863511.jpg?v=637848777740130000"},
-    {n:"Fainalind display", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfBBGQCnbCEe828v2MclOnM7s9r2ldrqg-77BsTedlQA&s=10"},
-    {n:"Queso rallado suelto x kg", p:null, img:"images/fotos-cliente/queso-rallado-suelto.png"},
+  ["🥛","Varios lácteos y panificación",[
+    {n:"Ricota La niña", p:null, img:"images/fotos-cliente/ricota-la-nina.webp"},
+    {n:"Ricota Trelau", p:null, img:"images/externas/ricota-trelau.webp"},
+    {n:"Manteca x 100 tonadita", p:null, img:"images/externas/manteca-x-100-tonadita.webp"},
+    {n:"Manteca x 200 tonadita", p:null, img:"images/externas/manteca-x-200-tonadita.webp"},
+    {n:"Grasa vacuna Esani x 500 gr", p:null, img:"images/externas/grasa-vacuna-esani-x-500-gr.webp"},
+    {n:"Grasa porcina Esani x 500 gr", p:null, img:"images/externas/grasa-porcina-esani-x-500-gr.webp"},
+    {n:"Fainalind display", p:null, img:"images/externas/fainalind-display.webp"},
+    {n:"Queso rallado suelto x kg", p:null, img:"images/fotos-cliente/queso-rallado-suelto.webp"},
     {n:"Levadura levex 10 x 50 gr", p:null, img:"images/fotos-cliente/levex-prensada.jpg"},
-    {n:"Levadura levex seca", p:null, img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/172/573/products/levex1-ca307e5eb11baeed0a15978069207388-640-0.webp", img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/172/573/products/levex1-ca307e5eb11baeed0a15978069207388-640-0.webp"},
-    {n:"Tapa rotisera Sabroricas", p:null, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHUgfxkmAs4Uh4Tw-quAnDRqhb1f3R45Y006ofSUwtZA&s=10"}
+    {n:"Levadura levex seca", p:null, img:"images/externas/levadura-levex-seca.webp", img:"images/externas/levadura-levex-seca.webp"},
+    {n:"Tapa rotisera Sabroricas", p:null, img:"images/externas/tapa-rotisera-sabroricas.webp"}
   ]],
   ["🛒","Línea gastronómica",[
-    {n:"Mayonesa Hellmans x 2.9 kg", p:14492, g:"Aderezos", img:"https://www.unileverfoodsolutions.com.ar/dam/global-ufs/mcos/sla/argentina/calcmenu/products/AR-products/packshots/foodsolutions/mayonesa-cl%C3%A1sica-hellmanns-2-9-kg1/mayonesa-clasica-hellmanns-3x2.755KG.jpg"},
-    {n:"Mayonesa Natura x 2.9 kg", p:13213, g:"Aderezos", img:"https://viagastronomica.com.ar/wp-content/uploads/2022/08/MAYONESA-NATURA.png"},
-    {n:"Mayonesa Danica x 2.9 kg", p:9016, g:"Aderezos", img:"https://acdn-us.mitiendanube.com/stores/001/789/620/products/37631-14d69cef891c562dd217200291211168-1024-1024.webp"},
-    {n:"Mayonesa Menoyo x 2.7 kg", p:8003, g:"Aderezos", img:"https://comercialbaby.com.py/uploads/product_featured_image/1734454659-image.jpg"},
-    {n:"Mayonesa Mayodan x 3 kg", p:7067, g:"Aderezos", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3YBQtltSDFS8Oogg5IMqSeLFdZyXEzVjcO5a1TRT1DQ&s=10"},
-    {n:"Mostaza Savora x 3 kg", p:12446, g:"Aderezos", img:"https://acdn-us.mitiendanube.com/stores/001/350/887/products/savora-original1-17f3e90d16e874808716515083709649-1024-1024.png"},
+    {n:"Mayonesa Hellmans x 2.9 kg", p:14492, g:"Aderezos", img:"images/externas/mayonesa-hellmans-x-2-9-kg.webp"},
+    {n:"Mayonesa Natura x 2.9 kg", p:13213, g:"Aderezos", img:"images/externas/mayonesa-natura-x-2-9-kg.webp"},
+    {n:"Mayonesa Danica x 2.9 kg", p:9016, g:"Aderezos", img:"images/externas/mayonesa-danica-x-2-9-kg.webp"},
+    {n:"Mayonesa Menoyo x 2.7 kg", p:8003, g:"Aderezos", img:"images/externas/mayonesa-menoyo-x-2-7-kg.webp"},
+    {n:"Mayonesa Mayodan x 3 kg", p:7067, g:"Aderezos", img:"images/externas/mayonesa-mayodan-x-3-kg.webp"},
+    {n:"Mostaza Savora x 3 kg", p:12446, g:"Aderezos", img:"images/externas/mostaza-savora-x-3-kg.webp"},
     {n:"Mostaza Natura x 3 kg", p:7878, g:"Aderezos", img:"images/fotos-cliente/mostaza-natura-x3kg.jpg"},
-    {n:"Mostaza Danica x 3 kg", p:7226, g:"Aderezos", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh3uAhfi3iCduTVgzh407Ov2Psv350rN3AyE8qX6AkSQ&s=10"},
-    {n:"Ketchup Hellmans x 3 kg", p:14109, g:"Aderezos", img:"https://dcdn-us.mitiendanube.com/stores/001/151/835/products/7794000959620-47c99ae79f0cae5c0a17190864907170-1024-1024.webp"},
+    {n:"Mostaza Danica x 3 kg", p:7226, g:"Aderezos", img:"images/externas/mostaza-danica-x-3-kg.webp"},
+    {n:"Ketchup Hellmans x 3 kg", p:14109, g:"Aderezos", img:"images/externas/ketchup-hellmans-x-3-kg.webp"},
     {n:"Ketchup Natura x 3 kg", p:13557, g:"Aderezos", img:"images/fotos-cliente/ketchup-natura-x3kg.jpg"},
-    {n:"Ketchup Danica x 3 kg", p:9591, g:"Aderezos", img:"https://dcdn-us.mitiendanube.com/stores/005/135/941/products/129437-e517c7b1545edf273017498430315718-480-0.webp"},
+    {n:"Ketchup Danica x 3 kg", p:9591, g:"Aderezos", img:"images/externas/ketchup-danica-x-3-kg.webp"},
     {n:"Salsa golf Natura x 2.9 kg", p:15744, g:"Aderezos", img:"images/fotos-cliente/salsa-golf-natura-x29kg.jpg"},
-    {n:"Salsa golf Danica x 2.9 kg", p:10232, g:"Aderezos", img:"https://dcdn-us.mitiendanube.com/stores/005/135/941/products/129434-cb031254ccd6d51f4517498430184920-1024-1024.webp"},
-    {n:"Barbacoa hellmans x 3 kg", p:15000, g:"Aderezos", img:"https://d2eebw31vcx88p.cloudfront.net/ecomodico/uploads-r/p/ad9a2e7631c70c0f4adc0eb1794bdd3d6bc8c1db.jpg"},
-    {n:"Barbacoa Danica x 3Kg", p:12313, g:"Aderezos", img:"https://oestedistribucion.com.ar/wp-content/uploads/2025/04/Imagen-de-WhatsApp-2025-04-27-a-las-19.45.04_d6ec7a6b.jpg"},
-    {n:"Harina caserita 000 x 1 kg", p:804, g:"Harinas y derivados", img:"https://masonlineprod.vtexassets.com/arquivos/ids/322371/0779259000015-02-5450.jpg?v=638506389921230000"},
-    {n:"Harina caserita 0000 x 1 kg", p:1097, g:"Harinas y derivados", img:"https://cdn11.bigcommerce.com/s-3stx4pub31/images/stencil/1280x1280/products/3290/30137/Caserita_Harina_De_Trigo_0000_Wheat_Flour_Excellent_For_Homemade_Pasta_1_kg_1.1_lb__62173.1722536107.jpg?c=3"},
-    {n:"Harina caserita leudante x1kg", p:1348, g:"Harinas y derivados", img:"https://masonlineprod.vtexassets.com/arquivos/ids/322373/0779259000106-02-5452.jpg?v=638506389928730000"},
-    {n:"Pan rallado Santo pan x 5 kg", p:13721, g:"Harinas y derivados", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTau4KDatSIP5mPFpnA0Ae_1BBJXRI59KWjQx8yaVc9iLKLuOxK1jZtLIs&s=10"},
-    {n:"Rebozador Santo pan x 5 kg", p:13721, g:"Harinas y derivados", img:"images/rebozador-santo-pan-5kg.jpg"},
-    {n:"Fainalind x 5 kg", p:16831, g:"Harinas y derivados", img:"https://www.dicomere.com/img/productos/1167.jpg"},
-    {n:"Fainalind x 10 kg", p:27078, g:"Harinas y derivados", img:"https://http2.mlstatic.com/D_NQ_NP_658908-MLA74111821824_012024-F.jpg"},
-    {n:"Maizena x 2 kg", p:11837, g:"Harinas y derivados", img:"https://tienda.distribuidoraelcriollo.com/productos/6815.jpg"},
-    {n:"Maizena x 15 kg", p:54368, g:"Harinas y derivados", img:"https://tienda.distribuidoraelcriollo.com/productos/8012.jpg"},
-    {n:"Tomate x 8 lts Cayfar", p:11899, g:"Enlatados", img:"https://http2.mlstatic.com/D_718998-MLA106177291159_012026-C.jpg"},
-    {n:"Tomate x 8 lts Finca santiago", p:9765, g:"Enlatados", img:"https://http2.mlstatic.com/D_NQ_NP_706359-MLU72642616779_112023-O.webp"},
-    {n:"Morrón rey de reyes x 800 gr", p:3360, g:"Enlatados", img:"https://dcdn.mitiendanube.com/stores/001/227/587/products/morrones-rey-de-reyes-lata-3843df05668f47ab6a17242447374532-640-0.jpg"},
-    {n:"Palmitos cumana x 800 gr", p:7774, g:"Enlatados", img:"images/palmitos-cumana-800g.jpg"},
-    {n:"Arvejas cumaná x 850 gr", p:2070, g:"Enlatados", img:"images/arvejas-cumana-840g.jpg"},
-    {n:"Morrón cumaná x 2.5 kg", p:11748, g:"Enlatados", img:"images/morron-cumana-25kg.jpg"},
-    {n:"Atún cumaná entero x 1.88 kg", p:24426, g:"Enlatados", img:"https://saleciano.com.ar/imagenes/productos/W__WB_905_2.jpg"},
-    {n:"Morron cumana x750gr", p:4108, g:"Enlatados", img:"https://acdn-us.mitiendanube.com/stores/001/143/643/products/4146-6abdf4cf2c122b420b17443866900989-640-0.webp"},
-    {n:"Durazno Rio salado x 850 gr", p:2686, g:"Enlatados", img:"https://http2.mlstatic.com/D_NQ_NP_883234-MLA88776957812_082025-O.webp"},
-    {n:"Durazno cumaná x 820 gr", p:3606, g:"Enlatados", img:"https://elnenearg.vtexassets.com/arquivos/ids/158016/DURAZNO-CUMANA-EN-MITADES-S-TACC-X820GR-1-4125.jpg?v=637956561688630000"},
-    {n:"Ananá cumaná rod x 836 gr", p:5033, g:"Enlatados", img:"images/anana-cumana-836g.jpg"},
-    {n:"Ananá cumaná rod x 3 kg", p:18394, g:"Enlatados", img:"https://distribuidorachichi.com.ar/728-large_default/anana-en-rodajas-cumana-x-3-kg.jpg"},
-    {n:"Coctel cumaná x 820 gr", p:4519, g:"Enlatados", img:"images/coctel-cumana-820g.jpg"},
-    {n:"Choclo Cumaná grano x 820 gr", p:3117, g:"Enlatados", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7YoQKHk3SzJVaIj8ir2w94CJRWYufSX4Pmrs_FhkiSQ&s=10"},
-    {n:"Choclo Cumaná grano x2.95 kg", p:10693, g:"Enlatados", img:"images/choclo-cumana-295kg.jpg"},
-    {n:"Mayonesa hellmans x 8 gr", p:15182, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfe3r6-rPknEupK6fW5UzIObu7WghSLg5lIr6wVjfkKA&s=10"},
-    {n:"Mayonesa Danica x 8 gr", p:8750, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLEAEmVv3hrAi0mO58VOQd8MoA96a_gThKu0o7sETVNA&s=10"},
-    {n:"Mayonesa Menoyo x 8 gr", p:9927, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_0C030qk0exbLZmPRx2a0ZyPzOBaCz1ha5e8DEJ6-rg&s=10"},
-    {n:"Mostaza Savora x 8 gr", p:12700, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb2aSeiNMdNFFsxsTFQ27SUzEgPDQy-oq3mdl_ndWxGw&s=10"},
-    {n:"Mostaza Danica x 8 gr", p:8626, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi5ckzjfDEbMCrXObMYpD8tGleIlxwFa28fIi3XQ9-VA&s"},
-    {n:"Ketchup hellmans x 8 gr", p:15234, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkqqMLairPxYRLxunZb0Iik0bF_GCs5y_PK429Xz3qSA&s=10"},
-    {n:"Ketchup Danica x 8 gr", p:10137, g:"Individuales", img:"https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2026080813582178071-15a7741fcdf31214b117888867216491-1024-1024.webp"},
-    {n:"Sal fina Insya 1000 unid", p:7686, g:"Individuales", img:"https://acdn-us.mitiendanube.com/stores/007/965/655/products/d_628104-mla112987406423_062026-o-80f58a1a0fbfdbfa5b17846450927515-1024-1024.webp"},
-    {n:"Azucar Insya x 800 unid", p:12810, g:"Individuales", img:"https://http2.mlstatic.com/D_NQ_NP_796552-MLA81844220314_012025-O.webp"},
-    {n:"Edulcorante Insya x 400 ud", p:6405, g:"Individuales", img:"https://http2.mlstatic.com/D_NQ_NP_760952-MLA45424905717_042021-O.webp"},
-    {n:"Aceite Insya maiz 200x7cc", p:14091, g:"Individuales", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSFuHtoEAaLGhti-ou1iDXAbipdQhyUMWsamYQLmb1bQ&s=10"},
-    {n:"Vinagre Insya 200 x 7 cc", p:8967, g:"Individuales", img:"https://http2.mlstatic.com/D_NQ_NP_897951-MLA45754125944_042021-O.webp"},
-    {n:"Ac girasol x 5 lts casaliva", p:19974, g:"Aceites y vinagres", img:"https://casaliva.com.ar/assets/img/vista1_0002_mezcla5lt.webp"},
-    {n:"Ac girasol x 5 lt Don Hugo", p:13835, g:"Aceites y vinagres", img:"images/aceite-don-hugo-5l.jpg"},
-    {n:"Ac FritoMac x 5 lt (p/freir)", p:18585, g:"Aceites y vinagres", img:"images/aceite-fritomac-5l.jpg"},
-    {n:"Ac oliva R de leon x 500 cc", p:3573, g:"Aceites y vinagres", img:"https://acdn-us.mitiendanube.com/stores/002/625/145/products/aceite-reyleon-bdc05d0e8c1d7b1df217794629890949-1024-1024.webp"},
+    {n:"Salsa golf Danica x 2.9 kg", p:10232, g:"Aderezos", img:"images/externas/salsa-golf-danica-x-2-9-kg.webp"},
+    {n:"Barbacoa hellmans x 3 kg", p:15000, g:"Aderezos", img:"images/externas/barbacoa-hellmans-x-3-kg.webp"},
+    {n:"Barbacoa Danica x 3Kg", p:12313, g:"Aderezos", img:"images/externas/barbacoa-danica-x-3kg.webp"},
+    {n:"Harina caserita 000 x 1 kg", p:804, g:"Harinas y derivados", img:"images/externas/harina-caserita-000-x-1-kg.webp"},
+    {n:"Harina caserita 0000 x 1 kg", p:1097, g:"Harinas y derivados", img:"images/externas/harina-caserita-0000-x-1-kg.webp"},
+    {n:"Harina caserita leudante x1kg", p:1348, g:"Harinas y derivados", img:"images/externas/harina-caserita-leudante-x1kg.webp"},
+    {n:"Pan rallado Santo pan x 5 kg", p:13721, g:"Harinas y derivados", img:"images/externas/pan-rallado-santo-pan-x-5-kg.webp"},
+    {n:"Rebozador Santo pan x 5 kg", p:13721, g:"Harinas y derivados", img:"images/rebozador-santo-pan-5kg.webp"},
+    {n:"Fainalind x 5 kg", p:16831, g:"Harinas y derivados", img:"images/externas/fainalind-x-5-kg.webp"},
+    {n:"Fainalind x 10 kg", p:27078, g:"Harinas y derivados", img:"images/externas/fainalind-x-10-kg.webp"},
+    {n:"Maizena x 2 kg", p:11837, g:"Harinas y derivados", img:"images/externas/maizena-x-2-kg.webp"},
+    {n:"Maizena x 15 kg", p:54368, g:"Harinas y derivados", img:"images/externas/maizena-x-15-kg.webp"},
+    {n:"Tomate x 8 lts Cayfar", p:11899, g:"Enlatados", img:"images/externas/tomate-x-8-lts-cayfar.webp"},
+    {n:"Tomate x 8 lts Finca santiago", p:9765, g:"Enlatados", img:"images/externas/tomate-x-8-lts-finca-santiago.webp"},
+    {n:"Morrón rey de reyes x 800 gr", p:3360, g:"Enlatados", img:"images/externas/morron-rey-de-reyes-x-800-gr.webp"},
+    {n:"Palmitos cumana x 800 gr", p:7774, g:"Enlatados", img:"images/palmitos-cumana-800g.webp"},
+    {n:"Arvejas cumaná x 850 gr", p:2070, g:"Enlatados", img:"images/arvejas-cumana-840g.webp"},
+    {n:"Morrón cumaná x 2.5 kg", p:11748, g:"Enlatados", img:"images/morron-cumana-25kg.webp"},
+    {n:"Atún cumaná entero x 1.88 kg", p:24426, g:"Enlatados", img:"images/externas/atun-cumana-entero-x-1-88-kg.webp"},
+    {n:"Morron cumana x750gr", p:4108, g:"Enlatados", img:"images/externas/morron-cumana-x750gr.webp"},
+    {n:"Durazno Rio salado x 850 gr", p:2686, g:"Enlatados", img:"images/externas/durazno-rio-salado-x-850-gr.webp"},
+    {n:"Durazno cumaná x 820 gr", p:3606, g:"Enlatados", img:"images/externas/durazno-cumana-x-820-gr.webp"},
+    {n:"Ananá cumaná rod x 836 gr", p:5033, g:"Enlatados", img:"images/anana-cumana-836g.webp"},
+    {n:"Ananá cumaná rod x 3 kg", p:18394, g:"Enlatados", img:"images/externas/anana-cumana-rod-x-3-kg.webp"},
+    {n:"Coctel cumaná x 820 gr", p:4519, g:"Enlatados", img:"images/coctel-cumana-820g.webp"},
+    {n:"Choclo Cumaná grano x 820 gr", p:3117, g:"Enlatados", img:"images/externas/choclo-cumana-grano-x-820-gr.webp"},
+    {n:"Choclo Cumaná grano x2.95 kg", p:10693, g:"Enlatados", img:"images/choclo-cumana-295kg.webp"},
+    {n:"Mayonesa hellmans x 8 gr", p:15182, g:"Individuales", img:"images/externas/mayonesa-hellmans-x-8-gr.webp"},
+    {n:"Mayonesa Danica x 8 gr", p:8750, g:"Individuales", img:"images/externas/mayonesa-danica-x-8-gr.webp"},
+    {n:"Mayonesa Menoyo x 8 gr", p:9927, g:"Individuales", img:"images/externas/mayonesa-menoyo-x-8-gr.webp"},
+    {n:"Mostaza Savora x 8 gr", p:12700, g:"Individuales", img:"images/externas/mostaza-savora-x-8-gr.webp"},
+    {n:"Mostaza Danica x 8 gr", p:8626, g:"Individuales", img:"images/externas/mostaza-danica-x-8-gr.webp"},
+    {n:"Ketchup hellmans x 8 gr", p:15234, g:"Individuales", img:"images/externas/ketchup-hellmans-x-8-gr.webp"},
+    {n:"Ketchup Danica x 8 gr", p:10137, g:"Individuales", img:"images/externas/ketchup-danica-x-8-gr.webp"},
+    {n:"Sal fina Insya 1000 unid", p:7686, g:"Individuales", img:"images/externas/sal-fina-insya-1000-unid.webp"},
+    {n:"Azucar Insya x 800 unid", p:12810, g:"Individuales", img:"images/externas/azucar-insya-x-800-unid.webp"},
+    {n:"Edulcorante Insya x 400 ud", p:6405, g:"Individuales", img:"images/externas/edulcorante-insya-x-400-ud.webp"},
+    {n:"Aceite Insya maiz 200x7cc", p:14091, g:"Individuales", img:"images/externas/aceite-insya-maiz-200x7cc.webp"},
+    {n:"Vinagre Insya 200 x 7 cc", p:8967, g:"Individuales", img:"images/externas/vinagre-insya-200-x-7-cc.webp"},
+    {n:"Ac girasol x 5 lts casaliva", p:19974, g:"Aceites y vinagres", img:"images/externas/ac-girasol-x-5-lts-casaliva.webp"},
+    {n:"Ac girasol x 5 lt Don Hugo", p:13835, g:"Aceites y vinagres", img:"images/aceite-don-hugo-5l.webp"},
+    {n:"Ac FritoMac x 5 lt (p/freir)", p:18585, g:"Aceites y vinagres", img:"images/aceite-fritomac-5l.webp"},
+    {n:"Ac oliva R de leon x 500 cc", p:3573, g:"Aceites y vinagres", img:"images/externas/ac-oliva-r-de-leon-x-500-cc.webp"},
     {n:"Ac oliva R. de leon x 2 lts", p:12714, g:"Aceites y vinagres", img:"images/aceite-oliva-r-de-leon-2l.webp"},
-    {n:"Ac oliva R de leon X 5 lts", p:25606, g:"Aceites y vinagres", img:"https://tienda.distribuidoraelcriollo.com/productos/15534.jpg"},
-    {n:"Vinagre alcohol x 5 lts", p:7209, g:"Aceites y vinagres", img:"images/vinagre-alcohol-5l.jpg"},
-    {n:"Vinagre manzana x 1 lt", p:1907, g:"Aceites y vinagres", img:"images/vinagre-manzana-marvavic-1l.png"},
+    {n:"Ac oliva R de leon X 5 lts", p:25606, g:"Aceites y vinagres", img:"images/externas/ac-oliva-r-de-leon-x-5-lts.webp"},
+    {n:"Vinagre alcohol x 5 lts", p:7209, g:"Aceites y vinagres", img:"images/vinagre-alcohol-5l.webp"},
+    {n:"Vinagre manzana x 1 lt", p:1907, g:"Aceites y vinagres", img:"images/vinagre-manzana-marvavic-1l.webp"},
     {n:"Vinagre de vino x 1 lt", p:1667, g:"Aceites y vinagres", img:"images/vinagre-vino-marvavic-1l.jpg"},
-    {n:"Aceto balsamico x 3 lts", p:18458, g:"Aceites y vinagres", img:"images/aceto-balsamico-3l.jpg"},
+    {n:"Aceto balsamico x 3 lts", p:18458, g:"Aceites y vinagres", img:"images/aceto-balsamico-3l.webp"},
     {n:"Aceto balsamico x 500 cc", p:3279, g:"Aceites y vinagres", img:"images/aceto-monterrey-500cc.webp"},
-    {n:"Leche larga vida x1lt Ilolai", p:1923, g:"Frescos y lácteos", img:"https://modomarketar.vteximg.com.br/arquivos/ids/174045/Leche-Ilolay-Larga-Vida-Entera-X-1-Lt-1-7143.jpg?v=638920029696270000"},
-    {n:"Crema x 5 lts Ramolac", p:46176, g:"Frescos y lácteos", img:"https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2025031209550360551-d79a46e8939c48e65617444625162410-640-0.webp"},
-    {n:"D. de leche x 5 kg Ramolac", p:21571, g:"Frescos y lácteos", img:"images/dulce-leche-ramolac-5kg.jpg"},
-    {n:"Cheddar x 3.5 kg Milkaut", p:37695, g:"Frescos y lácteos", img:"https://masonlineprod.vtexassets.com/arquivos/ids/329383/Queso-Cheddar-Milkaut-3-5-Kg-1-59183.jpg?v=638575293896930000"},
-    {n:"Cheddar x 3 kg Tonadita", p:25694, g:"Frescos y lácteos", img:"https://acdn-us.mitiendanube.com/stores/001/789/620/products/36904_mesa-de-trabajo-1-7092f70f15faec793217242540938104-1024-1024.webp"},
-    {n:"Cheddar x 3 kg Spalem", p:21078, g:"Frescos y lácteos", img:"https://d2j6dbq0eux0bg.cloudfront.net/images/51759127/2092351455.jpg"},
-    {n:"Cheddar Feteado Milkaut", p:45464, g:"Frescos y lácteos", img:"https://http2.mlstatic.com/D_NQ_NP_898130-MLU70777690076_082023-O.webp"},
-    {n:"Cheddar feteado Tonadita", p:25991, g:"Frescos y lácteos", img:"https://dcdn-us.mitiendanube.com/stores/005/091/765/products/image2025051413014873230-200c346d81fd0ef9c417499169295147-1024-1024.webp"},
-    {n:"Manteca pilon x 2,5 kg", p:null, g:"Frescos y lácteos", img:"https://oestedistribucion.com.ar/wp-content/uploads/2024/02/manteca-lucrecia.jpeg"},
-    {n:"Q crema Milkaut x 3,5 kg", p:30450, g:"Frescos y lácteos", img:"https://dcdn-us.mitiendanube.com/stores/001/181/598/products/photoroom_20250605_143228-67c2386b2c767e9a7c17491448727180-640-0.webp"},
-    {n:"Q crema Tonadita x 3 kg", p:22753, g:"Frescos y lácteos", img:"https://madelein.com.ar/5720-large_default/queso-crema-cremette-clasico-tonadita-x-3kg.jpg"},
-    {n:"Q Patagonia p/sushi x 3 kg", p:28669, g:"Frescos y lácteos", img:"https://cdn.prod.website-files.com/64e50df36011eb184c8be5a5/699e01a64b345372f561cc15_PATAGONIA%20SUSHI%20-%203Kg-PC0007.png"},
-    {n:"Adobo p/pizza x 1 kg", p:11731, g:"Condimentos Centurión", img:"images/adobo-pizza-centurion-1kg.jpg"},
-    {n:"Aji molido x 1 kg", p:12608, g:"Condimentos Centurión", img:"images/aji-molido-centurion-1kg.jpg"},
-    {n:"Ajo en polvo x 500 gr", p:6596, g:"Condimentos Centurión", img:"images/ajo-polvo-centurion-500g.jpg"},
-    {n:"Ajo granulado x 500 gr", p:9389, g:"Condimentos Centurión", img:"images/ajo-granulado-centurion-500g.jpg"},
-    {n:"Azucar impalpable x 1 kg", p:3996, g:"Condimentos Centurión", img:"images/azucar-impalpable-centurion-1kg.jpg"},
-    {n:"Bicarbonato de sodio x 50 gr", p:330, g:"Condimentos Centurión", img:"https://www.productoscenturion.com.ar/gallery_gen/39a1fefc1f87fc9fba605465f3abcd79_221x329.00751879699.jpg"},
-    {n:"Chimichurri x 500 gr", p:6148, g:"Condimentos Centurión", img:"images/chimichurri-centurion-500g.jpg"},
-    {n:"Clavo de olor x 10 gr", p:1169, g:"Condimentos Centurión", img:"https://jumboargentina.vtexassets.com/arquivos/ids/663614/Clavo-De-Olor-1-877794.jpg?v=637666366447770000"},
-    {n:"Coco rallado x500gr", p:9624, g:"Condimentos Centurión", img:"https://www.productoscenturion.com.ar/gallery_gen/8a681f1e2e0f75cb148b76175eefb040_221x332.33082706767.jpg"},
-    {n:"Comino molido x 500", p:6236, g:"Condimentos Centurión", img:"images/comino-centurion-500g.jpg"},
-    {n:"Condimento p/arroz x 500 gr", p:7823, g:"Condimentos Centurión", img:"images/condimento-arroz-centurion-500g.jpg"},
-    {n:"Curcuma x 500 gr", p:8960, g:"Condimentos Centurión", img:"https://mundohuevo.com/cdn/shop/files/curcuma_500-1_1080x.jpg?v=1712111394"},
-    {n:"Curry x1kg", p:13268, g:"Condimentos Centurión", img:"https://www.productoscenturion.com.ar/gallery_gen/fbb27367035f5157f47060266af5203c_221x332.33082706767.jpg"},
-    {n:"Nuez moscada molida x500 gr", p:18193, g:"Condimentos Centurión", img:"https://www.productoscenturion.com.ar/gallery_gen/8f3b368f574e75ee9a5e9bd74fc8fbb5_221x332.33082706767.jpg"},
-    {n:"Nuez moscada entera x500 gr", p:37417, g:"Condimentos Centurión", img:"https://www.productoscenturion.com.ar/gallery_gen/4f1bfcaae0aa4f8fc68e2fdff40f6de9_221x332.33082706767.jpg"},
-    {n:"Oregano x 1 kg", p:11298, g:"Condimentos Centurión", img:"images/oregano-centurion-1kg.jpg"},
-    {n:"Pimentón ahumado x1kg", p:14837, g:"Condimentos Centurión", img:"https://cdn11.bigcommerce.com/s-3stx4pub31/images/stencil/1280x1280/products/3659/26581/saborigal-pimenton-extra-ahumado__20461.1701362224.jpg?c=2"},
-    {n:"Pimenton selec. x 1 kg", p:11563, g:"Condimentos Centurión", img:"images/pimenton-seleccionado-centurion-1kg.jpg"},
-    {n:"Pimienta bca/mol x 500 gr", p:33931, g:"Condimentos Centurión", img:"images/pimienta-blanca-centurion-500g.jpg"},
-    {n:"Pimienta neg/mol x 500 gr", p:19493, g:"Condimentos Centurión", img:"images/pimienta-negra-centurion-500g.jpg"},
-    {n:"Polvo p/hornear 50x50", p:466, g:"Condimentos Centurión", img:"https://www.productoscenturion.com.ar/gallery_gen/4b56d790406420fbceb4bbb4fb0a0c81_221x332.33082706767.jpg"},
-    {n:"Provenzal x 1 kg", p:17011, g:"Condimentos Centurión", img:"images/provenzal-centurion-1kg.jpg"},
-    {n:"Sal fina celusal x 500", p:1144, g:"Condimentos Centurión", img:"https://elnenearg.vtexassets.com/arquivos/ids/156778-800-auto?aspect=true&height=auto&v=637943818810570000&width=800"},
-    {n:"Sal fina colosal x 500", p:621, g:"Condimentos Centurión", img:"https://toledodigitalar.vtexassets.com/arquivos/ids/163991/20813.jpg?v=638796799802000000"},
-    {n:"Sal gruesa celusal x 1 kg", p:1706, g:"Condimentos Centurión", img:"https://jumboargentina.vtexassets.com/arquivos/ids/538489/Sal-Gruesa-Celusal-1-Kg-1-41269.jpg?v=636983688437800000"},
+    {n:"Leche larga vida x1lt Ilolai", p:1923, g:"Frescos y lácteos", img:"images/externas/leche-larga-vida-x1lt-ilolai.webp"},
+    {n:"Crema x 5 lts Ramolac", p:46176, g:"Frescos y lácteos", img:"images/externas/crema-x-5-lts-ramolac.webp"},
+    {n:"D. de leche x 5 kg Ramolac", p:21571, g:"Frescos y lácteos", img:"images/dulce-leche-ramolac-5kg.webp"},
+    {n:"Cheddar x 3.5 kg Milkaut", p:37695, g:"Frescos y lácteos", img:"images/externas/cheddar-x-3-5-kg-milkaut.webp"},
+    {n:"Cheddar x 3 kg Tonadita", p:25694, g:"Frescos y lácteos", img:"images/externas/cheddar-x-3-kg-tonadita.webp"},
+    {n:"Cheddar x 3 kg Spalem", p:21078, g:"Frescos y lácteos", img:"images/externas/cheddar-x-3-kg-spalem.webp"},
+    {n:"Cheddar Feteado Milkaut", p:45464, g:"Frescos y lácteos", img:"images/externas/cheddar-feteado-milkaut.webp"},
+    {n:"Cheddar feteado Tonadita", p:25991, g:"Frescos y lácteos", img:"images/externas/cheddar-feteado-tonadita.webp"},
+    {n:"Manteca pilon x 2,5 kg", p:null, g:"Frescos y lácteos", img:"images/externas/manteca-pilon-x-2-5-kg.webp"},
+    {n:"Q crema Milkaut x 3,5 kg", p:30450, g:"Frescos y lácteos", img:"images/externas/q-crema-milkaut-x-3-5-kg.webp"},
+    {n:"Q crema Tonadita x 3 kg", p:22753, g:"Frescos y lácteos", img:"images/externas/q-crema-tonadita-x-3-kg.webp"},
+    {n:"Q Patagonia p/sushi x 3 kg", p:28669, g:"Frescos y lácteos", img:"images/externas/q-patagonia-p-sushi-x-3-kg.webp"},
+    {n:"Adobo p/pizza x 1 kg", p:11731, g:"Condimentos Centurión", img:"images/adobo-pizza-centurion-1kg.webp"},
+    {n:"Aji molido x 1 kg", p:12608, g:"Condimentos Centurión", img:"images/aji-molido-centurion-1kg.webp"},
+    {n:"Ajo en polvo x 500 gr", p:6596, g:"Condimentos Centurión", img:"images/ajo-polvo-centurion-500g.webp"},
+    {n:"Ajo granulado x 500 gr", p:9389, g:"Condimentos Centurión", img:"images/ajo-granulado-centurion-500g.webp"},
+    {n:"Azucar impalpable x 1 kg", p:3996, g:"Condimentos Centurión", img:"images/azucar-impalpable-centurion-1kg.webp"},
+    {n:"Bicarbonato de sodio x 50 gr", p:330, g:"Condimentos Centurión", img:"images/externas/bicarbonato-de-sodio-x-50-gr.webp"},
+    {n:"Chimichurri x 500 gr", p:6148, g:"Condimentos Centurión", img:"images/chimichurri-centurion-500g.webp"},
+    {n:"Clavo de olor x 10 gr", p:1169, g:"Condimentos Centurión", img:"images/externas/clavo-de-olor-x-10-gr.webp"},
+    {n:"Coco rallado x500gr", p:9624, g:"Condimentos Centurión", img:"images/externas/coco-rallado-x500gr.webp"},
+    {n:"Comino molido x 500", p:6236, g:"Condimentos Centurión", img:"images/comino-centurion-500g.webp"},
+    {n:"Condimento p/arroz x 500 gr", p:7823, g:"Condimentos Centurión", img:"images/condimento-arroz-centurion-500g.webp"},
+    {n:"Curcuma x 500 gr", p:8960, g:"Condimentos Centurión", img:"images/externas/curcuma-x-500-gr.webp"},
+    {n:"Curry x1kg", p:13268, g:"Condimentos Centurión", img:"images/externas/curry-x1kg.webp"},
+    {n:"Nuez moscada molida x500 gr", p:18193, g:"Condimentos Centurión", img:"images/externas/nuez-moscada-molida-x500-gr.webp"},
+    {n:"Nuez moscada entera x500 gr", p:37417, g:"Condimentos Centurión", img:"images/externas/nuez-moscada-entera-x500-gr.webp"},
+    {n:"Oregano x 1 kg", p:11298, g:"Condimentos Centurión", img:"images/oregano-centurion-1kg.webp"},
+    {n:"Pimentón ahumado x1kg", p:14837, g:"Condimentos Centurión", img:"images/externas/pimenton-ahumado-x1kg.webp"},
+    {n:"Pimenton selec. x 1 kg", p:11563, g:"Condimentos Centurión", img:"images/pimenton-seleccionado-centurion-1kg.webp"},
+    {n:"Pimienta bca/mol x 500 gr", p:33931, g:"Condimentos Centurión", img:"images/pimienta-blanca-centurion-500g.webp"},
+    {n:"Pimienta neg/mol x 500 gr", p:19493, g:"Condimentos Centurión", img:"images/pimienta-negra-centurion-500g.webp"},
+    {n:"Polvo p/hornear 50x50", p:466, g:"Condimentos Centurión", img:"images/externas/polvo-p-hornear-50x50.webp"},
+    {n:"Provenzal x 1 kg", p:17011, g:"Condimentos Centurión", img:"images/provenzal-centurion-1kg.webp"},
+    {n:"Sal fina celusal x 500", p:1144, g:"Condimentos Centurión", img:"images/externas/sal-fina-celusal-x-500.webp"},
+    {n:"Sal fina colosal x 500", p:621, g:"Condimentos Centurión", img:"images/externas/sal-fina-colosal-x-500.webp"},
+    {n:"Sal gruesa celusal x 1 kg", p:1706, g:"Condimentos Centurión", img:"images/externas/sal-gruesa-celusal-x-1-kg.webp"},
     {n:"Sal gruesa colosal x 1 kg", p:936, g:"Condimentos Centurión", img:"https://maxiconsumo.com/media/catalog/product/cache/dee42de555cd0e5c071d2951391ded3b/1/8/18080.jpg"},
-    {n:"Sal entrefina celusal", p:1575, g:"Condimentos Centurión", img:"https://rosario.dipa.ar/28361-medium_default/sal-celusal-entrefina-paquete-1kg.jpg"},
-    {n:"Sal entrefina colosal", p:897, g:"Condimentos Centurión", img:"https://acdn-us.mitiendanube.com/stores/001/143/643/products/12048_011-7d52e798a8c21f56b816261866437310-640-0.webp"},
+    {n:"Sal entrefina celusal", p:1575, g:"Condimentos Centurión", img:"images/externas/sal-entrefina-celusal.webp"},
+    {n:"Sal entrefina colosal", p:897, g:"Condimentos Centurión", img:"images/externas/sal-entrefina-colosal.webp"},
     {n:"D.Vicente caserito x 500 gr", p:3233, g:"Fideos y arroces", img:"images/fotos-cliente/dv-caserito.jpg"},
-    {n:"D.Vicente fettuccini x500gr", p:3256, g:"Fideos y arroces", img:"https://masonlineprod.vtexassets.com/arquivos/ids/314031/Fideos-Don-Vicente-Fettuccini-500-G-1-53673.jpg?v=638417181877930000"},
-    {n:"D.Vicente Tallarin x 500 gr", p:3133, g:"Fideos y arroces", img:"https://ardiaprod.vtexassets.com/arquivos/ids/287172/Fideos-Tallarin-Don-Vicente-500-Gr-_1.jpg?v=638376332593700000"},
-    {n:"D.Vicente tirabuzón x500gr", p:3133, g:"Fideos y arroces", img:"https://aremsaprod.vtexassets.com/arquivos/ids/1010810/image-7c2143b2093842db877ec51152e648d6.jpg?v=638950091447670000"},
-    {n:"Lucchetti ave maria x500gr", p:1438, g:"Fideos y arroces", img:"https://acdn-us.mitiendanube.com/stores/798/865/products/266778141-31e2fffbe3375222b017454726852694-640-0.webp"},
+    {n:"D.Vicente fettuccini x500gr", p:3256, g:"Fideos y arroces", img:"images/externas/d-vicente-fettuccini-x500gr.webp"},
+    {n:"D.Vicente Tallarin x 500 gr", p:3133, g:"Fideos y arroces", img:"images/externas/d-vicente-tallarin-x-500-gr.webp"},
+    {n:"D.Vicente tirabuzón x500gr", p:3133, g:"Fideos y arroces", img:"images/externas/d-vicente-tirabuzon-x500gr.webp"},
+    {n:"Lucchetti ave maria x500gr", p:1438, g:"Fideos y arroces", img:"images/externas/lucchetti-ave-maria-x500gr.webp"},
     {n:"Lucchetti C.d.angel x500gr", p:2279, g:"Fideos y arroces", img:"images/fotos-cliente/lucchetti-cabello-angel.jpg"},
-    {n:"Lucchetti codito x 500 gr", p:1405, g:"Fideos y arroces", img:"https://d2eebw31vcx88p.cloudfront.net/ecomodico/uploads/7c1fb00b94ae52f05be5adff974579ed9405528e.jpg.webp"},
-    {n:"Lucchetti dedalito x 500 gr", p:1344, g:"Fideos y arroces", img:"https://masonlineprod.vtexassets.com/arquivos/ids/235359/front-view-26843.jpg?v=637860987731870000"},
-    {n:"Lucchetti Letritas x 500 gr", p:1344, g:"Fideos y arroces", img:"https://aremsaprod.vtexassets.com/arquivos/ids/1010927/image-96acaf20545847d598220633168a6c73.jpg?v=638950098476870000"},
-    {n:"Lucchetti moños x 500 gr", p:2432, g:"Fideos y arroces", img:"https://jumboargentina.vtexassets.com/arquivos/ids/592394/Fideos-Lucchetti-Mo-os-500-Gr-1-46219.jpg?v=637296886212170000"},
-    {n:"Lucchetti mostachol x500gr", p:1302, g:"Fideos y arroces", img:"https://masonlineprod.vtexassets.com/arquivos/ids/304328-800-auto?aspect=true&height=auto&v=638337693873500000&width=800"},
+    {n:"Lucchetti codito x 500 gr", p:1405, g:"Fideos y arroces", img:"images/externas/lucchetti-codito-x-500-gr.webp"},
+    {n:"Lucchetti dedalito x 500 gr", p:1344, g:"Fideos y arroces", img:"images/externas/lucchetti-dedalito-x-500-gr.webp"},
+    {n:"Lucchetti Letritas x 500 gr", p:1344, g:"Fideos y arroces", img:"images/externas/lucchetti-letritas-x-500-gr.webp"},
+    {n:"Lucchetti moños x 500 gr", p:2432, g:"Fideos y arroces", img:"images/externas/lucchetti-monos-x-500-gr.webp"},
+    {n:"Lucchetti mostachol x500gr", p:1302, g:"Fideos y arroces", img:"images/externas/lucchetti-mostachol-x500gr.webp"},
     {n:"Lucchetti municionesx500gr", p:1438, g:"Fideos y arroces", img:"https://hiperlibertad.vtexassets.com/arquivos/ids/237539-800-auto?aspect=true&height=auto&v=639071121887170000&width=800"},
-    {n:"Luc.nido fettuccini x 500 gr", p:2094, g:"Fideos y arroces", img:"https://aremsaprod.vtexassets.com/arquivos/ids/1010947/image-1b4a4dbb40004c718d5c3f14f0bbc647.jpg?v=638950098511770000"},
-    {n:"Luc. penne rigate x 500 gr", p:1301, g:"Fideos y arroces", img:"https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/2540759_f.jpg"},
-    {n:"Lucchetti spaghetti x500gr", p:1438, g:"Fideos y arroces", img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/350/887/products/al25016-fideos-spaguetti-lucchetti-x-500-gr1-291715f8a8f7d222e516033799584994-1024-1024.jpg"},
-    {n:"Lucchetti tallarin x 500 gr", p:1438, g:"Fideos y arroces", img:"https://jumboargentina.vtexassets.com/arquivos/ids/601815/Fideos-Tallar-n-Lucchetti-500-Gr-1-40587.jpg?v=637352619953370000"},
-    {n:"Lucchetti tirabuzón x500gr", p:1263, g:"Fideos y arroces", img:"https://d2r9epyceweg5n.cloudfront.net/stores/001/151/835/products/77959070003161-9af0d0b517f0c6f95b16167678490137-1024-1024.jpg"}
+    {n:"Luc.nido fettuccini x 500 gr", p:2094, g:"Fideos y arroces", img:"images/externas/luc-nido-fettuccini-x-500-gr.webp"},
+    {n:"Luc. penne rigate x 500 gr", p:1301, g:"Fideos y arroces", img:"images/externas/luc-penne-rigate-x-500-gr.webp"},
+    {n:"Lucchetti spaghetti x500gr", p:1438, g:"Fideos y arroces", img:"images/externas/lucchetti-spaghetti-x500gr.webp"},
+    {n:"Lucchetti tallarin x 500 gr", p:1438, g:"Fideos y arroces", img:"images/externas/lucchetti-tallarin-x-500-gr.webp"},
+    {n:"Lucchetti tirabuzón x500gr", p:1263, g:"Fideos y arroces", img:"images/externas/lucchetti-tirabuzon-x500gr.webp"}
   ]]
 ];
 
@@ -525,7 +565,81 @@ const URL_APPS_SCRIPT_PRECIOS = 'https://script.google.com/macros/s/AKfycbwqwNgW
 
 let S = BASE_PRODUCTOS.map(([e,t,a])=>({e,t,a:a.map(x=>({...x, img: x.img||null}))}));
 const $ = id => document.getElementById(id);
-const fm = p => (p == null || isNaN(p) || p === '') ? 'Consultar' : '$' + Number(p).toLocaleString('es-AR');
+const sinPrecio = p => p == null || p === '' || isNaN(p);
+const fm = p => sinPrecio(p) ? 'Consultar' : '$' + Number(p).toLocaleString('es-AR');
+
+// Unidad del precio. Fiambres y quesos se venden por kg; lo que trae
+// presentación en el nombre ("x 5 kg", "x 6", "1000 unid") es precio por bulto.
+// Para forzar otra unidad en un producto, agregarle u:"kg" o u:"" (sin unidad).
+const CATEGORIAS_POR_KG = new Set(["Jamones","Salames y salamines","Paletas","Mortadelas","Jamón crudo","Bondiolas y lomos","Pancetas","Matambres","Varios fiambres","Quesos blandos","Quesos en barra","Quesos postre","Quesos duros"]);
+function unidad(producto, categoria) {
+  if (producto.u !== undefined) return producto.u;
+  if (/\bx\s*kg\b/i.test(producto.n)) return 'kg';
+  if (/\bx\s*\d|\d\s*(unid|ud)\b/i.test(producto.n)) return '';
+  return CATEGORIAS_POR_KG.has(categoria) ? 'kg' : '';
+}
+// Búsqueda: además del nombre visible, cada producto tiene un texto oculto con
+// abreviaturas expandidas ("J. cocido" -> "jamon cocido") y palabras de su
+// categoría ("Barra Rondo" -> "queso"). Para sumar sinónimos a un producto,
+// agregarle alias:"palabra otra palabra".
+const ALIAS_CATEGORIA = {
+  "Jamones": "jamon",
+  "Salames y salamines": "salame salamin",
+  "Paletas": "paleta",
+  "Mortadelas": "mortadela",
+  "Jamón crudo": "jamon crudo",
+  "Bondiolas y lomos": "bondiola lomo",
+  "Pancetas": "panceta",
+  "Matambres": "matambre",
+  "Encurtidos": "encurtidos",
+  "Dulces Cayfar": "dulce",
+  "Dulces Esnaola": "dulce",
+  "Quesos blandos": "queso",
+  "Quesos en barra": "queso barra",
+  "Quesos postre": "queso",
+  "Quesos duros": "queso",
+  "Condimentos Centurión": "condimento especia",
+  "Fideos y arroces": "fideos pasta",
+  "Aderezos": "aderezo"
+};
+const ABREVIATURAS = [
+  [/^j\.?\s+/, 'jamon '],
+  [/^(ac\.?|aceit)\s+(verde|negra)/, 'aceitunas $2'],
+  [/^ac\s+(girasol|oliva|fritomac)/, 'aceite $1'],
+  [/^q\.?\s+/, 'queso '],
+  [/^d\.\s*de leche/, 'dulce de leche'],
+  [/^d\.\s*vicente/, 'don vicente'],
+  [/^luc(\.|\s)\s*/, 'lucchetti '],
+  [/^p\.\s*bombon/, 'postre bombon'],
+  [/c\.d\.angel/, 'cabello de angel'],
+  [/\bc\s*\/\s*/g, 'con '],
+  [/\bs\s*\/\s*/g, 'sin '],
+  [/muzzarella/, 'mozzarella muzarela muzza'],
+  [/\brod\b/, 'rodajas'],
+  [/\bbca\b/, 'blanca'],
+  [/\bneg\b/, 'negra'],
+  [/\bmol\b/, 'molida'],
+  [/\bselec\./, 'seleccionado'],
+  [/\bc\. austral/, 'campo austral']
+];
+function textoBusqueda(producto, categoria) {
+  if (producto._busqueda) return producto._busqueda;
+  const nombre = norm(producto.n);
+  const expandido = ABREVIATURAS.reduce((texto, [patron, reemplazo]) => texto.replace(patron, reemplazo), nombre);
+  producto._busqueda = [nombre, expandido, norm(producto.alias || ''), norm(ALIAS_CATEGORIA[categoria] || ''), norm(ALIAS_CATEGORIA[producto.g] || '')].join(' ');
+  return producto._busqueda;
+}
+// Todas las palabras buscadas tienen que aparecer, en cualquier orden.
+// Acepta plural o singular: "negras" también encuentra "Ac. Negra".
+const coincide = (producto, categoria, palabras) => {
+  const texto = textoBusqueda(producto, categoria);
+  return palabras.every(palabra => texto.includes(palabra) || (palabra.length > 3 && /e?s$/.test(palabra) && texto.includes(palabra.replace(/e?s$/, ''))));
+};
+function precioHtml(producto, categoria) {
+  if (sinPrecio(producto.p)) return '<div class="p consult">Consultar</div>';
+  const u = unidad(producto, categoria);
+  return '<div class="p">' + fm(producto.p) + (u ? '<span class="u">/' + u + '</span>' : '') + '</div>';
+}
 
 
 const carrito = new Map();
@@ -560,7 +674,7 @@ function renderPedido() {
     const [si, xi] = clave.split('-').map(Number);
     const producto = S[si] && S[si].a[xi];
     if (!producto) return '';
-    return '<li><span class="order-product">' + escaparHtml(producto.n) + '<small>' + escaparHtml(fm(producto.p)) + '</small></span><div class="order-quantity"><button type="button" data-action="minus" data-key="' + clave + '" aria-label="Quitar uno">−</button><b>' + cantidad + '</b><button type="button" data-action="plus" data-key="' + clave + '" aria-label="Agregar uno">+</button></div></li>';
+    return '<li><span class="order-product">' + escaparHtml(producto.n) + '<small>' + escaparHtml(fm(producto.p) + (!sinPrecio(producto.p) && unidad(producto, S[si].t) ? ' /' + unidad(producto, S[si].t) : '')) + '</small></span><div class="order-quantity"><button type="button" data-action="minus" data-key="' + clave + '" aria-label="Quitar uno">−</button><b>' + cantidad + '</b><button type="button" data-action="plus" data-key="' + clave + '" aria-label="Agregar uno">+</button></div></li>';
   }).join('');
   $('sendSebastian').href = total ? urlPedido('5491153442331') : '#';
   $('sendDaniel').href = total ? urlPedido('5491161943773') : '#';
@@ -580,17 +694,17 @@ function renderPedido() {
 }
 
 function R() {
-  const q = $('q').value.toLowerCase();$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
+  const palabras = norm($('q').value).split(' ').filter(Boolean);$('catsSelect').innerHTML = '<option value="" disabled selected>Ir a una categoría...</option>' + 
     S.map((s, i) => `<option value="${i}">${s.e} ${s.t}</option>`).join('');
 
 
   $('l').innerHTML = S.map((s, si) => {
     const grupos = new Map();
     s.a.forEach((x, xi) => {
-      if (!x.n.toLowerCase().includes(q)) return;
+      if (!coincide(x, s.t, palabras)) return;
       const grupo = x.g || '';
       if (!grupos.has(grupo)) grupos.set(grupo, []);
-      grupos.get(grupo).push(`<div class="card"><div class="ph">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" referrerpolicy="no-referrer" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.outerHTML='${s.e}'">` : s.e}</div><div class="n">${x.n}</div><div class="p">${fm(x.p)}</div><button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button><button class="remove-product" type="button" data-key="${si}-${xi}" aria-label="Quitar del pedido" aria-hidden="true" disabled>−</button></div>`);
+      grupos.get(grupo).push(`<div class="card"><div class="ph${x.img ? '' : ' empty'}">${x.img ? `<img${x.crop ? ` class="crop-${x.crop}"` : ''} src="${x.img}" referrerpolicy="no-referrer" alt="${x.n}" tabindex="0" role="button" aria-label="Ampliar foto de ${x.n}" title="Ampliar foto" loading="lazy" onerror="this.parentNode.classList.add('empty');this.outerHTML='<span aria-hidden=&quot;true&quot;>${s.e}</span>'">` : `<span aria-hidden="true">${s.e}</span>`}</div><div class="n">${x.n}</div>${precioHtml(x, s.t)}<button class="add-product" type="button" data-key="${si}-${xi}" aria-label="Agregar al pedido" aria-pressed="false">+</button><button class="remove-product" type="button" data-key="${si}-${xi}" aria-label="Quitar del pedido" aria-hidden="true" disabled>−</button></div>`);
     });
     const it = [...grupos.entries()].map(([grupo, cards]) =>
       `${grupo ? `<h3 class="subcat">${grupo}</h3>` : ''}<div class="g">${cards.join('')}</div>`
@@ -738,6 +852,32 @@ $('catsSelect').onchange = e => {
 
 
 $('q').oninput = R;
+
+// Vista en tarjetas (con fotos) o en lista compacta; se recuerda la elección.
+const ICONO_LISTA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>';
+const ICONO_TARJETAS = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>';
+function aplicarVista(lista) {
+  document.body.classList.toggle('list-view', lista);
+  const boton = $('viewToggle');
+  boton.innerHTML = lista ? ICONO_TARJETAS + '<span class="vt-text">Ver fotos</span>' : ICONO_LISTA + '<span class="vt-text">Ver lista</span>';
+  boton.setAttribute('aria-pressed', String(lista));
+  boton.setAttribute('aria-label', lista ? 'Ver productos con fotos' : 'Ver productos en lista compacta');
+  boton.title = boton.getAttribute('aria-label');
+}
+let vistaLista = false;
+try { vistaLista = localStorage.getItem('vista') === 'lista'; } catch (e) {}
+aplicarVista(vistaLista);
+$('viewToggle').onclick = () => {
+  vistaLista = !vistaLista;
+  aplicarVista(vistaLista);
+  try { localStorage.setItem('vista', vistaLista ? 'lista' : 'tarjetas'); } catch (e) {}
+};
+
+// Sombra en la barra de búsqueda cuando queda fija arriba.
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(([entrada]) => $('controls').classList.toggle('is-stuck', !entrada.isIntersecting)).observe($('controlsSentinel'));
+}
+
 renderPedido();
 $('up').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -748,7 +888,9 @@ async function actualizarPrecios() {
     const preciosDocs = await cargarPrecios();
     if (!preciosDocs || !Object.keys(preciosDocs).length) throw new Error('La lista de precios está vacía');
     aplicarPrecios(preciosDocs);
-    status.textContent = 'Precios sincronizados · ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+    const ahora = new Date();
+    status.classList.remove('is-stale');
+    status.textContent = 'Precios actualizados al ' + ahora.toLocaleDateString('es-AR', { day: 'numeric', month: 'long' }) + ' · ' + ahora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) + ' h';
   } catch (error) {
     try {
       const respaldo = await fetch('precios.json?_cb=' + Date.now(), { cache: 'no-store' }).then(r => {
@@ -757,9 +899,11 @@ async function actualizarPrecios() {
       });
       if (!respaldo || !Object.keys(respaldo).length) throw new Error('El respaldo de precios está vacío');
       aplicarPrecios(respaldo);
+      status.classList.add('is-stale');
       status.textContent = 'Mostrando la última lista guardada; se reintentará la sincronización.';
     } catch (errorRespaldo) {
       R();
+      status.classList.add('is-stale');
       status.textContent = 'No se pudieron actualizar los precios. Se volverá a intentar automáticamente.';
     }
   }
